@@ -583,6 +583,246 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 .dark-section .media-placeholder .label { color: var(--accent-light); }
 .dark-section .media-placeholder .desc { color: #666; }
 
+/* ===== TERMINAL ===== */
+.terminal {
+  background: #0C0C0C;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 2em 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.terminal-bar {
+  background: #1A1A1A;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red { background: #FF5F57; }
+.terminal-dot.yellow { background: #FFBD2E; }
+.terminal-dot.green { background: #28C840; }
+
+.terminal-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65em;
+  color: #666;
+  margin-left: 8px;
+}
+
+.terminal-body {
+  padding: clamp(16px, 2.5vw, 28px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78em;
+  line-height: 1.9;
+  color: #BBB;
+  overflow-x: auto;
+}
+
+.terminal-body .prompt {
+  color: #28C840;
+  user-select: none;
+}
+
+.terminal-body .cmd {
+  color: #fff;
+}
+
+.terminal-body .flag {
+  color: var(--accent-light);
+}
+
+.terminal-body .string {
+  color: #E8A858;
+}
+
+.terminal-body .comment {
+  color: #555;
+  font-style: italic;
+}
+
+.terminal-body .output {
+  color: #888;
+}
+
+.terminal-body .success {
+  color: #28C840;
+}
+
+.terminal-body .json-key {
+  color: var(--accent-light);
+}
+
+.terminal-body .json-val {
+  color: #E8A858;
+}
+
+.terminal-body .json-num {
+  color: #7DD17D;
+}
+
+.terminal-body .dim {
+  color: #444;
+}
+
+.terminal-body .blank {
+  display: block;
+  height: 1em;
+}
+
+/* Terminal typing animation for the hero command */
+.terminal-hero {
+  margin: 3em 0 0;
+  max-width: 600px;
+  display: inline-block;
+  text-align: left;
+}
+
+.terminal-hero .terminal-body {
+  font-size: 0.85em;
+}
+
+/* Blueprint grid background */
+.blueprint-section {
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.blueprint-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.blueprint-section::after {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 100%; height: 100%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse at center, rgba(0,0,210,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.blueprint-section .container { position: relative; z-index: 1; }
+.blueprint-section h2 { color: #fff; }
+.blueprint-section h3 { color: #fff; }
+.blueprint-section p { color: #BBB; }
+.blueprint-section strong { color: #fff; }
+.blueprint-section .section-label { color: var(--accent-light); }
+
+/* Step connector line */
+.engine-step {
+  position: relative;
+  padding-left: 3em;
+  margin-bottom: 3em;
+}
+
+.engine-step::before {
+  content: '';
+  position: absolute;
+  left: 0.9em;
+  top: 2em;
+  bottom: -2em;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent-light), rgba(136,136,255,0.1));
+}
+
+.engine-step:last-child::before { display: none; }
+
+.engine-step-number {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+  border: 1px solid var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7em;
+  font-weight: 500;
+  color: var(--accent-light);
+  background: var(--dark);
+  z-index: 1;
+}
+
+.engine-step-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65em;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-light);
+  margin-bottom: 0.3em;
+}
+
+.engine-step-title {
+  font-weight: 600;
+  font-size: 1.1em;
+  color: #fff;
+  margin-bottom: 0.5em;
+}
+
+.engine-step-desc {
+  font-size: 0.92em;
+  color: #888;
+  margin-bottom: 1em;
+}
+
+/* One-command hero */
+.one-cmd {
+  text-align: center;
+  padding: 3em 0;
+  margin: 2em 0;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.one-cmd-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65em;
+  color: #555;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.5em;
+}
+
+.one-cmd-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(1.1em, 2.5vw, 1.6em);
+  color: #fff;
+  background: rgba(255,255,255,0.04);
+  display: inline-block;
+  padding: 0.5em 1.2em;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.one-cmd-code .prompt { color: #28C840; }
+.one-cmd-code .flag { color: var(--accent-light); }
+
+.one-cmd-sub {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 1em;
+}
+
 /* ===== MATRIX TABLE ===== */
 .matrix {
   margin: 2em 0;
@@ -803,6 +1043,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   <a href="#plan"><span class="tip">4-week plan</span></a>
   <a href="#stack"><span class="tip">Connect stack</span></a>
   <a href="#numbers"><span class="tip">Real numbers</span></a>
+  <a href="#engine"><span class="tip">Engine room</span></a>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -1682,6 +1923,330 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
         </div>
       </li>
     </ol>
+  </div>
+</section>
+
+<!-- ===== PART 9: THE ENGINE ROOM ===== -->
+<section class="blueprint-section" id="engine">
+  <div class="container">
+    <span class="section-label fade-up">Part 09 // Advanced</span>
+    <h2 class="fade-up">The Engine Room</h2>
+    <p class="fade-up">Everything above can be orchestrated from a single terminal. Here's what it looks like under the hood when Claude Code runs the full stack.</p>
+
+    <!-- ===== STEP 1: SIGNALS CLI ===== -->
+    <div class="engine-step fade-up">
+      <div class="engine-step-number">1</div>
+      <div class="engine-step-label">Detection Layer</div>
+      <div class="engine-step-title">Set up signal monitoring with the Signals CLI</div>
+      <div class="engine-step-desc">Create a business profile, define your ICP, and activate all 5 signal subscriptions. Leads start flowing within 24 hours.</div>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">signals-cli</div>
+        </div>
+        <div class="terminal-body">
+<span class="comment"># Create business profile</span>
+<span class="prompt">$ </span><span class="cmd">signals businesses:create</span> <span class="flag">--website</span> <span class="string">https://www.acme-agency.com</span>
+<span class="blank"></span>
+<span class="success">&#10003; Business created</span>
+<span class="output">  id: <span class="json-num">biz_8f3k2m</span></span>
+<span class="output">  name: Acme Agency</span>
+<span class="output">  website: https://www.acme-agency.com</span>
+<span class="blank"></span>
+<span class="comment"># Define your Ideal Customer Profile</span>
+<span class="prompt">$ </span><span class="cmd">signals businesses:update</span> <span class="json-num">biz_8f3k2m</span> <span class="flag">--icp</span> <span class="string">'{
+    "target_job_titles": ["CMO", "VP Marketing", "Head of Growth"],
+    "target_industries": ["Software", "SaaS", "Professional Services"],
+    "target_company_sizes": ["51-200", "201-500", "501-1000"],
+    "target_locations": ["United States", "United Kingdom", "France"]
+  }'</span>
+<span class="blank"></span>
+<span class="success">&#10003; ICP updated</span>
+<span class="blank"></span>
+<span class="comment"># Subscribe to competitor engagement signals</span>
+<span class="prompt">$ </span><span class="cmd">signals subscriptions:create</span> \
+    <span class="flag">--business</span> <span class="json-num">biz_8f3k2m</span> \
+    <span class="flag">--signal</span> <span class="string">linkedin-company-engagers</span> \
+    <span class="flag">--name</span> <span class="string">"Competitor // Apollo.io engagers"</span> \
+    <span class="flag">--config</span> <span class="string">'{"linkedin_url": "https://linkedin.com/company/apollo-io"}'</span>
+<span class="blank"></span>
+<span class="success">&#10003; Subscription created</span> <span class="output">// active, scanning daily</span>
+<span class="blank"></span>
+<span class="comment"># Subscribe to topic conversations (pain-point keywords)</span>
+<span class="prompt">$ </span><span class="cmd">signals subscriptions:create</span> \
+    <span class="flag">--business</span> <span class="json-num">biz_8f3k2m</span> \
+    <span class="flag">--signal</span> <span class="string">linkedin-keyword-posters</span> \
+    <span class="flag">--name</span> <span class="string">"Pain // outbound not working"</span> \
+    <span class="flag">--config</span> <span class="string">'{"keywords": "\"outbound not working\" OR \"pipeline is empty\" OR \"need more leads\""}'</span>
+<span class="blank"></span>
+<span class="success">&#10003; Subscription created</span> <span class="output">// active, scanning daily</span>
+<span class="blank"></span>
+<span class="comment"># Subscribe to job changes</span>
+<span class="prompt">$ </span><span class="cmd">signals subscriptions:create</span> \
+    <span class="flag">--business</span> <span class="json-num">biz_8f3k2m</span> \
+    <span class="flag">--signal</span> <span class="string">job-changers</span> \
+    <span class="flag">--name</span> <span class="string">"Job changes // Marketing leaders"</span>
+<span class="blank"></span>
+<span class="success">&#10003; Subscription created</span> <span class="output">// active, scanning weekly</span>
+        </div>
+      </div>
+
+      <!-- Show leads coming in -->
+      <div class="terminal" style="margin-top:1em;">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">24 hours later...</div>
+        </div>
+        <div class="terminal-body">
+<span class="prompt">$ </span><span class="cmd">signals leads:list</span> <span class="flag">--business</span> <span class="json-num">biz_8f3k2m</span> <span class="flag">--limit</span> <span class="json-num">5</span>
+<span class="blank"></span>
+<span class="output">┌──────────────────────────────┬──────────────────────┬─────────────────────────────┐</span>
+<span class="output">│ <span class="json-key">Name</span>                         │ <span class="json-key">Signal</span>               │ <span class="json-key">Context</span>                     │</span>
+<span class="output">├──────────────────────────────┼──────────────────────┼─────────────────────────────┤</span>
+<span class="output">│ Sarah Chen, VP Marketing     │ <span class="json-val">job-changers</span>         │ Started at DataCo 12 days   │</span>
+<span class="output">│ Marc Dupont, CMO             │ <span class="json-val">competitor-engager</span>   │ Liked Apollo.io post        │</span>
+<span class="output">│ Lisa Park, Head of Growth    │ <span class="json-val">keyword-poster</span>       │ Posted "outbound not working"│</span>
+<span class="output">│ James Rivera, VP Sales       │ <span class="json-val">recently-funded</span>      │ Series B, $18M              │</span>
+<span class="output">│ Anna Weber, Marketing Dir    │ <span class="json-val">profile-engager</span>      │ Liked your CEO's post       │</span>
+<span class="output">└──────────────────────────────┴──────────────────────┴─────────────────────────────┘</span>
+<span class="blank"></span>
+<span class="output"><span class="json-num">47</span> leads matching ICP across <span class="json-num">5</span> active subscriptions</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 2: OVERLOOP CLI ===== -->
+    <div class="engine-step fade-up">
+      <div class="engine-step-number">2</div>
+      <div class="engine-step-label">Execution Layer</div>
+      <div class="engine-step-title">Launch campaigns with the Overloop CLI</div>
+      <div class="engine-step-desc">Create a signal-triggered campaign, configure AI personalization per persona, build a sourcing from 450M+ contacts, and activate. Claude writes every message from scratch.</div>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">overloop-cli</div>
+        </div>
+        <div class="terminal-body">
+<span class="comment"># Create campaign with AI personalization</span>
+<span class="prompt">$ </span><span class="cmd">overloop campaigns:create</span> \
+    <span class="flag">--name</span> <span class="string">"Acme // US // CMO // Signal-triggered // v1"</span> \
+    <span class="flag">--sender</span> <span class="json-num">sender_nf01</span> \
+    <span class="flag">--pitch_settings</span> <span class="string">'{
+      "selling_description": "We help B2B companies build outbound systems that book meetings on autopilot",
+      "pain_points": [
+        "Sales team spends 80% of time on manual prospecting",
+        "3% reply rate on cold outreach",
+        "No system to detect buying signals at scale"
+      ],
+      "benefits": [
+        "12% reply rate with signal-based outreach",
+        "Less than 20 min/day of human time",
+        "Pipeline runs while you sleep"
+      ],
+      "proof_points": ["19 meetings booked in 2 weeks", "450M+ verified contacts"],
+      "campaign_intent": "book_a_meeting"
+    }'</span> \
+    <span class="flag">--personalization</span> <span class="string">'{"language": "english", "tone_of_voice": "straightforward", "length": "short"}'</span>
+<span class="blank"></span>
+<span class="success">&#10003; Campaign created</span> <span class="output">(status: off)</span>
+<span class="output">  id: <span class="json-num">camp_2k9f1</span></span>
+<span class="blank"></span>
+<span class="comment"># Add sequence steps (Signal-Triggered Fast: 7 days)</span>
+<span class="prompt">$ </span><span class="cmd">overloop campaigns:add-steps</span> <span class="json-num">camp_2k9f1</span> <span class="flag">--steps</span> <span class="string">'[
+    {"type": "email",                    "generate_with_ai": true},
+    {"type": "delay",                    "config": {"days_delay": 2}},
+    {"type": "linkedin_visit_profile"},
+    {"type": "delay",                    "config": {"hours_delay": 12}},
+    {"type": "linkedin_send_invitation", "generate_with_ai": true},
+    {"type": "delay",                    "config": {"days_delay": 3}},
+    {"type": "email",                    "generate_with_ai": true},
+    {"type": "delay",                    "config": {"days_delay": 2}},
+    {"type": "pipedrive",                "config": {"stage": "Meeting Scheduled"}}
+  ]'</span>
+<span class="blank"></span>
+<span class="success">&#10003; 9 steps added</span> <span class="output">// 3 touches, 7 days, 2 channels</span>
+<span class="blank"></span>
+<span class="comment"># Build prospect list from 450M+ database</span>
+<span class="prompt">$ </span><span class="cmd">overloop sourcings:estimate</span> \
+    <span class="flag">--job_titles</span> <span class="string">"CMO, VP Marketing, Head of Growth"</span> \
+    <span class="flag">--locations</span> <span class="string">"United States"</span> \
+    <span class="flag">--industries</span> <span class="string">"Software, SaaS"</span> \
+    <span class="flag">--company_sizes</span> <span class="string">"51-200, 201-500"</span>
+<span class="blank"></span>
+<span class="output">  estimated_count: <span class="json-num">3,847</span></span>
+<span class="output">  <span class="comment">// Good. Narrow enough for quality, wide enough for volume.</span></span>
+<span class="blank"></span>
+<span class="prompt">$ </span><span class="cmd">overloop sourcings:create</span> \
+    <span class="flag">--campaign</span> <span class="json-num">camp_2k9f1</span> \
+    <span class="flag">--name</span> <span class="string">"Acme // SRC // US CMOs SaaS"</span> \
+    <span class="flag">--auto_enroll</span> <span class="json-num">true</span> \
+    <span class="flag">--limit</span> <span class="string">'{"period": "day", "quantity": 30}'</span>
+<span class="blank"></span>
+<span class="success">&#10003; Sourcing created</span> <span class="output">// 30 new prospects/day, auto-enrolled</span>
+<span class="blank"></span>
+<span class="comment"># Activate</span>
+<span class="prompt">$ </span><span class="cmd">overloop campaigns:activate</span> <span class="json-num">camp_2k9f1</span>
+<span class="blank"></span>
+<span class="success">&#10003; Campaign live</span>
+<span class="output">  Sending: 30 prospects/day</span>
+<span class="output">  Channels: Email + LinkedIn</span>
+<span class="output">  AI personalization: on (every message unique)</span>
+<span class="output">  Safety: 10-year algorithm, GDPR compliant</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STEP 3: CLAUDE CODE ===== -->
+    <div class="engine-step fade-up">
+      <div class="engine-step-number">3</div>
+      <div class="engine-step-label">Orchestration Layer</div>
+      <div class="engine-step-title">Claude Code runs everything with one command</div>
+      <div class="engine-step-desc">Steps 1 and 2 are what happens under the hood. In practice, you type one slash command and Claude's agent swarm handles the rest. Research, strategy, ICP, subscriptions, campaigns, sourcing, activation.</div>
+
+      <div class="terminal">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">claude-code</div>
+        </div>
+        <div class="terminal-body">
+<span class="prompt">claude&gt; </span><span class="cmd">/signals</span> <span class="string">acme-agency</span> <span class="string">https://www.acme-agency.com</span>
+<span class="blank"></span>
+<span class="output"><span class="json-key">&#9655; Agent: Research Analyst</span></span>
+<span class="output">  Scanning website, LinkedIn, competitors...</span>
+<span class="output">  Found 6 competitors: Apollo.io, Lemlist, Clay, Instantly, Outreach, Salesloft</span>
+<span class="output">  Extracted ICP from website: B2B SaaS, 50-500 employees, US/UK/FR</span>
+<span class="blank"></span>
+<span class="output"><span class="json-key">&#9655; Agent: Signals Planner</span></span>
+<span class="output">  Designing signal strategy...</span>
+<span class="output">  7 subscriptions across 5 signal types</span>
+<span class="output">  18 keyword groups crafted (pain points + intent + competitor mentions)</span>
+<span class="blank"></span>
+<span class="output"><span class="dim">  ┌─ Strategy ─────────────────────────────────────────────┐</span></span>
+<span class="output"><span class="dim">  │</span> P1  Competitor engagers: Apollo.io, Lemlist, Clay      <span class="dim">│</span></span>
+<span class="output"><span class="dim">  │</span> P1  Topic: "outbound not working" OR "need more leads" <span class="dim">│</span></span>
+<span class="output"><span class="dim">  │</span> P1  Job changes: CMO, VP Marketing, Head of Growth     <span class="dim">│</span></span>
+<span class="output"><span class="dim">  │</span> P2  Funding: SaaS, 51-500 employees                   <span class="dim">│</span></span>
+<span class="output"><span class="dim">  │</span> P2  Profile engagers: CEO personal page                <span class="dim">│</span></span>
+<span class="output"><span class="dim">  │</span> Expected volume: 120-200 signals/month                <span class="dim">│</span></span>
+<span class="output"><span class="dim">  └────────────────────────────────────────────────────────┘</span></span>
+<span class="blank"></span>
+<span class="output"><span class="success">&#10003; Checkpoint: approve strategy? (y/n)</span></span>
+<span class="prompt">claude&gt; </span><span class="cmd">y</span>
+<span class="blank"></span>
+<span class="output"><span class="json-key">&#9655; Agent: Signals Executor</span></span>
+<span class="output">  Creating business... <span class="success">&#10003;</span></span>
+<span class="output">  Updating ICP... <span class="success">&#10003;</span></span>
+<span class="output">  Creating subscription 1/7: Competitor // Apollo.io... <span class="success">&#10003;</span></span>
+<span class="output">  Creating subscription 2/7: Competitor // Lemlist... <span class="success">&#10003;</span></span>
+<span class="output">  Creating subscription 3/7: Competitor // Clay... <span class="success">&#10003;</span></span>
+<span class="output">  Creating subscription 4/7: Pain // outbound keywords... <span class="success">&#10003;</span></span>
+<span class="output">  Creating subscription 5/7: Pain // pipeline keywords... <span class="success">&#10003;</span></span>
+<span class="output">  Creating subscription 6/7: Job changes // Marketing... <span class="success">&#10003;</span></span>
+<span class="output">  Creating subscription 7/7: Funding // SaaS... <span class="success">&#10003;</span></span>
+<span class="blank"></span>
+<span class="success">&#10003; All 7 subscriptions active. Leads start flowing within 24h.</span>
+<span class="output">  Execution log saved to: outputs/signals/acme-agency/execution-log.md</span>
+        </div>
+      </div>
+
+      <!-- Second command: outbound -->
+      <div class="terminal" style="margin-top:1.5em;">
+        <div class="terminal-bar">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+          <div class="terminal-title">claude-code // 1 week later</div>
+        </div>
+        <div class="terminal-body">
+<span class="prompt">claude&gt; </span><span class="cmd">/outbound</span> <span class="string">acme-agency</span> <span class="flag">--with-signals</span>
+<span class="blank"></span>
+<span class="output"><span class="json-key">&#9655; Agent: Copywriter</span></span>
+<span class="output">  Writing pitch_settings for 2 personas x 2 angles (A/B test)...</span>
+<span class="output">  Pain points: persona-specific, anti-slop checked</span>
+<span class="output">  4 variants ready</span>
+<span class="blank"></span>
+<span class="output"><span class="json-key">&#9655; Agent: Sequence Designer</span></span>
+<span class="output">  Pattern D (Signal-triggered fast, 7 days) for signal leads</span>
+<span class="output">  Pattern A (Multichannel standard, 25 days) for competitor engagers</span>
+<span class="blank"></span>
+<span class="output"><span class="json-key">&#9655; Agent: List Builder</span></span>
+<span class="output">  Progressive filtering on 450M+ database...</span>
+<span class="output">  Round 1: job_titles + locations = 12,400</span>
+<span class="output">  Round 2: + industries = 4,200</span>
+<span class="output">  Round 3: + company_sizes = 1,850 <span class="success">&#10003; target range</span></span>
+<span class="blank"></span>
+<span class="output"><span class="json-key">&#9655; Agent: Outbound Executor</span></span>
+<span class="output">  Creating exclusion list (competitors + existing clients)... <span class="success">&#10003;</span></span>
+<span class="output">  Creating campaign: CMO // US // Signal-triggered // v1... <span class="success">&#10003;</span></span>
+<span class="output">  Creating campaign: CMO // US // Signal-triggered // v2... <span class="success">&#10003;</span></span>
+<span class="output">  Creating sourcing: 30/day, auto-enroll... <span class="success">&#10003;</span></span>
+<span class="output">  Linking to CRM (Pipedrive)... <span class="success">&#10003;</span></span>
+<span class="blank"></span>
+<span class="output"><span class="success">&#10003; Checkpoint: 2 campaigns ready. Activate? (y/n)</span></span>
+<span class="prompt">claude&gt; </span><span class="cmd">y</span>
+<span class="blank"></span>
+<span class="success">&#10003; Campaigns live. A/B test running. 30 prospects/day.</span>
+<span class="output">  Review in 2 weeks: /outbound:optimize acme-agency</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== THE ONE COMMAND ===== -->
+    <div class="one-cmd fade-up">
+      <div class="one-cmd-label">The whole system in two commands</div>
+      <div style="margin-bottom:0.8em;">
+        <span class="one-cmd-code"><span class="prompt">$</span> /signals <span class="flag">acme</span> https://acme.com</span>
+      </div>
+      <div>
+        <span class="one-cmd-code"><span class="prompt">$</span> /outbound <span class="flag">acme</span> --with-signals</span>
+      </div>
+      <div class="one-cmd-sub">30 seconds of typing. 27 specialized agents. Full pipeline on autopilot.</div>
+    </div>
+
+    <!-- ===== WHY THIS IS DIFFERENT ===== -->
+    <div class="divider" style="background:rgba(255,255,255,0.05);"></div>
+
+    <h3 class="fade-up" style="color:#fff; margin-top:2em;">Why this isn't another "AI outbound" tool</h3>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5em; margin:2em 0;" class="fade-up">
+      <div class="dark-card" style="position:relative;">
+        <div class="card-label" style="color:var(--accent-light);">Everyone else</div>
+        <ul style="list-style:none; padding:0; font-size:0.9em; color:#888;">
+          <li style="padding:0.3em 0;">Plug Claude into Apollo for contacts</li>
+          <li style="padding:0.3em 0;">Plug Claude into Clay for enrichment</li>
+          <li style="padding:0.3em 0;">Plug Claude into Lemlist for sending</li>
+          <li style="padding:0.3em 0;">Plug Claude into Bombora for intent</li>
+          <li style="padding:0.3em 0;">4 tools, 4 subscriptions, 4 failure points</li>
+        </ul>
+      </div>
+      <div class="dark-card" style="position:relative; border-color:rgba(136,136,255,0.2);">
+        <div class="card-label" style="color:var(--accent-light);">This system</div>
+        <ul style="list-style:none; padding:0; font-size:0.9em; color:#BBB;">
+          <li style="padding:0.3em 0;"><strong style="color:#fff;">Signals</strong> detects buying moments (native)</li>
+          <li style="padding:0.3em 0;"><strong style="color:#fff;">450M DB</strong> enriches with verified contacts (native)</li>
+          <li style="padding:0.3em 0;"><strong style="color:#fff;">Overloop</strong> sends via Email + LinkedIn (native)</li>
+          <li style="padding:0.3em 0;"><strong style="color:#fff;">Claude</strong> orchestrates everything (native)</li>
+          <li style="padding:0.3em 0;"><strong style="color:var(--accent-light);">1 integrated stack. Zero duct tape.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="dark-card fade-up" style="position:relative; text-align:center; padding:2em;">
+      <p style="font-size:0.92em; color:#888; margin-bottom:0.5em;">Account safety track record</p>
+      <div style="font-family:'Playfair Display',serif; font-size:2.5em; font-weight:700; color:#fff;">100,000+</div>
+      <p style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:#888; letter-spacing:0.05em;">CAMPAIGNS RUN // ZERO ACCOUNTS BANNED // 10 YEARS</p>
+    </div>
+
   </div>
 </section>
 
