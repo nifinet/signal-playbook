@@ -734,33 +734,27 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 .engine-step::before {
   content: '';
   position: absolute;
-  left: 0.9em;
-  top: 2em;
+  left: 12px;
+  top: 30px;
   bottom: -2em;
   width: 1px;
-  background: linear-gradient(to bottom, var(--accent-light), rgba(136,136,255,0.1));
+  background: linear-gradient(to bottom, #E06060, rgba(224,96,96,0.1));
 }
 
 .engine-step:last-child::before { display: none; }
 
 .engine-step-number {
   position: absolute;
-  left: 0;
-  top: 0;
-  width: 2em;
-  height: 2em;
-  border-radius: 50%;
-  border: 1px solid var(--accent-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  font-weight: 500;
-  color: var(--accent-light);
-  background: var(--dark);
+  left: -2px;
+  top: -2px;
+  width: 28px;
+  height: 28px;
   z-index: 1;
+  image-rendering: pixelated;
 }
+
+/* Hide the text content of engine-step-number, replaced by SVG */
+.engine-step-number { font-size: 0; color: transparent; }
 
 .engine-step-label {
   font-family: 'JetBrains Mono', monospace;
@@ -2412,7 +2406,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 
     <!-- ===== STEP 1: SIGNALS CLI ===== -->
     <div class="engine-step fade-up">
-      <div class="engine-step-number">1</div>
+      <svg class="engine-step-number" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
       <div class="engine-step-label">Detection Layer</div>
       <div class="engine-step-title">Set up signal monitoring with the Signals CLI</div>
       <div class="engine-step-desc">Create a business profile, define your ICP, and activate all 5 signal subscriptions. Leads start flowing within 24 hours.</div>
@@ -2499,7 +2493,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 
     <!-- ===== STEP 2: OVERLOOP CLI ===== -->
     <div class="engine-step fade-up">
-      <div class="engine-step-number">2</div>
+      <svg class="engine-step-number" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
       <div class="engine-step-label">Execution Layer</div>
       <div class="engine-step-title">Launch campaigns with the Overloop CLI</div>
       <div class="engine-step-desc">Create a signal-triggered campaign, configure AI personalization per persona, build a sourcing from 450M+ contacts, and activate. Claude writes every message from scratch.</div>
@@ -2587,7 +2581,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 
     <!-- ===== STEP 3: CLAUDE CODE ===== -->
     <div class="engine-step fade-up">
-      <div class="engine-step-number">3</div>
+      <svg class="engine-step-number" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
       <div class="engine-step-label">Orchestration Layer</div>
       <div class="engine-step-title">Claude Code runs everything with one command</div>
       <div class="engine-step-desc">Steps 1 and 2 are what happens under the hood. In practice, you type one slash command and Claude's agent swarm handles the rest. Research, strategy, ICP, subscriptions, campaigns, sourcing, activation.</div>
