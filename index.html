@@ -2411,82 +2411,73 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="engine-step-title">Set up signal monitoring with the Signals CLI</div>
       <div class="engine-step-desc">Create a business profile, define your ICP, and activate all 5 signal subscriptions. Leads start flowing within 24 hours.</div>
 
-      <div class="terminal">
-        <div class="terminal-bar">
-          <div class="terminal-dot red"></div>
-          <div class="terminal-dot yellow"></div>
-          <div class="terminal-dot green"></div>
-          <div class="terminal-title">signals-cli</div>
+      <div class="cc">
+        <div class="cc-header">
+          <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
+          <div class="cc-meta">
+            <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
+            <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
+            <span class="info">/Users/nicolasfinet</span>
+          </div>
         </div>
-        <div class="terminal-body">
-<span class="comment"># Create business profile</span>
-<span class="prompt">$ </span><span class="cmd">signals businesses:create</span> <span class="flag">--website</span> <span class="string">https://www.acme-agency.com</span>
-<span class="blank"></span>
-<span class="success">&#10003; Business created</span>
-<span class="output">  id: <span class="json-num">biz_8f3k2m</span></span>
-<span class="output">  name: Acme Agency</span>
-<span class="output">  website: https://www.acme-agency.com</span>
-<span class="blank"></span>
-<span class="comment"># Define your Ideal Customer Profile</span>
-<span class="prompt">$ </span><span class="cmd">signals businesses:update</span> <span class="json-num">biz_8f3k2m</span> <span class="flag">--icp</span> <span class="string">'{
-    "target_job_titles": ["CMO", "VP Marketing", "Head of Growth"],
-    "target_industries": ["Software", "SaaS", "Professional Services"],
-    "target_company_sizes": ["51-200", "201-500", "501-1000"],
-    "target_locations": ["United States", "United Kingdom", "France"]
-  }'</span>
-<span class="blank"></span>
-<span class="success">&#10003; ICP updated</span>
-<span class="blank"></span>
-<span class="comment"># Subscribe to competitor engagement signals</span>
-<span class="prompt">$ </span><span class="cmd">signals subscriptions:create</span> \
-    <span class="flag">--business</span> <span class="json-num">biz_8f3k2m</span> \
-    <span class="flag">--signal</span> <span class="string">linkedin-company-engagers</span> \
-    <span class="flag">--name</span> <span class="string">"Competitor // Apollo.io engagers"</span> \
-    <span class="flag">--config</span> <span class="string">'{"linkedin_url": "https://linkedin.com/company/apollo-io"}'</span>
-<span class="blank"></span>
-<span class="success">&#10003; Subscription created</span> <span class="output">// active, scanning daily</span>
-<span class="blank"></span>
-<span class="comment"># Subscribe to topic conversations (pain-point keywords)</span>
-<span class="prompt">$ </span><span class="cmd">signals subscriptions:create</span> \
-    <span class="flag">--business</span> <span class="json-num">biz_8f3k2m</span> \
-    <span class="flag">--signal</span> <span class="string">linkedin-keyword-posters</span> \
-    <span class="flag">--name</span> <span class="string">"Pain // outbound not working"</span> \
-    <span class="flag">--config</span> <span class="string">'{"keywords": "\"outbound not working\" OR \"pipeline is empty\" OR \"need more leads\""}'</span>
-<span class="blank"></span>
-<span class="success">&#10003; Subscription created</span> <span class="output">// active, scanning daily</span>
-<span class="blank"></span>
-<span class="comment"># Subscribe to job changes</span>
-<span class="prompt">$ </span><span class="cmd">signals subscriptions:create</span> \
-    <span class="flag">--business</span> <span class="json-num">biz_8f3k2m</span> \
-    <span class="flag">--signal</span> <span class="string">job-changers</span> \
-    <span class="flag">--name</span> <span class="string">"Job changes // Marketing leaders"</span>
-<span class="blank"></span>
-<span class="success">&#10003; Subscription created</span> <span class="output">// active, scanning weekly</span>
-        </div>
-      </div>
+        <div class="cc-body">
 
-      <!-- Show leads coming in -->
-      <div class="terminal" style="margin-top:1em;">
-        <div class="terminal-bar">
-          <div class="terminal-dot red"></div>
-          <div class="terminal-dot yellow"></div>
-          <div class="terminal-dot green"></div>
-          <div class="terminal-title">24 hours later...</div>
-        </div>
-        <div class="terminal-body">
-<span class="prompt">$ </span><span class="cmd">signals leads:list</span> <span class="flag">--business</span> <span class="json-num">biz_8f3k2m</span> <span class="flag">--limit</span> <span class="json-num">5</span>
-<span class="blank"></span>
-<span class="output">┌──────────────────────────────┬──────────────────────┬─────────────────────────────┐</span>
-<span class="output">│ <span class="json-key">Name</span>                         │ <span class="json-key">Signal</span>               │ <span class="json-key">Context</span>                     │</span>
-<span class="output">├──────────────────────────────┼──────────────────────┼─────────────────────────────┤</span>
-<span class="output">│ Sarah Chen, VP Marketing     │ <span class="json-val">job-changers</span>         │ Started at DataCo 12 days   │</span>
-<span class="output">│ Marc Dupont, CMO             │ <span class="json-val">competitor-engager</span>   │ Liked Apollo.io post        │</span>
-<span class="output">│ Lisa Park, Head of Growth    │ <span class="json-val">keyword-poster</span>       │ Posted "outbound not working"│</span>
-<span class="output">│ James Rivera, VP Sales       │ <span class="json-val">recently-funded</span>      │ Series B, $18M              │</span>
-<span class="output">│ Anna Weber, Marketing Dir    │ <span class="json-val">profile-engager</span>      │ Liked your CEO's post       │</span>
-<span class="output">└──────────────────────────────┴──────────────────────┴─────────────────────────────┘</span>
-<span class="blank"></span>
-<span class="output"><span class="json-num">47</span> leads matching ICP across <span class="json-num">5</span> active subscriptions</span>
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">signals businesses:create --website https://www.acme-agency.com</span>
+          </div>
+          <div class="cc-response">
+<span class="success">&#10003; Business created</span><br>
+id: <span style="color:#7DD17D;">biz_8f3k2m</span> &nbsp;name: Acme Agency
+          </div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">signals businesses:update biz_8f3k2m --icp '{"target_job_titles": ["CMO", "VP Marketing", "Head of Growth"], "target_industries": ["Software", "SaaS"], "target_company_sizes": ["51-200", "201-500"], "target_locations": ["US", "UK", "France"]}'</span>
+          </div>
+          <div class="cc-response"><span class="success">&#10003; ICP updated</span></div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">signals subscriptions:create --business biz_8f3k2m --signal linkedin-company-engagers --name "Competitor // Apollo.io" --config '{"linkedin_url": "https://linkedin.com/company/apollo-io"}'</span>
+          </div>
+          <div class="cc-response"><span class="success">&#10003; Subscription created</span> <span class="dim">// active, scanning daily</span></div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">signals subscriptions:create --business biz_8f3k2m --signal linkedin-keyword-posters --name "Pain // outbound" --config '{"keywords": "\"outbound not working\" OR \"pipeline is empty\""}'</span>
+          </div>
+          <div class="cc-response"><span class="success">&#10003; Subscription created</span> <span class="dim">// active, scanning daily</span></div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">signals subscriptions:create --business biz_8f3k2m --signal job-changers --name "Job changes // Marketing leaders"</span>
+          </div>
+          <div class="cc-response"><span class="success">&#10003; Subscription created</span> <span class="dim">// active, scanning weekly</span></div>
+
+          <hr class="cc-sep">
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">signals leads:list --business biz_8f3k2m --limit 5</span>
+          </div>
+          <div class="cc-response" style="font-size:0.92em;">
+<span class="dim">24 hours later...</span><br>
+<br>
+Sarah Chen, VP Marketing &nbsp;&nbsp;<span class="warn">job-changers</span> &nbsp;&nbsp;Started at DataCo 12 days ago<br>
+Marc Dupont, CMO &nbsp;&nbsp;<span class="warn">competitor-engager</span> &nbsp;&nbsp;Liked Apollo.io post<br>
+Lisa Park, Head of Growth &nbsp;&nbsp;<span class="warn">keyword-poster</span> &nbsp;&nbsp;Posted "outbound not working"<br>
+James Rivera, VP Sales &nbsp;&nbsp;<span class="warn">recently-funded</span> &nbsp;&nbsp;Series B, $18M<br>
+Anna Weber, Marketing Dir &nbsp;&nbsp;<span class="warn">profile-engager</span> &nbsp;&nbsp;Liked your CEO's post<br>
+<br>
+<span class="highlight">47</span> leads matching ICP across <span class="highlight">5</span> active subscriptions
+          </div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="cursor"></span>
+          </div>
+
         </div>
       </div>
     </div>
@@ -2498,79 +2489,66 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="engine-step-title">Launch campaigns with the Overloop CLI</div>
       <div class="engine-step-desc">Create a signal-triggered campaign, configure AI personalization per persona, build a sourcing from 450M+ contacts, and activate. Claude writes every message from scratch.</div>
 
-      <div class="terminal">
-        <div class="terminal-bar">
-          <div class="terminal-dot red"></div>
-          <div class="terminal-dot yellow"></div>
-          <div class="terminal-dot green"></div>
-          <div class="terminal-title">overloop-cli</div>
+      <div class="cc">
+        <div class="cc-header">
+          <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
+          <div class="cc-meta">
+            <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
+            <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
+            <span class="info">/Users/nicolasfinet</span>
+          </div>
         </div>
-        <div class="terminal-body">
-<span class="comment"># Create campaign with AI personalization</span>
-<span class="prompt">$ </span><span class="cmd">overloop campaigns:create</span> \
-    <span class="flag">--name</span> <span class="string">"Acme // US // CMO // Signal-triggered // v1"</span> \
-    <span class="flag">--sender</span> <span class="json-num">sender_nf01</span> \
-    <span class="flag">--pitch_settings</span> <span class="string">'{
-      "selling_description": "We help B2B companies build outbound systems that book meetings on autopilot",
-      "pain_points": [
-        "Sales team spends 80% of time on manual prospecting",
-        "3% reply rate on cold outreach",
-        "No system to detect buying signals at scale"
-      ],
-      "benefits": [
-        "12% reply rate with signal-based outreach",
-        "Less than 20 min/day of human time",
-        "Pipeline runs while you sleep"
-      ],
-      "proof_points": ["19 meetings booked in 2 weeks", "450M+ verified contacts"],
-      "campaign_intent": "book_a_meeting"
-    }'</span> \
-    <span class="flag">--personalization</span> <span class="string">'{"language": "english", "tone_of_voice": "straightforward", "length": "short"}'</span>
-<span class="blank"></span>
-<span class="success">&#10003; Campaign created</span> <span class="output">(status: off)</span>
-<span class="output">  id: <span class="json-num">camp_2k9f1</span></span>
-<span class="blank"></span>
-<span class="comment"># Add sequence steps (Signal-Triggered Fast: 7 days)</span>
-<span class="prompt">$ </span><span class="cmd">overloop campaigns:add-steps</span> <span class="json-num">camp_2k9f1</span> <span class="flag">--steps</span> <span class="string">'[
-    {"type": "email",                    "generate_with_ai": true},
-    {"type": "delay",                    "config": {"days_delay": 2}},
-    {"type": "linkedin_visit_profile"},
-    {"type": "delay",                    "config": {"hours_delay": 12}},
-    {"type": "linkedin_send_invitation", "generate_with_ai": true},
-    {"type": "delay",                    "config": {"days_delay": 3}},
-    {"type": "email",                    "generate_with_ai": true},
-    {"type": "delay",                    "config": {"days_delay": 2}},
-    {"type": "pipedrive",                "config": {"stage": "Meeting Scheduled"}}
-  ]'</span>
-<span class="blank"></span>
-<span class="success">&#10003; 9 steps added</span> <span class="output">// 3 touches, 7 days, 2 channels</span>
-<span class="blank"></span>
-<span class="comment"># Build prospect list from 450M+ database</span>
-<span class="prompt">$ </span><span class="cmd">overloop sourcings:estimate</span> \
-    <span class="flag">--job_titles</span> <span class="string">"CMO, VP Marketing, Head of Growth"</span> \
-    <span class="flag">--locations</span> <span class="string">"United States"</span> \
-    <span class="flag">--industries</span> <span class="string">"Software, SaaS"</span> \
-    <span class="flag">--company_sizes</span> <span class="string">"51-200, 201-500"</span>
-<span class="blank"></span>
-<span class="output">  estimated_count: <span class="json-num">3,847</span></span>
-<span class="output">  <span class="comment">// Good. Narrow enough for quality, wide enough for volume.</span></span>
-<span class="blank"></span>
-<span class="prompt">$ </span><span class="cmd">overloop sourcings:create</span> \
-    <span class="flag">--campaign</span> <span class="json-num">camp_2k9f1</span> \
-    <span class="flag">--name</span> <span class="string">"Acme // SRC // US CMOs SaaS"</span> \
-    <span class="flag">--auto_enroll</span> <span class="json-num">true</span> \
-    <span class="flag">--limit</span> <span class="string">'{"period": "day", "quantity": 30}'</span>
-<span class="blank"></span>
-<span class="success">&#10003; Sourcing created</span> <span class="output">// 30 new prospects/day, auto-enrolled</span>
-<span class="blank"></span>
-<span class="comment"># Activate</span>
-<span class="prompt">$ </span><span class="cmd">overloop campaigns:activate</span> <span class="json-num">camp_2k9f1</span>
-<span class="blank"></span>
-<span class="success">&#10003; Campaign live</span>
-<span class="output">  Sending: 30 prospects/day</span>
-<span class="output">  Channels: Email + LinkedIn</span>
-<span class="output">  AI personalization: on (every message unique)</span>
-<span class="output">  Safety: 10-year algorithm, GDPR compliant</span>
+        <div class="cc-body">
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">overloop campaigns:create --name "Acme // US // CMO // Signal-triggered // v1" --sender sender_nf01 --pitch_settings '{...}' --personalization '{"language": "english", "tone": "straightforward", "length": "short"}'</span>
+          </div>
+          <div class="cc-response">
+<span class="success">&#10003; Campaign created</span> <span class="dim">(status: off)</span><br>
+id: <span style="color:#7DD17D;">camp_2k9f1</span><br>
+<br>
+<span class="dim">pitch_settings:</span><br>
+&nbsp;&nbsp;pain_points: "80% time on manual prospecting", "3% reply rate", "No signal detection"<br>
+&nbsp;&nbsp;benefits: "12% reply rate", "&lt;20 min/day", "Pipeline runs while you sleep"<br>
+&nbsp;&nbsp;proof_points: "19 meetings in 2 weeks", "450M+ verified contacts"
+          </div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">overloop campaigns:add-steps camp_2k9f1 --steps '[{"type":"email","generate_with_ai":true}, {"type":"delay","config":{"days_delay":2}}, {"type":"linkedin_visit_profile"}, {"type":"delay","config":{"hours_delay":12}}, {"type":"linkedin_send_invitation","generate_with_ai":true}, {"type":"delay","config":{"days_delay":3}}, {"type":"email","generate_with_ai":true}, {"type":"pipedrive","config":{"stage":"Meeting Scheduled"}}]'</span>
+          </div>
+          <div class="cc-response"><span class="success">&#10003; 8 steps added</span> <span class="dim">// 3 touches, 7 days, 2 channels + CRM sync</span></div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">overloop sourcings:estimate --job_titles "CMO, VP Marketing, Head of Growth" --locations "United States" --industries "Software, SaaS" --company_sizes "51-200, 201-500"</span>
+          </div>
+          <div class="cc-response">estimated_count: <span class="highlight">3,847</span> <span class="dim">// Good. Narrow enough for quality, wide enough for volume.</span></div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">overloop sourcings:create --campaign camp_2k9f1 --name "Acme // SRC // US CMOs SaaS" --auto_enroll true --limit '{"period":"day","quantity":30}'</span>
+          </div>
+          <div class="cc-response"><span class="success">&#10003; Sourcing created</span> <span class="dim">// 30 new prospects/day, auto-enrolled</span></div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">overloop campaigns:activate camp_2k9f1</span>
+          </div>
+          <div class="cc-response">
+<span class="success">&#10003; Campaign live</span><br>
+Sending: 30 prospects/day<br>
+Channels: Email + LinkedIn<br>
+AI personalization: on (every message unique)<br>
+Safety: 10-year algorithm, GDPR compliant
+          </div>
+
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="cursor"></span>
+          </div>
+
         </div>
       </div>
 
