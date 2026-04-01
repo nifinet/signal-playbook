@@ -1286,6 +1286,20 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   50% { opacity: 0; }
 }
 
+@keyframes decaySlide {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Decay bar shrink animation on scroll */
+.decay-bar {
+  transition: width 2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.fade-up.visible .decay-bar {
+  animation: none;
+}
+
 /* Claude response block */
 .cc-response {
   padding: 0.8em 0 0.8em 1.6em;
@@ -2237,6 +2251,9 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
         </tbody>
       </table>
       <p style="font-size:0.85em; color:var(--text-muted); margin-bottom:0;">Supported: HubSpot, Pipedrive, Salesforce (native). Add CRM step at end of every sequence.</p>
+      <div class="callout" style="margin-top:1em; margin-bottom:0;">
+        <strong>No manual export/import.</strong> Sortlist Signals pushes leads directly into your CRM as they're detected, so Claude can pick them up and start outreach automatically. The entire loop is hands-free.
+      </div>
     </div>
 
     <div class="media-placeholder fade-up">
@@ -2532,6 +2549,10 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 <span class="output">  Safety: 10-year algorithm, GDPR compliant</span>
         </div>
       </div>
+
+      <div class="callout fade-up" style="background:rgba(40,200,64,0.06); border-left-color:#28C840; margin-top:1em;">
+        <strong>Not ready to go full-auto?</strong> Set "Review Mode" to approve Claude's first 20 messages before the system sends on its own. You stay in control until you trust the output. Most teams switch to auto after 5-10 reviewed messages.
+      </div>
     </div>
 
     <!-- ===== STEP 3: CLAUDE CODE ===== -->
@@ -2798,23 +2819,77 @@ Sortlist Signals containing prospects who showed buying intent.</span>
     <div class="divider" style="background:rgba(255,255,255,0.05);"></div>
 
     <h3 class="fade-up" style="color:#fff; margin-top:2em;">Signals decay. Speed wins.</h3>
+    <p class="fade-up" style="color:#888;">Every signal has a half-life. Miss the window and the prospect goes cold, gets contacted by a competitor, or moves on. This is what's happening right now while you read this:</p>
 
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1em; margin:2em 0;" class="fade-up">
-      <div class="dark-card" style="position:relative; text-align:center; padding:1.5em 1em;">
-        <div style="font-family:'Playfair Display',serif; font-size:1.8em; font-weight:700; color:var(--accent-light);">14 days</div>
-        <p style="font-size:0.78em; color:#888; margin:0;">Job change window</p>
+    <!-- Animated decay bars -->
+    <div class="fade-up" style="margin:2em 0;">
+
+      <!-- Job change -->
+      <div style="margin-bottom:1.5em;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4em;">
+          <span style="color:#fff; font-weight:500; font-size:0.92em;">Job change signal</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--accent-light);">14 day window</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:6px; height:8px; overflow:hidden; position:relative;">
+          <div style="position:absolute; top:0; left:0; height:100%; width:100%; border-radius:6px; background:linear-gradient(90deg, #28C840 0%, #28C840 30%, #E8A858 60%, #E05050 85%, #444 100%); animation:decaySlide 4s ease-out forwards;" class="decay-bar"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:0.3em;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#28C840;">Day 1: They're reassessing vendors</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#E05050;">Day 14: Decisions are made</span>
+        </div>
       </div>
-      <div class="dark-card" style="position:relative; text-align:center; padding:1.5em 1em;">
-        <div style="font-family:'Playfair Display',serif; font-size:1.8em; font-weight:700; color:var(--accent-light);">48 hours</div>
-        <p style="font-size:0.78em; color:#888; margin:0;">Post engagement decay</p>
+
+      <!-- Competitor engagement -->
+      <div style="margin-bottom:1.5em;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4em;">
+          <span style="color:#fff; font-weight:500; font-size:0.92em;">Competitor engagement</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:#E8A858;">48 hour window</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:6px; height:8px; overflow:hidden; position:relative;">
+          <div style="position:absolute; top:0; left:0; height:100%; width:65%; border-radius:6px; background:linear-gradient(90deg, #28C840 0%, #E8A858 50%, #E05050 80%, #444 100%); animation:decaySlide 3s ease-out forwards;" class="decay-bar"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:0.3em;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#28C840;">Hour 1: Topic is top of mind</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#E05050;">Hour 48: They've moved on</span>
+        </div>
       </div>
-      <div class="dark-card" style="position:relative; text-align:center; padding:1.5em 1em;">
-        <div style="font-family:'Playfair Display',serif; font-size:1.8em; font-weight:700; color:var(--accent-light);">7 days</div>
-        <p style="font-size:0.78em; color:#888; margin:0;">Funding announcement</p>
+
+      <!-- Topic post -->
+      <div style="margin-bottom:1.5em;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4em;">
+          <span style="color:#fff; font-weight:500; font-size:0.92em;">Topic conversation</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:#E8A858;">72 hour window</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:6px; height:8px; overflow:hidden; position:relative;">
+          <div style="position:absolute; top:0; left:0; height:100%; width:75%; border-radius:6px; background:linear-gradient(90deg, #28C840 0%, #E8A858 40%, #E05050 75%, #444 100%); animation:decaySlide 3.5s ease-out forwards;" class="decay-bar"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:0.3em;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#28C840;">Hour 1: Actively seeking answers</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#E05050;">Hour 72: Found a solution (not you)</span>
+        </div>
       </div>
+
+      <!-- Funding -->
+      <div style="margin-bottom:0;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4em;">
+          <span style="color:#fff; font-weight:500; font-size:0.92em;">Funding announcement</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--accent-light);">7 day window</span>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:6px; height:8px; overflow:hidden; position:relative;">
+          <div style="position:absolute; top:0; left:0; height:100%; width:90%; border-radius:6px; background:linear-gradient(90deg, #28C840 0%, #28C840 40%, #E8A858 65%, #E05050 90%, #444 100%); animation:decaySlide 3.8s ease-out forwards;" class="decay-bar"></div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:0.3em;">
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#28C840;">Day 1: Budget is unlocked</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#E05050;">Day 7: Every vendor already called</span>
+        </div>
+      </div>
+
     </div>
 
-    <p class="fade-up" style="color:#888; text-align:center;">A new CMO reassesses vendors in their first 90 days. A competitor engagement decays in 48 hours. A funding announcement generates inbound interest within a week. Without real-time detection, you miss the window entirely.</p>
+    <div class="callout fade-up" style="background:rgba(224,80,80,0.08); border-left-color:#E05050;">
+      <strong style="color:#fff;">The math is brutal:</strong>
+      <p style="color:#888; margin-bottom:0;">If you detect a signal on Monday but your sales team doesn't reach out until Thursday, the competitor engagement signal is already dead and the topic conversation prospect already found another vendor. Sortlist Signals detects in real-time. Claude writes in seconds. The outreach goes out the same day.</p>
+    </div>
 
     <!-- ===== FINAL CTA ===== -->
     <div class="cta-banner fade-up" style="margin-top:3em; padding:3em 2em; border-color:rgba(136,136,255,0.25);">
