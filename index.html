@@ -1029,6 +1029,104 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   display: block;
 }
 
+/* ===== CTA BUTTON ===== */
+.cta-btn {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 0.8em 1.8em;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cta-btn.primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.cta-btn.primary:hover {
+  background: #0000ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,0,210,0.3);
+}
+
+.cta-btn.outline {
+  background: transparent;
+  color: var(--accent-light);
+  border: 1px solid rgba(136,136,255,0.3);
+}
+
+.cta-btn.outline:hover {
+  background: rgba(136,136,255,0.08);
+  border-color: var(--accent-light);
+}
+
+.cta-banner {
+  text-align: center;
+  padding: 2em;
+  margin: 2em 0;
+  border-radius: 12px;
+  background: rgba(0,0,210,0.04);
+  border: 1px solid rgba(0,0,210,0.1);
+}
+
+.dark-section .cta-banner,
+.blueprint-section .cta-banner {
+  background: rgba(136,136,255,0.06);
+  border-color: rgba(136,136,255,0.15);
+}
+
+.cta-banner p {
+  margin-bottom: 1em;
+  font-size: 0.92em;
+}
+
+/* Cost comparison */
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+
+.cost-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.8em 1em;
+  text-align: left;
+}
+
+.cost-table td {
+  padding: 0.6em 1em;
+  font-size: 0.9em;
+  border-bottom: 1px solid var(--border);
+}
+
+.cost-table .old { color: var(--text-muted); text-decoration: line-through; }
+.cost-table .new { color: var(--accent); font-weight: 500; }
+
+.dark-section .cost-table td { border-color: rgba(255,255,255,0.05); }
+.dark-section .cost-table .old { color: #666; }
+.dark-section .cost-table .new { color: var(--accent-light); font-weight: 500; }
+
+.price-tag {
+  font-family: 'Playfair Display', serif;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.price-tag .strike {
+  text-decoration: line-through;
+  color: #666;
+  font-size: 0.6em;
+  font-weight: 400;
+}
+
 /* ===== TABLE OF CONTENTS ===== */
 .toc-section {
   padding: clamp(48px, 8vh, 80px) 0;
@@ -1099,161 +1197,141 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 }
 
 /* ===== CLAUDE CODE TERMINAL ===== */
-.claude-terminal {
-  background: #1a1a2e;
+.cc {
+  background: #1a1a1a;
   border-radius: 12px;
   overflow: hidden;
   margin: 2em 0;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  font-family: 'JetBrains Mono', monospace;
 }
 
-.claude-terminal-bar {
-  background: #12122a;
-  padding: 10px 16px;
+/* Header mimicking real Claude Code startup */
+.cc-header {
+  padding: 20px 24px 16px;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  gap: 16px;
+  align-items: flex-start;
+  border-bottom: 1px solid #333;
 }
 
-.claude-terminal-bar .terminal-dot.red { background: #FF5F57; }
-.claude-terminal-bar .terminal-dot.yellow { background: #FFBD2E; }
-.claude-terminal-bar .terminal-dot.green { background: #28C840; }
+/* Pixel art robot logo */
+.cc-logo {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  image-rendering: pixelated;
+}
 
-.claude-terminal-bar .terminal-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65em;
+.cc-meta {
+  font-size: 0.75em;
+  line-height: 1.6;
+}
+
+.cc-meta .title {
+  color: #fff;
+  font-weight: 500;
+}
+
+.cc-meta .version {
+  color: #888;
+}
+
+.cc-meta .info {
   color: #666;
-  margin-left: auto;
 }
 
-.claude-terminal-body {
-  padding: clamp(16px, 2.5vw, 28px);
-  font-family: 'JetBrains Mono', monospace;
+.cc-meta .info .dot {
+  color: #444;
+  margin: 0 0.3em;
+}
+
+/* Body */
+.cc-body {
+  padding: clamp(16px, 2.5vw, 24px);
   font-size: 0.78em;
   line-height: 1.9;
   color: #BBB;
   overflow-x: auto;
 }
 
-/* Claude message bubbles */
-.claude-msg {
-  display: flex;
-  gap: 12px;
-  margin: 1em 0;
-  align-items: flex-start;
-}
-
-.claude-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  flex-shrink: 0;
+/* Prompt line: ❯ with blue cursor */
+.cc-prompt {
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 14px;
+  gap: 0.5em;
+  margin: 1.2em 0 0.3em;
 }
 
-.claude-avatar.ai {
-  background: linear-gradient(135deg, #D97706, #EA580C);
-}
-
-.claude-avatar.ai::after {
-  content: '';
-  width: 14px;
-  height: 14px;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E") center/contain no-repeat;
-  /* Simple sparkle shape */
-  background: none;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 10px solid white;
-  width: 0; height: 0;
-}
-
-.claude-avatar.user {
-  background: #333;
+.cc-prompt .chevron {
   color: #888;
-  font-size: 11px;
-  font-weight: 500;
+  user-select: none;
 }
 
-.claude-bubble {
-  flex: 1;
-  min-width: 0;
+.cc-prompt .input {
+  color: #fff;
 }
 
-.claude-bubble .sender {
-  font-size: 0.8em;
-  font-weight: 500;
-  margin-bottom: 0.3em;
+.cc-prompt .cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.2em;
+  background: #5B8DEF;
+  vertical-align: middle;
+  animation: cursorBlink 1s step-end infinite;
 }
 
-.claude-bubble .sender.ai-name { color: #E8A858; }
-.claude-bubble .sender.user-name { color: #888; }
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 
-.claude-bubble .content {
+/* Claude response block */
+.cc-response {
+  padding: 0.8em 0 0.8em 1.6em;
+  border-left: 2px solid #333;
+  margin: 0.5em 0 1em;
   color: #ccc;
   line-height: 1.8;
 }
 
-.claude-bubble .content .dim { color: #555; }
-.claude-bubble .content .highlight { color: var(--accent-light); }
-.claude-bubble .content .success { color: #28C840; }
-.claude-bubble .content .agent-tag {
+.cc-response .agent-tag {
   display: inline-block;
   background: rgba(217,119,6,0.15);
   color: #E8A858;
-  padding: 0.1em 0.5em;
+  padding: 0.15em 0.5em;
   border-radius: 4px;
-  font-size: 0.85em;
+  font-size: 0.88em;
   margin-right: 0.3em;
 }
 
-/* User input line in Claude terminal */
-.claude-input {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 1em;
-  padding-top: 1em;
-  border-top: 1px solid rgba(255,255,255,0.05);
+.cc-response .dim { color: #555; }
+.cc-response .highlight { color: var(--accent-light); }
+.cc-response .success { color: #28C840; }
+.cc-response .warn { color: #E8A858; }
+
+/* Strategy box inside response */
+.cc-strategy {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.8em 1em;
+  margin: 0.8em 0;
+  color: #BBB;
+  line-height: 1.7;
 }
 
-.claude-input .caret {
-  color: var(--accent-light);
-  font-size: 1.1em;
+.cc-strategy .label {
+  color: #666;
+  font-size: 0.85em;
+  margin-bottom: 0.3em;
 }
 
-.claude-input .typed {
-  color: #fff;
-}
-
-/* Thinking indicator */
-.claude-thinking {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #555;
-  font-size: 0.8em;
-  margin: 0.5em 0 0.5em 40px;
-}
-
-.claude-thinking .dots span {
-  display: inline-block;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #555;
-  animation: dotPulse 1.4s infinite;
-}
-
-.claude-thinking .dots span:nth-child(2) { animation-delay: 0.2s; }
-.claude-thinking .dots span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes dotPulse {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+/* Separator line */
+.cc-sep {
+  border: none;
+  border-top: 1px solid #333;
+  margin: 0.8em 0;
 }
 </style>
 </head>
@@ -1278,8 +1356,11 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   <div class="hero-content">
     <div class="label">Operational Playbook</div>
     <h1>The Signal-Based<br><em>Outbound</em> Playbook</h1>
-    <p class="subtitle">How we use Claude to listen to the market and book meetings on autopilot.</p>
-    <p class="meta">by Nicolas Finet <span>//</span> March 2026</p>
+    <p class="subtitle">Claude is the brain. Sortlist Signals is the nervous system. You're the conductor.</p>
+    <p class="meta">by Nicolas Finet <span>//</span> 19 meetings in 2 weeks <span>//</span> 12% reply rate <span>//</span> &lt;20 min/day</p>
+    <div style="margin-top:2.5em;">
+      <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial on Sortlist Signals</a>
+    </div>
   </div>
 </section>
 
@@ -1381,7 +1462,47 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 
     <div class="callout fade-up">
       <strong>Same person. Different timing. Completely different conversation.</strong><br>
-      That's signal-based outbound. And Claude is how we run it.
+      That's signal-based outbound. Claude is the brain. Sortlist Signals is what makes it possible.
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Cost comparison -->
+    <h3 class="fade-up">The traditional stack vs. one integrated system</h3>
+    <p class="fade-up">Most teams duct-tape 4-5 tools together. Each one adds cost, complexity, and failure points.</p>
+
+    <div class="card fade-up">
+      <table class="cost-table">
+        <thead>
+          <tr><th>Tool</th><th>What it does</th><th>Cost/month</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="old">Sales Navigator</td><td class="old">Find prospects</td><td class="old">$99</td></tr>
+          <tr><td class="old">Apollo / ZoomInfo</td><td class="old">Get emails</td><td class="old">$99-249</td></tr>
+          <tr><td class="old">Clay</td><td class="old">Enrich data</td><td class="old">$149</td></tr>
+          <tr><td class="old">PhantomBuster</td><td class="old">Scrape LinkedIn</td><td class="old">$69</td></tr>
+          <tr><td class="old">Bombora / 6sense</td><td class="old">Intent data</td><td class="old">$2,500+</td></tr>
+          <tr style="border-top:2px solid var(--border);"><td colspan="2"><strong>Total traditional stack</strong></td><td><strong>$500-3,000+/mo</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card fade-up" style="border-left-color:var(--accent);">
+      <div class="card-label">The replacement</div>
+      <table class="cost-table">
+        <tbody>
+          <tr><td><strong>Sortlist Signals</strong></td><td>5 buying signals, real-time LinkedIn intent, ICP matching</td><td class="new">Included</td></tr>
+          <tr><td><strong>450M+ Contact DB</strong></td><td>Verified emails + phones, progressive filtering</td><td class="new">Included</td></tr>
+          <tr><td><strong>Outbound Engine</strong></td><td>Email + LinkedIn automation, AI personalization</td><td class="new">Included</td></tr>
+          <tr><td><strong>Claude</strong></td><td>Writes every message from scratch, orchestrates agents</td><td class="new">$20/mo</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85em; color:var(--text-muted); margin-bottom:0;">One integrated stack. No duct tape. Real intent data instead of cold lists.</p>
+    </div>
+
+    <div class="cta-banner fade-up">
+      <p><strong>The shortcut:</strong> Skip the 4-tool stack. Start with the system that has signals, contacts, and outbound built in.</p>
+      <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial</a>
     </div>
   </div>
 </section>
@@ -1391,12 +1512,12 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   <div class="container">
     <span class="section-label fade-up">Part 02 // Detection</span>
     <h2 class="fade-up">The 5 buying signals</h2>
-    <p class="fade-up">Not all signals are equal. Here are the 5 we monitor, ranked by conversion potential.</p>
+    <p class="fade-up">Sortlist Signals monitors LinkedIn 24/7 for 5 types of buying signals. Not all are equal. Here's what each one detects and why it converts.</p>
 
     <div class="media-placeholder fade-up">
       <div class="icon">&#9654;</div>
       <div class="label">Video</div>
-      <div class="desc">2-min screen recording showing the Signals dashboard with live leads coming in across all 5 signal types</div>
+      <div class="desc">2-min screen recording of the Sortlist Signals dashboard with live leads coming in across all 5 signal types</div>
     </div>
 
     <!-- Signal 1 -->
@@ -1538,6 +1659,11 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
     <div class="callout fade-up">
       Start with <strong>Job Changes + Competitor Engagement + Topic Conversations</strong>. Add the others once you've validated your ICP and keywords.
     </div>
+
+    <div class="cta-banner fade-up">
+      <p>All 5 signal types are available in <strong>Sortlist Signals</strong>. Configure your radars in minutes.</p>
+      <a href="https://signals.sortlist.com" class="cta-btn outline" target="_blank">Configure your signals</a>
+    </div>
   </div>
 </section>
 
@@ -1556,10 +1682,9 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
     <h3 class="fade-up">What you need</h3>
     <div class="card fade-up">
       <ul style="list-style:none; padding:0;">
-        <li style="padding:0.3em 0; color:var(--text-secondary);">Claude Pro or Team subscription</li>
+        <li style="padding:0.3em 0; color:var(--text-secondary);"><strong>Sortlist Signals</strong> account (free trial at <a href="https://signals.sortlist.com" target="_blank" style="color:var(--accent);">signals.sortlist.com</a>)</li>
+        <li style="padding:0.3em 0; color:var(--text-secondary);"><strong>Claude Pro</strong> or Team subscription ($20/mo)</li>
         <li style="padding:0.3em 0; color:var(--text-secondary);">A LinkedIn account</li>
-        <li style="padding:0.3em 0; color:var(--text-secondary);">A signal monitoring tool</li>
-        <li style="padding:0.3em 0; color:var(--text-secondary);">An outbound automation platform</li>
         <li style="padding:0.3em 0; color:var(--text-secondary);">30 minutes for initial setup</li>
       </ul>
     </div>
@@ -1567,23 +1692,24 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
     <h3 class="fade-up">The 3-layer architecture</h3>
 
     <div class="flow-block fade-up">
-      <span class="highlight">Layer 1: DETECTION</span> <span class="dim">//</span> Signals<br>
-      Claude agents monitor LinkedIn for the 5 buying signals.<br>
-      Leads are matched against your ICP and scored.<br>
+      <span class="highlight">Layer 1: DETECTION</span> <span class="dim">//</span> Sortlist Signals<br>
+      Monitors LinkedIn 24/7 for buying signals.<br>
+      Matches leads against your ICP. Scores intent.<br>
+      <span class="dim">signals.sortlist.com</span><br>
       <br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">|</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">|</span> <span style="color:#E8A858;">fresh intent data</span><br>
       &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">v</span><br>
       <br>
-      <span class="highlight">Layer 2: PERSONALIZATION</span> <span class="dim">//</span> Claude<br>
-      For each signal lead, Claude reads their profile, recent activity,<br>
-      and the signal context. Writes a message from scratch.<br>
+      <span class="highlight">Layer 2: INTELLIGENCE</span> <span class="dim">//</span> Claude<br>
+      Reads each signal lead's profile, activity, context.<br>
+      Writes a unique message from scratch. No templates.<br>
       <br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">|</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">|</span> <span style="color:#7DD17D;">personalized outreach</span><br>
       &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">v</span><br>
       <br>
-      <span class="highlight">Layer 3: EXECUTION</span> <span class="dim">//</span> Outbound<br>
-      Messages sent via LinkedIn + Email sequences.<br>
-      Follow-ups automated. Replies routed to your calendar.
+      <span class="highlight">Layer 3: EXECUTION</span> <span class="dim">//</span> Outbound Engine<br>
+      Email + LinkedIn sequences. 450M+ contact DB.<br>
+      Auto follow-ups. CRM sync. Always-on.
     </div>
 
     <div class="media-placeholder fade-up">
@@ -1594,7 +1720,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 
     <div class="divider"></div>
 
-    <h3 class="fade-up">Setting up signal detection</h3>
+    <h3 class="fade-up">Configure your radars on Sortlist Signals</h3>
 
     <!-- Step 1 -->
     <div class="card fade-up">
@@ -1669,13 +1795,18 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
     <div class="card fade-up">
       <span class="step-number">Step 05</span>
       <h3>Let it run</h3>
-      <p>Signals start flowing within 24 hours. Each signal includes the person's name, title, company, which signal triggered, their LinkedIn URL, and ICP match score.</p>
+      <p>Sortlist Signals starts delivering leads within 24 hours. Each signal includes the person's name, title, company, which signal triggered, their LinkedIn URL, and ICP match score.</p>
     </div>
 
     <div class="media-placeholder fade-up">
       <div class="icon">&#128247;</div>
       <div class="label">Screenshot</div>
-      <div class="desc">Signal feed showing 5-10 real leads with their signal types and ICP scores</div>
+      <div class="desc">Sortlist Signals dashboard showing 5-10 real leads with their signal types and ICP scores</div>
+    </div>
+
+    <div class="cta-banner fade-up">
+      <p>Steps 1-5 take 30 minutes in Sortlist Signals. First leads arrive tomorrow.</p>
+      <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial</a>
     </div>
   </div>
 </section>
@@ -1813,7 +1944,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="card">
         <h3>New Decision-Maker Alert</h3>
         <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>Job change signal matching ICP</dd>
+          <dt>Trigger</dt><dd>New signal in Sortlist: job change matching ICP</dd>
           <dt>Pattern</dt><dd>Signal-Triggered Fast (7 days)</dd>
           <dt>Angle</dt><dd>"First 90 days = vendor reassessment"</dd>
           <dt>Volume</dt><dd>5-15 signals/week</dd>
@@ -1841,7 +1972,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="card">
         <h3>Competitor Audience Capture</h3>
         <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>Engages with competitor's LinkedIn</dd>
+          <dt>Trigger</dt><dd>New signal in Sortlist: competitor engagement</dd>
           <dt>Pattern</dt><dd>Multichannel Standard (25 days)</dd>
           <dt>Angle</dt><dd>"Here's what we do differently"</dd>
           <dt>Volume</dt><dd>20-50 signals/week per competitor</dd>
@@ -1869,7 +2000,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="card">
         <h3>Pain Point Radar</h3>
         <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>Posts about a topic you solve</dd>
+          <dt>Trigger</dt><dd>New signal in Sortlist: topic conversation</dd>
           <dt>Pattern</dt><dd>Signal-Triggered Fast (7 days)</dd>
           <dt>Angle</dt><dd>"Saw your post. We work on exactly this."</dd>
           <dt>Volume</dt><dd>30-100+ signals/week</dd>
@@ -1895,7 +2026,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="card">
         <h3>Funded Company Blitz</h3>
         <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>Company announces funding round</dd>
+          <dt>Trigger</dt><dd>New signal in Sortlist: funding announced</dd>
           <dt>Pattern</dt><dd>Signal-Triggered Fast (7 days)</dd>
           <dt>Angle</dt><dd>"Post-funding = investment phase"</dd>
           <dt>Volume</dt><dd>5-10 signals/week</dd>
@@ -1923,7 +2054,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="card">
         <h3>Warm Audience Activation</h3>
         <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>Engages with YOUR content</dd>
+          <dt>Trigger</dt><dd>New signal in Sortlist: your content engagement</dd>
           <dt>Pattern</dt><dd>LinkedIn-First Warm (20 days)</dd>
           <dt>Angle</dt><dd>"Thanks for engaging. Here's more."</dd>
           <dt>Volume</dt><dd>10-30/week if you post regularly</dd>
@@ -1952,7 +2083,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="card">
         <h3>Always-On Recycling Engine</h3>
         <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>Completed any sequence, no reply</dd>
+          <dt>Trigger</dt><dd>Sortlist sequence completed, no reply</dd>
           <dt>Pattern</dt><dd>45-day wait, then re-enroll</dd>
           <dt>Angle</dt><dd>Fresh angle every cycle</dd>
           <dt>Max cycles</dt><dd>3 per prospect</dd>
@@ -2011,7 +2142,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
         <div class="timeline-week">Week 01 // Foundation</div>
         <div class="timeline-title" style="color:#fff;">Setup everything. Send nothing.</div>
         <ul class="timeline-tasks">
-          <li style="color:#BBB;">Set up Claude Code + install signal monitoring CLI</li>
+          <li style="color:#BBB;">Sign up at <span style="color:var(--accent-light);">signals.sortlist.com</span> + install Claude Code</li>
           <li style="color:#BBB;">Define your ICP (titles, industries, sizes, locations)</li>
           <li style="color:#BBB;">Map 5-8 competitors + grab LinkedIn URLs</li>
           <li style="color:#BBB;">Craft keyword groups (3-5 groups)</li>
@@ -2411,30 +2542,36 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="engine-step-desc">Steps 1 and 2 are what happens under the hood. In practice, you type one slash command and Claude's agent swarm handles the rest. Research, strategy, ICP, subscriptions, campaigns, sourcing, activation.</div>
 
       <!-- /signals command -->
-      <div class="claude-terminal">
-        <div class="claude-terminal-bar">
-          <div class="terminal-dot red"></div>
-          <div class="terminal-dot yellow"></div>
-          <div class="terminal-dot green"></div>
-          <div class="terminal-title">Claude Code</div>
+      <div class="cc">
+        <div class="cc-header">
+          <!-- Pixel art robot - inline SVG mimicking the Claude Code mascot -->
+          <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="1" width="12" height="3" fill="#E06060"/>
+            <rect x="1" y="4" width="14" height="8" fill="#E06060"/>
+            <rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/>
+            <rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/>
+            <rect x="4" y="6" width="1" height="1" fill="#fff"/>
+            <rect x="11" y="6" width="1" height="1" fill="#fff"/>
+            <rect x="1" y="12" width="3" height="2" fill="#E06060"/>
+            <rect x="12" y="12" width="3" height="2" fill="#E06060"/>
+            <rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/>
+          </svg>
+          <div class="cc-meta">
+            <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
+            <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
+            <span class="info">/Users/nicolasfinet</span>
+          </div>
         </div>
-        <div class="claude-terminal-body">
+        <div class="cc-body">
 
-          <!-- User message -->
-          <div class="claude-msg">
-            <div class="claude-avatar user">N</div>
-            <div class="claude-bubble">
-              <div class="sender user-name">Nicolas</div>
-              <div class="content"><span class="cmd">/signals</span> <span class="string">acme-agency</span> <span class="string">https://www.acme-agency.com</span></div>
-            </div>
+          <!-- User types /signals -->
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">/signals acme-agency https://www.acme-agency.com</span>
           </div>
 
-          <!-- Claude response -->
-          <div class="claude-msg">
-            <div class="claude-avatar ai"></div>
-            <div class="claude-bubble">
-              <div class="sender ai-name">Claude</div>
-              <div class="content">
+          <!-- Claude responds -->
+          <div class="cc-response">
 I'll set up signal monitoring for Acme Agency. Let me research their business and design a strategy.<br>
 <br>
 <span class="agent-tag">Research Analyst</span> Scanning website, LinkedIn, competitors...<br>
@@ -2442,36 +2579,28 @@ Found <span class="highlight">6 competitors</span>: Apollo.io, Lemlist, Clay, In
 Extracted ICP: B2B SaaS, 50-500 employees, US/UK/FR<br>
 <br>
 <span class="agent-tag">Signals Planner</span> Designing signal strategy...<br>
-<br>
-<span class="dim">  ┌─ Strategy ────────────────────────────────────────────────┐</span><br>
-<span class="dim">  │</span> P1  Competitor engagers: Apollo.io, Lemlist, Clay         <span class="dim">│</span><br>
-<span class="dim">  │</span> P1  Topic: "outbound not working" OR "need more leads"    <span class="dim">│</span><br>
-<span class="dim">  │</span> P1  Job changes: CMO, VP Marketing, Head of Growth        <span class="dim">│</span><br>
-<span class="dim">  │</span> P2  Funding: SaaS, 51-500 employees                      <span class="dim">│</span><br>
-<span class="dim">  │</span> P2  Profile engagers: CEO personal page                   <span class="dim">│</span><br>
-<span class="dim">  │</span> Expected volume: <span class="highlight">120-200 signals/month</span>                   <span class="dim">│</span><br>
-<span class="dim">  └─────────────────────────────────────────────────────────────┘</span><br>
-<br>
+
+<div class="cc-strategy">
+<span class="label">Strategy</span><br>
+P1&nbsp;&nbsp;Competitor engagers: Apollo.io, Lemlist, Clay<br>
+P1&nbsp;&nbsp;Topic: "outbound not working" OR "need more leads"<br>
+P1&nbsp;&nbsp;Job changes: CMO, VP Marketing, Head of Growth<br>
+P2&nbsp;&nbsp;Funding: SaaS, 51-500 employees<br>
+P2&nbsp;&nbsp;Profile engagers: CEO personal page<br>
+<span class="highlight">Expected volume: 120-200 signals/month</span>
+</div>
+
 <strong style="color:#fff;">7 subscriptions across 5 signal types. Approve?</strong>
-              </div>
-            </div>
           </div>
 
           <!-- User approves -->
-          <div class="claude-msg">
-            <div class="claude-avatar user">N</div>
-            <div class="claude-bubble">
-              <div class="sender user-name">Nicolas</div>
-              <div class="content">y</div>
-            </div>
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">y</span>
           </div>
 
           <!-- Claude executes -->
-          <div class="claude-msg">
-            <div class="claude-avatar ai"></div>
-            <div class="claude-bubble">
-              <div class="sender ai-name">Claude</div>
-              <div class="content">
+          <div class="cc-response">
 <span class="agent-tag">Signals Executor</span> Creating subscriptions via CLI...<br>
 <br>
 Creating business... <span class="success">&#10003;</span><br>
@@ -2486,8 +2615,6 @@ Subscription 7/7: Funding // SaaS... <span class="success">&#10003;</span><br>
 <br>
 <span class="success">&#10003; All 7 subscriptions active.</span> Leads start flowing within 24h.<br>
 <span class="dim">Execution log: outputs/signals/acme-agency/execution-log.md</span>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -2496,31 +2623,36 @@ Subscription 7/7: Funding // SaaS... <span class="success">&#10003;</span><br>
       <!-- /outbound command - 1 week later -->
       <p style="font-family:'JetBrains Mono',monospace; font-size:0.65em; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin:2em 0 0.5em; text-align:center;">1 week later</p>
 
-      <div class="claude-terminal">
-        <div class="claude-terminal-bar">
-          <div class="terminal-dot red"></div>
-          <div class="terminal-dot yellow"></div>
-          <div class="terminal-dot green"></div>
-          <div class="terminal-title">Claude Code</div>
+      <div class="cc">
+        <div class="cc-header">
+          <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="1" width="12" height="3" fill="#E06060"/>
+            <rect x="1" y="4" width="14" height="8" fill="#E06060"/>
+            <rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/>
+            <rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/>
+            <rect x="4" y="6" width="1" height="1" fill="#fff"/>
+            <rect x="11" y="6" width="1" height="1" fill="#fff"/>
+            <rect x="1" y="12" width="3" height="2" fill="#E06060"/>
+            <rect x="12" y="12" width="3" height="2" fill="#E06060"/>
+            <rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/>
+          </svg>
+          <div class="cc-meta">
+            <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
+            <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
+            <span class="info">/Users/nicolasfinet</span>
+          </div>
         </div>
-        <div class="claude-terminal-body">
+        <div class="cc-body">
 
-          <!-- User message -->
-          <div class="claude-msg">
-            <div class="claude-avatar user">N</div>
-            <div class="claude-bubble">
-              <div class="sender user-name">Nicolas</div>
-              <div class="content"><span class="cmd">/outbound</span> <span class="string">acme-agency</span> <span class="flag">--with-signals</span></div>
-            </div>
+          <!-- User types /outbound -->
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">/outbound acme-agency --with-signals</span>
           </div>
 
-          <!-- Claude response -->
-          <div class="claude-msg">
-            <div class="claude-avatar ai"></div>
-            <div class="claude-bubble">
-              <div class="sender ai-name">Claude</div>
-              <div class="content">
-Launching outbound for Acme Agency with signal data. 4 agents running in parallel.<br>
+          <!-- Claude responds -->
+          <div class="cc-response">
+Launching outbound for Acme Agency with signal data. 4 agents in parallel.<br>
 <br>
 <span class="agent-tag">Copywriter</span> Writing pitch_settings: 2 personas x 2 angles (A/B test)<br>
 Pain points: persona-specific, anti-slop checked. <span class="highlight">4 variants ready.</span><br>
@@ -2542,34 +2674,29 @@ Sourcing: 30/day, auto-enroll... <span class="success">&#10003;</span><br>
 CRM sync (Pipedrive)... <span class="success">&#10003;</span><br>
 <br>
 <strong style="color:#fff;">2 campaigns ready. A/B test configured. Activate?</strong>
-              </div>
-            </div>
           </div>
 
           <!-- User approves -->
-          <div class="claude-msg">
-            <div class="claude-avatar user">N</div>
-            <div class="claude-bubble">
-              <div class="sender user-name">Nicolas</div>
-              <div class="content">y</div>
-            </div>
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="input">y</span>
           </div>
 
           <!-- Claude confirms -->
-          <div class="claude-msg">
-            <div class="claude-avatar ai"></div>
-            <div class="claude-bubble">
-              <div class="sender ai-name">Claude</div>
-              <div class="content">
+          <div class="cc-response">
 <span class="success">&#10003; Campaigns live.</span> A/B test running. 30 prospects/day.<br>
 <br>
 Channels: Email + LinkedIn<br>
 AI personalization: on (every message unique)<br>
 Safety: 10-year algorithm, GDPR compliant<br>
 <br>
-<span class="dim">Review in 2 weeks:</span> <span class="cmd">/outbound:optimize</span> <span class="string">acme-agency</span>
-              </div>
-            </div>
+<span class="dim">Review in 2 weeks:</span> /outbound:optimize acme-agency
+          </div>
+
+          <!-- Final idle prompt -->
+          <div class="cc-prompt">
+            <span class="chevron">&rsaquo;</span>
+            <span class="cursor"></span>
           </div>
 
         </div>
@@ -2622,13 +2749,90 @@ Safety: 10-year algorithm, GDPR compliant<br>
       <p style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:#888; letter-spacing:0.05em;">CAMPAIGNS RUN // ZERO ACCOUNTS BANNED // 10 YEARS</p>
     </div>
 
+    <!-- ===== THE SECRET WEAPON: PROMPT ===== -->
+    <div class="divider" style="background:rgba(255,255,255,0.05);"></div>
+
+    <h3 class="fade-up" style="color:#fff; margin-top:2em;">The prompt that turns signals into meetings</h3>
+    <p class="fade-up" style="color:#888;">Copy this prompt into Claude. Paste your Sortlist Signals export. Get ready-to-send outreach in seconds.</p>
+
+    <div class="terminal fade-up">
+      <div class="terminal-bar">
+        <div class="terminal-dot red"></div>
+        <div class="terminal-dot yellow"></div>
+        <div class="terminal-dot green"></div>
+        <div class="terminal-title">Claude prompt // copy-paste this</div>
+      </div>
+      <div class="terminal-body" style="font-size:0.75em; line-height:1.8;">
+<span class="string">You are an outbound sales agent. I'm giving you a CSV export from
+Sortlist Signals containing prospects who showed buying intent.</span>
+<span class="blank"></span>
+<span class="string">For each row in the CSV:</span>
+<span class="string">1. Read the person's name, title, company, and signal type</span>
+<span class="string">2. Read the signal context (what they did: job change, post,</span>
+<span class="string">&nbsp;&nbsp;&nbsp;competitor engagement, funding, or content engagement)</span>
+<span class="string">3. Write a personalized 4-sentence email that:</span>
+<span class="string">&nbsp;&nbsp;&nbsp;- References the specific signal in sentence 1</span>
+<span class="string">&nbsp;&nbsp;&nbsp;- Connects it to a relevant pain point in sentence 2</span>
+<span class="string">&nbsp;&nbsp;&nbsp;- Mentions one proof point in sentence 3</span>
+<span class="string">&nbsp;&nbsp;&nbsp;- Ends with a single CTA: "15-min call this week?"</span>
+<span class="blank"></span>
+<span class="string">Rules:</span>
+<span class="string">- No buzzwords. No "innovative" or "leverage".</span>
+<span class="string">- Each email must be different. No templates.</span>
+<span class="string">- Subject line must reference the signal.</span>
+<span class="string">- Max 6 sentences total.</span>
+<span class="blank"></span>
+<span class="string">My company: [YOUR COMPANY DESCRIPTION]</span>
+<span class="string">My proof points: [YOUR BEST RESULTS]</span>
+<span class="blank"></span>
+<span class="comment">// Paste your Sortlist Signals CSV export below:</span>
+      </div>
+    </div>
+
+    <div class="callout fade-up" style="background:rgba(217,119,6,0.08); border-left-color:#E8A858;">
+      <strong style="color:#fff;">Why this only works with Sortlist data:</strong>
+      <p style="color:#888; margin-bottom:0;">The prompt needs the <em>signal context column</em> — what the prospect actually did (liked a competitor post, changed jobs, posted about a problem). Cold databases don't have this. Only real-time intent data makes the personalization work. Without it, you're back to &#123;&#123;first_name&#125;&#125; templates.</p>
+    </div>
+
+    <!-- ===== URGENCY ===== -->
+    <div class="divider" style="background:rgba(255,255,255,0.05);"></div>
+
+    <h3 class="fade-up" style="color:#fff; margin-top:2em;">Signals decay. Speed wins.</h3>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1em; margin:2em 0;" class="fade-up">
+      <div class="dark-card" style="position:relative; text-align:center; padding:1.5em 1em;">
+        <div style="font-family:'Playfair Display',serif; font-size:1.8em; font-weight:700; color:var(--accent-light);">14 days</div>
+        <p style="font-size:0.78em; color:#888; margin:0;">Job change window</p>
+      </div>
+      <div class="dark-card" style="position:relative; text-align:center; padding:1.5em 1em;">
+        <div style="font-family:'Playfair Display',serif; font-size:1.8em; font-weight:700; color:var(--accent-light);">48 hours</div>
+        <p style="font-size:0.78em; color:#888; margin:0;">Post engagement decay</p>
+      </div>
+      <div class="dark-card" style="position:relative; text-align:center; padding:1.5em 1em;">
+        <div style="font-family:'Playfair Display',serif; font-size:1.8em; font-weight:700; color:var(--accent-light);">7 days</div>
+        <p style="font-size:0.78em; color:#888; margin:0;">Funding announcement</p>
+      </div>
+    </div>
+
+    <p class="fade-up" style="color:#888; text-align:center;">A new CMO reassesses vendors in their first 90 days. A competitor engagement decays in 48 hours. A funding announcement generates inbound interest within a week. Without real-time detection, you miss the window entirely.</p>
+
+    <!-- ===== FINAL CTA ===== -->
+    <div class="cta-banner fade-up" style="margin-top:3em; padding:3em 2em; border-color:rgba(136,136,255,0.25);">
+      <div style="font-family:'Playfair Display',serif; font-size:1.4em; color:#fff; margin-bottom:0.5em;">Stop chasing. Start listening.</div>
+      <p style="color:#888;">Set up Sortlist Signals in 30 minutes. First leads tomorrow. Claude handles the rest.</p>
+      <div style="display:flex; gap:1em; justify-content:center; flex-wrap:wrap; margin-top:1.5em;">
+        <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial</a>
+        <a href="https://www.linkedin.com/in/nicolasfinet/" class="cta-btn outline" target="_blank">Connect with Nicolas</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- ===== FOOTER ===== -->
 <footer class="footer" style="background:var(--dark);">
-  <p style="color:#555;">Built with Claude. Running on coffee and buying signals.</p>
-  <p style="margin-top:0.5em;"><a href="https://www.linkedin.com/in/nicolasfinet/">Connect on LinkedIn</a></p>
+  <p style="color:#555;">Built with Claude + Sortlist Signals</p>
+  <p style="margin-top:0.5em;"><a href="https://signals.sortlist.com">signals.sortlist.com</a> <span style="color:#333;">&middot;</span> <a href="https://www.linkedin.com/in/nicolasfinet/">LinkedIn</a></p>
 </footer>
 
 <!-- ===== SCROLL ANIMATION ===== -->
