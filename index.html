@@ -2384,218 +2384,36 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   <div class="container">
     <span class="section-label fade-up">Part 09 // Advanced</span>
 
-    <!-- Claude Code logo prominent at the top -->
+    <!-- Claude Code logo + title -->
     <div class="fade-up" style="display:flex; align-items:center; gap:20px; margin-bottom:1.5em;">
-      <svg style="width:56px; height:56px; image-rendering:pixelated; flex-shrink:0;" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="2" y="1" width="12" height="3" fill="#E06060"/>
-        <rect x="1" y="4" width="14" height="8" fill="#E06060"/>
-        <rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/>
-        <rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/>
-        <rect x="4" y="6" width="1" height="1" fill="#fff"/>
-        <rect x="11" y="6" width="1" height="1" fill="#fff"/>
-        <rect x="1" y="12" width="3" height="2" fill="#E06060"/>
-        <rect x="12" y="12" width="3" height="2" fill="#E06060"/>
-        <rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/>
-      </svg>
+      <svg style="width:56px; height:56px; image-rendering:pixelated; flex-shrink:0;" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
       <div>
         <h2 style="margin-bottom:0.1em;">The Engine Room</h2>
-        <p style="font-family:'JetBrains Mono',monospace; font-size:0.72em; color:#666; margin:0;">Claude Code <span style="color:#444;">//</span> Signals CLI <span style="color:#444;">//</span> Overloop CLI</p>
-      </div>
-    </div>
-    <p class="fade-up">Everything above can be orchestrated from a single terminal. Here's what it looks like under the hood when Claude Code runs the full stack.</p>
-
-    <!-- ===== STEP 1: SIGNALS CLI ===== -->
-    <div class="engine-step fade-up">
-      <svg class="engine-step-number" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-      <div class="engine-step-label">Detection Layer</div>
-      <div class="engine-step-title">Set up signal monitoring with the Signals CLI</div>
-      <div class="engine-step-desc">Create a business profile, define your ICP, and activate all 5 signal subscriptions. Leads start flowing within 24 hours.</div>
-
-      <div class="cc">
-        <div class="cc-header">
-          <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-          <div class="cc-meta">
-            <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
-            <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
-            <span class="info">/Users/nicolasfinet</span>
-          </div>
-        </div>
-        <div class="cc-body">
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">signals businesses:create --website https://www.acme-agency.com</span>
-          </div>
-          <div class="cc-response">
-<span class="success">&#10003; Business created</span><br>
-id: <span style="color:#7DD17D;">biz_8f3k2m</span> &nbsp;name: Acme Agency
-          </div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">signals businesses:update biz_8f3k2m --icp '{"target_job_titles": ["CMO", "VP Marketing", "Head of Growth"], "target_industries": ["Software", "SaaS"], "target_company_sizes": ["51-200", "201-500"], "target_locations": ["US", "UK", "France"]}'</span>
-          </div>
-          <div class="cc-response"><span class="success">&#10003; ICP updated</span></div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">signals subscriptions:create --business biz_8f3k2m --signal linkedin-company-engagers --name "Competitor // Apollo.io" --config '{"linkedin_url": "https://linkedin.com/company/apollo-io"}'</span>
-          </div>
-          <div class="cc-response"><span class="success">&#10003; Subscription created</span> <span class="dim">// active, scanning daily</span></div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">signals subscriptions:create --business biz_8f3k2m --signal linkedin-keyword-posters --name "Pain // outbound" --config '{"keywords": "\"outbound not working\" OR \"pipeline is empty\""}'</span>
-          </div>
-          <div class="cc-response"><span class="success">&#10003; Subscription created</span> <span class="dim">// active, scanning daily</span></div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">signals subscriptions:create --business biz_8f3k2m --signal job-changers --name "Job changes // Marketing leaders"</span>
-          </div>
-          <div class="cc-response"><span class="success">&#10003; Subscription created</span> <span class="dim">// active, scanning weekly</span></div>
-
-          <hr class="cc-sep">
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">signals leads:list --business biz_8f3k2m --limit 5</span>
-          </div>
-          <div class="cc-response" style="font-size:0.92em;">
-<span class="dim">24 hours later...</span><br>
-<br>
-Sarah Chen, VP Marketing &nbsp;&nbsp;<span class="warn">job-changers</span> &nbsp;&nbsp;Started at DataCo 12 days ago<br>
-Marc Dupont, CMO &nbsp;&nbsp;<span class="warn">competitor-engager</span> &nbsp;&nbsp;Liked Apollo.io post<br>
-Lisa Park, Head of Growth &nbsp;&nbsp;<span class="warn">keyword-poster</span> &nbsp;&nbsp;Posted "outbound not working"<br>
-James Rivera, VP Sales &nbsp;&nbsp;<span class="warn">recently-funded</span> &nbsp;&nbsp;Series B, $18M<br>
-Anna Weber, Marketing Dir &nbsp;&nbsp;<span class="warn">profile-engager</span> &nbsp;&nbsp;Liked your CEO's post<br>
-<br>
-<span class="highlight">47</span> leads matching ICP across <span class="highlight">5</span> active subscriptions
-          </div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="cursor"></span>
-          </div>
-
-        </div>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:0.72em; color:#666; margin:0;">Two commands. 27 agents. Full pipeline.</p>
       </div>
     </div>
 
-    <!-- ===== STEP 2: OVERLOOP CLI ===== -->
-    <div class="engine-step fade-up">
-      <svg class="engine-step-number" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-      <div class="engine-step-label">Execution Layer</div>
-      <div class="engine-step-title">Launch campaigns with the Overloop CLI</div>
-      <div class="engine-step-desc">Create a signal-triggered campaign, configure AI personalization per persona, build a sourcing from 450M+ contacts, and activate. Claude writes every message from scratch.</div>
+    <p class="fade-up">You type two commands. Claude researches the company, designs the signal strategy, creates the subscriptions, writes the outreach, builds the campaigns, and activates everything. Here's what it looks like.</p>
 
-      <div class="cc">
-        <div class="cc-header">
-          <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-          <div class="cc-meta">
-            <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
-            <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
-            <span class="info">/Users/nicolasfinet</span>
-          </div>
-        </div>
-        <div class="cc-body">
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">overloop campaigns:create --name "Acme // US // CMO // Signal-triggered // v1" --sender sender_nf01 --pitch_settings '{...}' --personalization '{"language": "english", "tone": "straightforward", "length": "short"}'</span>
-          </div>
-          <div class="cc-response">
-<span class="success">&#10003; Campaign created</span> <span class="dim">(status: off)</span><br>
-id: <span style="color:#7DD17D;">camp_2k9f1</span><br>
-<br>
-<span class="dim">pitch_settings:</span><br>
-&nbsp;&nbsp;pain_points: "80% time on manual prospecting", "3% reply rate", "No signal detection"<br>
-&nbsp;&nbsp;benefits: "12% reply rate", "&lt;20 min/day", "Pipeline runs while you sleep"<br>
-&nbsp;&nbsp;proof_points: "19 meetings in 2 weeks", "450M+ verified contacts"
-          </div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">overloop campaigns:add-steps camp_2k9f1 --steps '[{"type":"email","generate_with_ai":true}, {"type":"delay","config":{"days_delay":2}}, {"type":"linkedin_visit_profile"}, {"type":"delay","config":{"hours_delay":12}}, {"type":"linkedin_send_invitation","generate_with_ai":true}, {"type":"delay","config":{"days_delay":3}}, {"type":"email","generate_with_ai":true}, {"type":"pipedrive","config":{"stage":"Meeting Scheduled"}}]'</span>
-          </div>
-          <div class="cc-response"><span class="success">&#10003; 8 steps added</span> <span class="dim">// 3 touches, 7 days, 2 channels + CRM sync</span></div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">overloop sourcings:estimate --job_titles "CMO, VP Marketing, Head of Growth" --locations "United States" --industries "Software, SaaS" --company_sizes "51-200, 201-500"</span>
-          </div>
-          <div class="cc-response">estimated_count: <span class="highlight">3,847</span> <span class="dim">// Good. Narrow enough for quality, wide enough for volume.</span></div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">overloop sourcings:create --campaign camp_2k9f1 --name "Acme // SRC // US CMOs SaaS" --auto_enroll true --limit '{"period":"day","quantity":30}'</span>
-          </div>
-          <div class="cc-response"><span class="success">&#10003; Sourcing created</span> <span class="dim">// 30 new prospects/day, auto-enrolled</span></div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">overloop campaigns:activate camp_2k9f1</span>
-          </div>
-          <div class="cc-response">
-<span class="success">&#10003; Campaign live</span><br>
-Sending: 30 prospects/day<br>
-Channels: Email + LinkedIn<br>
-AI personalization: on (every message unique)<br>
-Safety: 10-year algorithm, GDPR compliant
-          </div>
-
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="cursor"></span>
-          </div>
-
+    <!-- ===== THE HERO: /signals ===== -->
+    <div class="cc fade-up">
+      <div class="cc-header">
+        <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
+        <div class="cc-meta">
+          <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
+          <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
+          <span class="info">/Users/nicolasfinet</span>
         </div>
       </div>
+      <div class="cc-body">
 
-      <div class="callout fade-up" style="background:rgba(40,200,64,0.06); border-left-color:#28C840; margin-top:1em;">
-        <strong>Not ready to go full-auto?</strong> Set "Review Mode" to approve Claude's first 20 messages before the system sends on its own. You stay in control until you trust the output. Most teams switch to auto after 5-10 reviewed messages.
-      </div>
-    </div>
-
-    <!-- ===== STEP 3: CLAUDE CODE ===== -->
-    <div class="engine-step fade-up">
-      <svg class="engine-step-number" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-      <div class="engine-step-label">Orchestration Layer</div>
-      <div class="engine-step-title">Claude Code runs everything with one command</div>
-      <div class="engine-step-desc">Steps 1 and 2 are what happens under the hood. In practice, you type one slash command and Claude's agent swarm handles the rest. Research, strategy, ICP, subscriptions, campaigns, sourcing, activation.</div>
-
-      <!-- /signals command -->
-      <div class="cc">
-        <div class="cc-header">
-          <!-- Pixel art robot - inline SVG mimicking the Claude Code mascot -->
-          <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="1" width="12" height="3" fill="#E06060"/>
-            <rect x="1" y="4" width="14" height="8" fill="#E06060"/>
-            <rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/>
-            <rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/>
-            <rect x="4" y="6" width="1" height="1" fill="#fff"/>
-            <rect x="11" y="6" width="1" height="1" fill="#fff"/>
-            <rect x="1" y="12" width="3" height="2" fill="#E06060"/>
-            <rect x="12" y="12" width="3" height="2" fill="#E06060"/>
-            <rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/>
-          </svg>
-          <div class="cc-meta">
-            <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
-            <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
-            <span class="info">/Users/nicolasfinet</span>
-          </div>
+        <div class="cc-prompt">
+          <span class="chevron">&rsaquo;</span>
+          <span class="input">/signals acme-agency https://www.acme-agency.com</span>
         </div>
-        <div class="cc-body">
 
-          <!-- User types /signals -->
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">/signals acme-agency https://www.acme-agency.com</span>
-          </div>
-
-          <!-- Claude responds -->
-          <div class="cc-response">
-I'll set up signal monitoring for Acme Agency. Let me research their business and design a strategy.<br>
+        <div class="cc-response">
+Setting up signal monitoring for Acme Agency.<br>
 <br>
 <span class="agent-tag">Research Analyst</span> Scanning website, LinkedIn, competitors...<br>
 Found <span class="highlight">6 competitors</span>: Apollo.io, Lemlist, Clay, Instantly, Outreach, Salesloft<br>
@@ -2604,139 +2422,122 @@ Extracted ICP: B2B SaaS, 50-500 employees, US/UK/FR<br>
 <span class="agent-tag">Signals Planner</span> Designing signal strategy...<br>
 
 <div class="cc-strategy">
-<span class="label">Strategy</span><br>
 P1&nbsp;&nbsp;Competitor engagers: Apollo.io, Lemlist, Clay<br>
 P1&nbsp;&nbsp;Topic: "outbound not working" OR "need more leads"<br>
 P1&nbsp;&nbsp;Job changes: CMO, VP Marketing, Head of Growth<br>
 P2&nbsp;&nbsp;Funding: SaaS, 51-500 employees<br>
 P2&nbsp;&nbsp;Profile engagers: CEO personal page<br>
-<span class="highlight">Expected volume: 120-200 signals/month</span>
+<span class="highlight">Expected: 120-200 signals/month</span>
 </div>
 
 <strong style="color:#fff;">7 subscriptions across 5 signal types. Approve?</strong>
-          </div>
+        </div>
 
-          <!-- User approves -->
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">y</span>
-          </div>
+        <div class="cc-prompt">
+          <span class="chevron">&rsaquo;</span>
+          <span class="input">y</span>
+        </div>
 
-          <!-- Claude executes -->
-          <div class="cc-response">
-<span class="agent-tag">Signals Executor</span> Creating subscriptions via CLI...<br>
+        <div class="cc-response">
+<span class="agent-tag">Signals Executor</span> Creating via Signals CLI...<br>
 <br>
-Creating business... <span class="success">&#10003;</span><br>
-Updating ICP... <span class="success">&#10003;</span><br>
-Subscription 1/7: Competitor // Apollo.io... <span class="success">&#10003;</span><br>
-Subscription 2/7: Competitor // Lemlist... <span class="success">&#10003;</span><br>
-Subscription 3/7: Competitor // Clay... <span class="success">&#10003;</span><br>
-Subscription 4/7: Pain // outbound keywords... <span class="success">&#10003;</span><br>
-Subscription 5/7: Pain // pipeline keywords... <span class="success">&#10003;</span><br>
-Subscription 6/7: Job changes // Marketing... <span class="success">&#10003;</span><br>
-Subscription 7/7: Funding // SaaS... <span class="success">&#10003;</span><br>
+Business created... <span class="success">&#10003;</span>&nbsp; ICP configured... <span class="success">&#10003;</span><br>
+Subscription 1/7: Competitor // Apollo.io <span class="success">&#10003;</span><br>
+Subscription 2/7: Competitor // Lemlist <span class="success">&#10003;</span><br>
+Subscription 3/7: Competitor // Clay <span class="success">&#10003;</span><br>
+Subscription 4/7: Pain // outbound keywords <span class="success">&#10003;</span><br>
+Subscription 5/7: Pain // pipeline keywords <span class="success">&#10003;</span><br>
+Subscription 6/7: Job changes // Marketing <span class="success">&#10003;</span><br>
+Subscription 7/7: Funding // SaaS <span class="success">&#10003;</span><br>
 <br>
-<span class="success">&#10003; All 7 subscriptions active.</span> Leads start flowing within 24h.<br>
-<span class="dim">Execution log: outputs/signals/acme-agency/execution-log.md</span>
-          </div>
+<span class="success">&#10003; All 7 subscriptions active.</span> Leads arrive within 24h.
+        </div>
 
+      </div>
+    </div>
+
+    <!-- ===== THE HERO: /outbound ===== -->
+    <p class="fade-up" style="font-family:'JetBrains Mono',monospace; font-size:0.65em; color:#555; letter-spacing:0.1em; text-transform:uppercase; text-align:center; margin:1.5em 0 0.5em;">One week later, signals are flowing. Time to launch outbound.</p>
+
+    <div class="cc fade-up">
+      <div class="cc-header">
+        <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
+        <div class="cc-meta">
+          <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
+          <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
+          <span class="info">/Users/nicolasfinet</span>
         </div>
       </div>
+      <div class="cc-body">
 
-      <!-- /outbound command - 1 week later -->
-      <p style="font-family:'JetBrains Mono',monospace; font-size:0.65em; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin:2em 0 0.5em; text-align:center;">1 week later</p>
-
-      <div class="cc">
-        <div class="cc-header">
-          <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="2" y="1" width="12" height="3" fill="#E06060"/>
-            <rect x="1" y="4" width="14" height="8" fill="#E06060"/>
-            <rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/>
-            <rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/>
-            <rect x="4" y="6" width="1" height="1" fill="#fff"/>
-            <rect x="11" y="6" width="1" height="1" fill="#fff"/>
-            <rect x="1" y="12" width="3" height="2" fill="#E06060"/>
-            <rect x="12" y="12" width="3" height="2" fill="#E06060"/>
-            <rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/>
-          </svg>
-          <div class="cc-meta">
-            <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
-            <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
-            <span class="info">/Users/nicolasfinet</span>
-          </div>
+        <div class="cc-prompt">
+          <span class="chevron">&rsaquo;</span>
+          <span class="input">/outbound acme-agency --with-signals</span>
         </div>
-        <div class="cc-body">
 
-          <!-- User types /outbound -->
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">/outbound acme-agency --with-signals</span>
-          </div>
-
-          <!-- Claude responds -->
-          <div class="cc-response">
-Launching outbound for Acme Agency with signal data. 4 agents in parallel.<br>
+        <div class="cc-response">
+4 agents running in parallel.<br>
 <br>
-<span class="agent-tag">Copywriter</span> Writing pitch_settings: 2 personas x 2 angles (A/B test)<br>
-Pain points: persona-specific, anti-slop checked. <span class="highlight">4 variants ready.</span><br>
+<span class="agent-tag">Copywriter</span> 2 personas x 2 angles (A/B). Anti-slop checked. <span class="highlight">4 variants ready.</span><br>
+<span class="agent-tag">Sequence Designer</span> Pattern D (7 days) for signals. Pattern A (25 days) for cold.<br>
+<span class="agent-tag">List Builder</span> 450M+ DB: 12,400 &rarr; 4,200 &rarr; 1,850 <span class="success">&#10003;</span><br>
 <br>
-<span class="agent-tag">Sequence Designer</span><br>
-Pattern D (Signal-triggered fast, 7 days) for signal leads<br>
-Pattern A (Multichannel standard, 25 days) for competitor engagers<br>
-<br>
-<span class="agent-tag">List Builder</span> Progressive filtering on 450M+ database<br>
-Round 1: job_titles + locations = 12,400<br>
-Round 2: + industries = 4,200<br>
-Round 3: + company_sizes = 1,850 <span class="success">&#10003; target range</span><br>
-<br>
-<span class="agent-tag">Outbound Executor</span><br>
-Creating exclusion list... <span class="success">&#10003;</span><br>
-Campaign: CMO // US // Signal-triggered // v1... <span class="success">&#10003;</span><br>
-Campaign: CMO // US // Signal-triggered // v2... <span class="success">&#10003;</span><br>
-Sourcing: 30/day, auto-enroll... <span class="success">&#10003;</span><br>
-CRM sync (Pipedrive)... <span class="success">&#10003;</span><br>
+<span class="agent-tag">Outbound Executor</span> Creating in Overloop via CLI...<br>
+Exclusion list <span class="success">&#10003;</span> Campaign v1 <span class="success">&#10003;</span> Campaign v2 <span class="success">&#10003;</span> Sourcing 30/day <span class="success">&#10003;</span> Pipedrive sync <span class="success">&#10003;</span><br>
 <br>
 <strong style="color:#fff;">2 campaigns ready. A/B test configured. Activate?</strong>
-          </div>
+        </div>
 
-          <!-- User approves -->
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="input">y</span>
-          </div>
+        <div class="cc-prompt">
+          <span class="chevron">&rsaquo;</span>
+          <span class="input">y</span>
+        </div>
 
-          <!-- Claude confirms -->
-          <div class="cc-response">
-<span class="success">&#10003; Campaigns live.</span> A/B test running. 30 prospects/day.<br>
-<br>
-Channels: Email + LinkedIn<br>
-AI personalization: on (every message unique)<br>
-Safety: 10-year algorithm, GDPR compliant<br>
-<br>
-<span class="dim">Review in 2 weeks:</span> /outbound:optimize acme-agency
-          </div>
+        <div class="cc-response">
+<span class="success">&#10003; Live.</span> 30 prospects/day. Email + LinkedIn. Every message unique.<br>
+<span class="dim">Review in 2 weeks: /outbound:optimize acme-agency</span>
+        </div>
 
-          <!-- Final idle prompt -->
-          <div class="cc-prompt">
-            <span class="chevron">&rsaquo;</span>
-            <span class="cursor"></span>
-          </div>
+        <div class="cc-prompt">
+          <span class="chevron">&rsaquo;</span>
+          <span class="cursor"></span>
+        </div>
 
+      </div>
+    </div>
+
+    <div class="callout fade-up" style="background:rgba(40,200,64,0.06); border-left-color:#28C840;">
+      <strong>Not ready to go full-auto?</strong> Set "Review Mode" to approve Claude's first 20 messages before the system sends on its own. Most teams switch to auto after 5-10 reviewed messages.
+    </div>
+
+    <!-- ===== UNDER THE HOOD (collapsible detail) ===== -->
+    <details class="fade-up" style="margin:2.5em 0;">
+      <summary style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:0.75em; font-weight:500; color:var(--accent-light); letter-spacing:0.05em; padding:1em 0; border-top:1px solid rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.05); user-select:none;">
+        UNDER THE HOOD &mdash; What the CLI commands look like (for builders)
+      </summary>
+      <div style="padding:1.5em 0; color:#888; font-size:0.9em; line-height:1.8;">
+        <p style="margin-bottom:1em;">When Claude runs <code style="color:var(--accent-light);">/signals</code>, it executes these Signals CLI commands:</p>
+        <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:1em 1.2em; font-family:'JetBrains Mono',monospace; font-size:0.82em; line-height:2; margin-bottom:1.5em; overflow-x:auto;">
+<span style="color:#28C840;">$</span> signals businesses:create --website https://acme-agency.com<br>
+<span style="color:#28C840;">$</span> signals businesses:update biz_8f3k2m --icp '{"target_job_titles": [...]}'<br>
+<span style="color:#28C840;">$</span> signals subscriptions:create --signal linkedin-company-engagers --config '{"linkedin_url": "..."}'<br>
+<span style="color:#28C840;">$</span> signals subscriptions:create --signal linkedin-keyword-posters --config '{"keywords": "..."}'<br>
+<span style="color:#28C840;">$</span> signals subscriptions:create --signal job-changers<br>
+<span style="color:#555;">// ... repeated for each signal type</span><br>
+<span style="color:#28C840;">$</span> signals leads:list --business biz_8f3k2m
+        </div>
+        <p style="margin-bottom:1em;">When Claude runs <code style="color:var(--accent-light);">/outbound</code>, it executes these Overloop CLI commands:</p>
+        <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:1em 1.2em; font-family:'JetBrains Mono',monospace; font-size:0.82em; line-height:2; overflow-x:auto;">
+<span style="color:#28C840;">$</span> overloop campaigns:create --name "Acme // US // CMO // v1" --pitch_settings '{...}'<br>
+<span style="color:#28C840;">$</span> overloop campaigns:add-steps camp_2k9f1 --steps '[{"type":"email","generate_with_ai":true}, ...]'<br>
+<span style="color:#28C840;">$</span> overloop sourcings:estimate --job_titles "CMO, VP Marketing" --locations "US" --industries "SaaS"<br>
+<span style="color:#555;">// estimated_count: 3,847 &#10003;</span><br>
+<span style="color:#28C840;">$</span> overloop sourcings:create --campaign camp_2k9f1 --auto_enroll true --limit '{"period":"day","quantity":30}'<br>
+<span style="color:#28C840;">$</span> overloop campaigns:activate camp_2k9f1<br>
+<span style="color:#555;">// &#10003; Campaign live. 30 prospects/day. Email + LinkedIn.</span>
         </div>
       </div>
-    </div>
-
-    <!-- ===== THE ONE COMMAND ===== -->
-    <div class="one-cmd fade-up">
-      <div class="one-cmd-label">The whole system in two commands</div>
-      <div style="margin-bottom:0.8em;">
-        <span class="one-cmd-code"><span class="prompt">$</span> /signals <span class="flag">acme</span> https://acme.com</span>
-      </div>
-      <div>
-        <span class="one-cmd-code"><span class="prompt">$</span> /outbound <span class="flag">acme</span> --with-signals</span>
-      </div>
-      <div class="one-cmd-sub">30 seconds of typing. 27 specialized agents. Full pipeline on autopilot.</div>
-    </div>
+    </details>
 
     <!-- ===== WHY THIS IS DIFFERENT ===== -->
     <div class="divider" style="background:rgba(255,255,255,0.05);"></div>
