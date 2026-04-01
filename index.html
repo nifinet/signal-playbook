@@ -1028,6 +1028,233 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   margin-bottom: 0.5em;
   display: block;
 }
+
+/* ===== TABLE OF CONTENTS ===== */
+.toc-section {
+  padding: clamp(48px, 8vh, 80px) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.toc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 2em;
+}
+
+@media (max-width: 600px) {
+  .toc-grid { grid-template-columns: 1fr; }
+}
+
+.toc-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1em;
+  padding: 0.8em 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.toc-item:hover { padding-left: 0.5em; }
+
+.toc-item:nth-child(odd) { padding-right: 2em; border-right: 1px solid var(--border); }
+.toc-item:nth-child(even) { padding-left: 2em; }
+
+@media (max-width: 600px) {
+  .toc-item:nth-child(odd) { padding-right: 0; border-right: none; }
+  .toc-item:nth-child(even) { padding-left: 0; }
+}
+
+.toc-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4em;
+  font-weight: 700;
+  color: rgba(0,0,210,0.12);
+  flex-shrink: 0;
+  width: 2em;
+  text-align: right;
+}
+
+.toc-text {
+  flex: 1;
+}
+
+.toc-title {
+  font-weight: 500;
+  font-size: 0.95em;
+  color: var(--text-primary);
+  display: block;
+}
+
+.toc-item:hover .toc-title { color: var(--accent); }
+
+.toc-desc {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62em;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  display: block;
+  margin-top: 0.2em;
+}
+
+/* ===== CLAUDE CODE TERMINAL ===== */
+.claude-terminal {
+  background: #1a1a2e;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 2em 0;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.claude-terminal-bar {
+  background: #12122a;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.claude-terminal-bar .terminal-dot.red { background: #FF5F57; }
+.claude-terminal-bar .terminal-dot.yellow { background: #FFBD2E; }
+.claude-terminal-bar .terminal-dot.green { background: #28C840; }
+
+.claude-terminal-bar .terminal-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65em;
+  color: #666;
+  margin-left: auto;
+}
+
+.claude-terminal-body {
+  padding: clamp(16px, 2.5vw, 28px);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78em;
+  line-height: 1.9;
+  color: #BBB;
+  overflow-x: auto;
+}
+
+/* Claude message bubbles */
+.claude-msg {
+  display: flex;
+  gap: 12px;
+  margin: 1em 0;
+  align-items: flex-start;
+}
+
+.claude-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.claude-avatar.ai {
+  background: linear-gradient(135deg, #D97706, #EA580C);
+}
+
+.claude-avatar.ai::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z'/%3E%3C/svg%3E") center/contain no-repeat;
+  /* Simple sparkle shape */
+  background: none;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 10px solid white;
+  width: 0; height: 0;
+}
+
+.claude-avatar.user {
+  background: #333;
+  color: #888;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.claude-bubble {
+  flex: 1;
+  min-width: 0;
+}
+
+.claude-bubble .sender {
+  font-size: 0.8em;
+  font-weight: 500;
+  margin-bottom: 0.3em;
+}
+
+.claude-bubble .sender.ai-name { color: #E8A858; }
+.claude-bubble .sender.user-name { color: #888; }
+
+.claude-bubble .content {
+  color: #ccc;
+  line-height: 1.8;
+}
+
+.claude-bubble .content .dim { color: #555; }
+.claude-bubble .content .highlight { color: var(--accent-light); }
+.claude-bubble .content .success { color: #28C840; }
+.claude-bubble .content .agent-tag {
+  display: inline-block;
+  background: rgba(217,119,6,0.15);
+  color: #E8A858;
+  padding: 0.1em 0.5em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  margin-right: 0.3em;
+}
+
+/* User input line in Claude terminal */
+.claude-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.claude-input .caret {
+  color: var(--accent-light);
+  font-size: 1.1em;
+}
+
+.claude-input .typed {
+  color: #fff;
+}
+
+/* Thinking indicator */
+.claude-thinking {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #555;
+  font-size: 0.8em;
+  margin: 0.5em 0 0.5em 40px;
+}
+
+.claude-thinking .dots span {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #555;
+  animation: dotPulse 1.4s infinite;
+}
+
+.claude-thinking .dots span:nth-child(2) { animation-delay: 0.2s; }
+.claude-thinking .dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
 </style>
 </head>
 <body>
@@ -1053,6 +1280,78 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
     <h1>The Signal-Based<br><em>Outbound</em> Playbook</h1>
     <p class="subtitle">How we use Claude to listen to the market and book meetings on autopilot.</p>
     <p class="meta">by Nicolas Finet <span>//</span> March 2026</p>
+  </div>
+</section>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<section class="toc-section" id="toc">
+  <div class="container">
+    <span class="section-label">What's inside</span>
+    <div class="toc-grid">
+      <a href="#broken" class="toc-item">
+        <span class="toc-num">01</span>
+        <span class="toc-text">
+          <span class="toc-title">Why cold outbound is broken</span>
+          <span class="toc-desc">The timing problem nobody talks about</span>
+        </span>
+      </a>
+      <a href="#signals" class="toc-item">
+        <span class="toc-num">02</span>
+        <span class="toc-text">
+          <span class="toc-title">The 5 buying signals</span>
+          <span class="toc-desc">Job changes, competitors, topics, funding, engagement</span>
+        </span>
+      </a>
+      <a href="#agents" class="toc-item">
+        <span class="toc-num">03</span>
+        <span class="toc-text">
+          <span class="toc-title">Building your Claude agent swarm</span>
+          <span class="toc-desc">3-layer architecture + step-by-step setup</span>
+        </span>
+      </a>
+      <a href="#sequence" class="toc-item">
+        <span class="toc-num">04</span>
+        <span class="toc-text">
+          <span class="toc-title">The 3-step message sequence</span>
+          <span class="toc-desc">Signal-triggered fast: 3 touches, 7 days</span>
+        </span>
+      </a>
+      <a href="#workflows" class="toc-item">
+        <span class="toc-num">05</span>
+        <span class="toc-text">
+          <span class="toc-title">6 workflows you can copy-paste</span>
+          <span class="toc-desc">From signal to meeting, fully automated</span>
+        </span>
+      </a>
+      <a href="#plan" class="toc-item">
+        <span class="toc-num">06</span>
+        <span class="toc-text">
+          <span class="toc-title">The 4-week implementation plan</span>
+          <span class="toc-desc">From zero to 10+ qualified calls/week</span>
+        </span>
+      </a>
+      <a href="#stack" class="toc-item">
+        <span class="toc-num">07</span>
+        <span class="toc-text">
+          <span class="toc-title">Connecting to your stack</span>
+          <span class="toc-desc">CRM, Slack, Notion dashboard</span>
+        </span>
+      </a>
+      <a href="#numbers" class="toc-item">
+        <span class="toc-num">08</span>
+        <span class="toc-text">
+          <span class="toc-title">Realistic numbers</span>
+          <span class="toc-desc">No inflated promises. Real benchmarks.</span>
+        </span>
+      </a>
+      <a href="#engine" class="toc-item" style="grid-column: 1 / -1; border-right:none; padding-left:0; padding-right:0;">
+        <span class="toc-num">09</span>
+        <span class="toc-text">
+          <span class="toc-title">The Engine Room</span>
+          <span class="toc-desc">Advanced // CLI terminals, full stack, one-command orchestration</span>
+        </span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -2111,92 +2410,168 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <div class="engine-step-title">Claude Code runs everything with one command</div>
       <div class="engine-step-desc">Steps 1 and 2 are what happens under the hood. In practice, you type one slash command and Claude's agent swarm handles the rest. Research, strategy, ICP, subscriptions, campaigns, sourcing, activation.</div>
 
-      <div class="terminal">
-        <div class="terminal-bar">
+      <!-- /signals command -->
+      <div class="claude-terminal">
+        <div class="claude-terminal-bar">
           <div class="terminal-dot red"></div>
           <div class="terminal-dot yellow"></div>
           <div class="terminal-dot green"></div>
-          <div class="terminal-title">claude-code</div>
+          <div class="terminal-title">Claude Code</div>
         </div>
-        <div class="terminal-body">
-<span class="prompt">claude&gt; </span><span class="cmd">/signals</span> <span class="string">acme-agency</span> <span class="string">https://www.acme-agency.com</span>
-<span class="blank"></span>
-<span class="output"><span class="json-key">&#9655; Agent: Research Analyst</span></span>
-<span class="output">  Scanning website, LinkedIn, competitors...</span>
-<span class="output">  Found 6 competitors: Apollo.io, Lemlist, Clay, Instantly, Outreach, Salesloft</span>
-<span class="output">  Extracted ICP from website: B2B SaaS, 50-500 employees, US/UK/FR</span>
-<span class="blank"></span>
-<span class="output"><span class="json-key">&#9655; Agent: Signals Planner</span></span>
-<span class="output">  Designing signal strategy...</span>
-<span class="output">  7 subscriptions across 5 signal types</span>
-<span class="output">  18 keyword groups crafted (pain points + intent + competitor mentions)</span>
-<span class="blank"></span>
-<span class="output"><span class="dim">  ┌─ Strategy ─────────────────────────────────────────────┐</span></span>
-<span class="output"><span class="dim">  │</span> P1  Competitor engagers: Apollo.io, Lemlist, Clay      <span class="dim">│</span></span>
-<span class="output"><span class="dim">  │</span> P1  Topic: "outbound not working" OR "need more leads" <span class="dim">│</span></span>
-<span class="output"><span class="dim">  │</span> P1  Job changes: CMO, VP Marketing, Head of Growth     <span class="dim">│</span></span>
-<span class="output"><span class="dim">  │</span> P2  Funding: SaaS, 51-500 employees                   <span class="dim">│</span></span>
-<span class="output"><span class="dim">  │</span> P2  Profile engagers: CEO personal page                <span class="dim">│</span></span>
-<span class="output"><span class="dim">  │</span> Expected volume: 120-200 signals/month                <span class="dim">│</span></span>
-<span class="output"><span class="dim">  └────────────────────────────────────────────────────────┘</span></span>
-<span class="blank"></span>
-<span class="output"><span class="success">&#10003; Checkpoint: approve strategy? (y/n)</span></span>
-<span class="prompt">claude&gt; </span><span class="cmd">y</span>
-<span class="blank"></span>
-<span class="output"><span class="json-key">&#9655; Agent: Signals Executor</span></span>
-<span class="output">  Creating business... <span class="success">&#10003;</span></span>
-<span class="output">  Updating ICP... <span class="success">&#10003;</span></span>
-<span class="output">  Creating subscription 1/7: Competitor // Apollo.io... <span class="success">&#10003;</span></span>
-<span class="output">  Creating subscription 2/7: Competitor // Lemlist... <span class="success">&#10003;</span></span>
-<span class="output">  Creating subscription 3/7: Competitor // Clay... <span class="success">&#10003;</span></span>
-<span class="output">  Creating subscription 4/7: Pain // outbound keywords... <span class="success">&#10003;</span></span>
-<span class="output">  Creating subscription 5/7: Pain // pipeline keywords... <span class="success">&#10003;</span></span>
-<span class="output">  Creating subscription 6/7: Job changes // Marketing... <span class="success">&#10003;</span></span>
-<span class="output">  Creating subscription 7/7: Funding // SaaS... <span class="success">&#10003;</span></span>
-<span class="blank"></span>
-<span class="success">&#10003; All 7 subscriptions active. Leads start flowing within 24h.</span>
-<span class="output">  Execution log saved to: outputs/signals/acme-agency/execution-log.md</span>
+        <div class="claude-terminal-body">
+
+          <!-- User message -->
+          <div class="claude-msg">
+            <div class="claude-avatar user">N</div>
+            <div class="claude-bubble">
+              <div class="sender user-name">Nicolas</div>
+              <div class="content"><span class="cmd">/signals</span> <span class="string">acme-agency</span> <span class="string">https://www.acme-agency.com</span></div>
+            </div>
+          </div>
+
+          <!-- Claude response -->
+          <div class="claude-msg">
+            <div class="claude-avatar ai"></div>
+            <div class="claude-bubble">
+              <div class="sender ai-name">Claude</div>
+              <div class="content">
+I'll set up signal monitoring for Acme Agency. Let me research their business and design a strategy.<br>
+<br>
+<span class="agent-tag">Research Analyst</span> Scanning website, LinkedIn, competitors...<br>
+Found <span class="highlight">6 competitors</span>: Apollo.io, Lemlist, Clay, Instantly, Outreach, Salesloft<br>
+Extracted ICP: B2B SaaS, 50-500 employees, US/UK/FR<br>
+<br>
+<span class="agent-tag">Signals Planner</span> Designing signal strategy...<br>
+<br>
+<span class="dim">  ┌─ Strategy ────────────────────────────────────────────────┐</span><br>
+<span class="dim">  │</span> P1  Competitor engagers: Apollo.io, Lemlist, Clay         <span class="dim">│</span><br>
+<span class="dim">  │</span> P1  Topic: "outbound not working" OR "need more leads"    <span class="dim">│</span><br>
+<span class="dim">  │</span> P1  Job changes: CMO, VP Marketing, Head of Growth        <span class="dim">│</span><br>
+<span class="dim">  │</span> P2  Funding: SaaS, 51-500 employees                      <span class="dim">│</span><br>
+<span class="dim">  │</span> P2  Profile engagers: CEO personal page                   <span class="dim">│</span><br>
+<span class="dim">  │</span> Expected volume: <span class="highlight">120-200 signals/month</span>                   <span class="dim">│</span><br>
+<span class="dim">  └─────────────────────────────────────────────────────────────┘</span><br>
+<br>
+<strong style="color:#fff;">7 subscriptions across 5 signal types. Approve?</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- User approves -->
+          <div class="claude-msg">
+            <div class="claude-avatar user">N</div>
+            <div class="claude-bubble">
+              <div class="sender user-name">Nicolas</div>
+              <div class="content">y</div>
+            </div>
+          </div>
+
+          <!-- Claude executes -->
+          <div class="claude-msg">
+            <div class="claude-avatar ai"></div>
+            <div class="claude-bubble">
+              <div class="sender ai-name">Claude</div>
+              <div class="content">
+<span class="agent-tag">Signals Executor</span> Creating subscriptions via CLI...<br>
+<br>
+Creating business... <span class="success">&#10003;</span><br>
+Updating ICP... <span class="success">&#10003;</span><br>
+Subscription 1/7: Competitor // Apollo.io... <span class="success">&#10003;</span><br>
+Subscription 2/7: Competitor // Lemlist... <span class="success">&#10003;</span><br>
+Subscription 3/7: Competitor // Clay... <span class="success">&#10003;</span><br>
+Subscription 4/7: Pain // outbound keywords... <span class="success">&#10003;</span><br>
+Subscription 5/7: Pain // pipeline keywords... <span class="success">&#10003;</span><br>
+Subscription 6/7: Job changes // Marketing... <span class="success">&#10003;</span><br>
+Subscription 7/7: Funding // SaaS... <span class="success">&#10003;</span><br>
+<br>
+<span class="success">&#10003; All 7 subscriptions active.</span> Leads start flowing within 24h.<br>
+<span class="dim">Execution log: outputs/signals/acme-agency/execution-log.md</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <!-- Second command: outbound -->
-      <div class="terminal" style="margin-top:1.5em;">
-        <div class="terminal-bar">
+      <!-- /outbound command - 1 week later -->
+      <p style="font-family:'JetBrains Mono',monospace; font-size:0.65em; color:#555; letter-spacing:0.1em; text-transform:uppercase; margin:2em 0 0.5em; text-align:center;">1 week later</p>
+
+      <div class="claude-terminal">
+        <div class="claude-terminal-bar">
           <div class="terminal-dot red"></div>
           <div class="terminal-dot yellow"></div>
           <div class="terminal-dot green"></div>
-          <div class="terminal-title">claude-code // 1 week later</div>
+          <div class="terminal-title">Claude Code</div>
         </div>
-        <div class="terminal-body">
-<span class="prompt">claude&gt; </span><span class="cmd">/outbound</span> <span class="string">acme-agency</span> <span class="flag">--with-signals</span>
-<span class="blank"></span>
-<span class="output"><span class="json-key">&#9655; Agent: Copywriter</span></span>
-<span class="output">  Writing pitch_settings for 2 personas x 2 angles (A/B test)...</span>
-<span class="output">  Pain points: persona-specific, anti-slop checked</span>
-<span class="output">  4 variants ready</span>
-<span class="blank"></span>
-<span class="output"><span class="json-key">&#9655; Agent: Sequence Designer</span></span>
-<span class="output">  Pattern D (Signal-triggered fast, 7 days) for signal leads</span>
-<span class="output">  Pattern A (Multichannel standard, 25 days) for competitor engagers</span>
-<span class="blank"></span>
-<span class="output"><span class="json-key">&#9655; Agent: List Builder</span></span>
-<span class="output">  Progressive filtering on 450M+ database...</span>
-<span class="output">  Round 1: job_titles + locations = 12,400</span>
-<span class="output">  Round 2: + industries = 4,200</span>
-<span class="output">  Round 3: + company_sizes = 1,850 <span class="success">&#10003; target range</span></span>
-<span class="blank"></span>
-<span class="output"><span class="json-key">&#9655; Agent: Outbound Executor</span></span>
-<span class="output">  Creating exclusion list (competitors + existing clients)... <span class="success">&#10003;</span></span>
-<span class="output">  Creating campaign: CMO // US // Signal-triggered // v1... <span class="success">&#10003;</span></span>
-<span class="output">  Creating campaign: CMO // US // Signal-triggered // v2... <span class="success">&#10003;</span></span>
-<span class="output">  Creating sourcing: 30/day, auto-enroll... <span class="success">&#10003;</span></span>
-<span class="output">  Linking to CRM (Pipedrive)... <span class="success">&#10003;</span></span>
-<span class="blank"></span>
-<span class="output"><span class="success">&#10003; Checkpoint: 2 campaigns ready. Activate? (y/n)</span></span>
-<span class="prompt">claude&gt; </span><span class="cmd">y</span>
-<span class="blank"></span>
-<span class="success">&#10003; Campaigns live. A/B test running. 30 prospects/day.</span>
-<span class="output">  Review in 2 weeks: /outbound:optimize acme-agency</span>
+        <div class="claude-terminal-body">
+
+          <!-- User message -->
+          <div class="claude-msg">
+            <div class="claude-avatar user">N</div>
+            <div class="claude-bubble">
+              <div class="sender user-name">Nicolas</div>
+              <div class="content"><span class="cmd">/outbound</span> <span class="string">acme-agency</span> <span class="flag">--with-signals</span></div>
+            </div>
+          </div>
+
+          <!-- Claude response -->
+          <div class="claude-msg">
+            <div class="claude-avatar ai"></div>
+            <div class="claude-bubble">
+              <div class="sender ai-name">Claude</div>
+              <div class="content">
+Launching outbound for Acme Agency with signal data. 4 agents running in parallel.<br>
+<br>
+<span class="agent-tag">Copywriter</span> Writing pitch_settings: 2 personas x 2 angles (A/B test)<br>
+Pain points: persona-specific, anti-slop checked. <span class="highlight">4 variants ready.</span><br>
+<br>
+<span class="agent-tag">Sequence Designer</span><br>
+Pattern D (Signal-triggered fast, 7 days) for signal leads<br>
+Pattern A (Multichannel standard, 25 days) for competitor engagers<br>
+<br>
+<span class="agent-tag">List Builder</span> Progressive filtering on 450M+ database<br>
+Round 1: job_titles + locations = 12,400<br>
+Round 2: + industries = 4,200<br>
+Round 3: + company_sizes = 1,850 <span class="success">&#10003; target range</span><br>
+<br>
+<span class="agent-tag">Outbound Executor</span><br>
+Creating exclusion list... <span class="success">&#10003;</span><br>
+Campaign: CMO // US // Signal-triggered // v1... <span class="success">&#10003;</span><br>
+Campaign: CMO // US // Signal-triggered // v2... <span class="success">&#10003;</span><br>
+Sourcing: 30/day, auto-enroll... <span class="success">&#10003;</span><br>
+CRM sync (Pipedrive)... <span class="success">&#10003;</span><br>
+<br>
+<strong style="color:#fff;">2 campaigns ready. A/B test configured. Activate?</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- User approves -->
+          <div class="claude-msg">
+            <div class="claude-avatar user">N</div>
+            <div class="claude-bubble">
+              <div class="sender user-name">Nicolas</div>
+              <div class="content">y</div>
+            </div>
+          </div>
+
+          <!-- Claude confirms -->
+          <div class="claude-msg">
+            <div class="claude-avatar ai"></div>
+            <div class="claude-bubble">
+              <div class="sender ai-name">Claude</div>
+              <div class="content">
+<span class="success">&#10003; Campaigns live.</span> A/B test running. 30 prospects/day.<br>
+<br>
+Channels: Email + LinkedIn<br>
+AI personalization: on (every message unique)<br>
+Safety: 10-year algorithm, GDPR compliant<br>
+<br>
+<span class="dim">Review in 2 weeks:</span> <span class="cmd">/outbound:optimize</span> <span class="string">acme-agency</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
