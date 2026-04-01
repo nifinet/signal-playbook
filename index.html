@@ -358,9 +358,9 @@ td {
 
 td:first-child { font-weight: 400; color: var(--text-primary); }
 
-.dark-section th { color: #888; border-color: var(--border-dark); }
+.dark-section th { color: #AAA; border-color: rgba(255,255,255,0.1); }
 .dark-section td { color: #BBB; border-color: var(--border-dark); }
-.dark-section td:first-child { color: #fff; }
+.dark-section td:first-child { color: #fff; font-weight: 400; }
 
 /* ===== CODE / FLOW ===== */
 .flow-block {
@@ -841,10 +841,15 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   letter-spacing: 0.03em;
 }
 
-.pill.high { background: rgba(0,0,210,0.08); color: var(--accent); }
-.pill.medium { background: rgba(0,0,0,0.04); color: var(--text-secondary); }
-.pill.low { background: rgba(0,0,0,0.02); color: var(--text-muted); }
-.pill.very-high { background: rgba(0,0,210,0.12); color: var(--accent); }
+.pill.high { background: rgba(40,200,64,0.12); color: #28C840; }
+.pill.medium { background: rgba(232,168,88,0.12); color: #E8A858; }
+.pill.low { background: rgba(255,255,255,0.06); color: #BBB; }
+.pill.very-high { background: rgba(40,200,64,0.18); color: #28C840; font-weight:500; }
+
+.dark-section .pill.high { background: rgba(40,200,64,0.12); color: #28C840; }
+.dark-section .pill.medium { background: rgba(232,168,88,0.12); color: #E8A858; }
+.dark-section .pill.low { background: rgba(255,255,255,0.06); color: #BBB; }
+.dark-section .pill.very-high { background: rgba(40,200,64,0.18); color: #28C840; }
 
 /* ===== CALLOUT ===== */
 .callout {
@@ -2384,7 +2389,25 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 <section class="blueprint-section" id="engine">
   <div class="container">
     <span class="section-label fade-up">Part 09 // Advanced</span>
-    <h2 class="fade-up">The Engine Room</h2>
+
+    <!-- Claude Code logo prominent at the top -->
+    <div class="fade-up" style="display:flex; align-items:center; gap:20px; margin-bottom:1.5em;">
+      <svg style="width:56px; height:56px; image-rendering:pixelated; flex-shrink:0;" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="2" y="1" width="12" height="3" fill="#E06060"/>
+        <rect x="1" y="4" width="14" height="8" fill="#E06060"/>
+        <rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/>
+        <rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/>
+        <rect x="4" y="6" width="1" height="1" fill="#fff"/>
+        <rect x="11" y="6" width="1" height="1" fill="#fff"/>
+        <rect x="1" y="12" width="3" height="2" fill="#E06060"/>
+        <rect x="12" y="12" width="3" height="2" fill="#E06060"/>
+        <rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/>
+      </svg>
+      <div>
+        <h2 style="margin-bottom:0.1em;">The Engine Room</h2>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:0.72em; color:#666; margin:0;">Claude Code <span style="color:#444;">//</span> Signals CLI <span style="color:#444;">//</span> Overloop CLI</p>
+      </div>
+    </div>
     <p class="fade-up">Everything above can be orchestrated from a single terminal. Here's what it looks like under the hood when Claude Code runs the full stack.</p>
 
     <!-- ===== STEP 1: SIGNALS CLI ===== -->
