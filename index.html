@@ -1028,6 +1028,33 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   display: block;
 }
 
+/* ===== PRODUCT SCREENSHOTS ===== */
+.screenshot {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  margin: 1.5em 0;
+  display: block;
+}
+
+.dark-section .screenshot,
+.blueprint-section .screenshot {
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+}
+
+.screenshot-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62em;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: -0.8em;
+  margin-bottom: 1.5em;
+}
+
+.dark-section .screenshot-label { color: #666; }
+
 /* ===== SIGNAL FEED ===== */
 .signal-feed {
   margin: 2em 0;
@@ -1841,11 +1868,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
     <h2 class="fade-up">The 5 buying signals</h2>
     <p class="fade-up">Sortlist Signals monitors LinkedIn 24/7 for 5 types of buying signals. Not all are equal. Here's what each one detects and why it converts.</p>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#9654;</div>
-      <div class="label">Video</div>
-      <div class="desc">2-min screen recording of the Sortlist Signals dashboard with live leads coming in across all 5 signal types</div>
-    </div>
+    <img src="img/signal-types.png" alt="Sortlist Signals — 8 signal types available" class="screenshot fade-up">
+    <div class="screenshot-label">All signal types available in Sortlist Signals</div>
 
     <!-- Signal 1 -->
     <div class="dark-card fade-up" style="position:relative;">
@@ -1864,11 +1888,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       </div>
     </div>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#128247;</div>
-      <div class="label">Screenshot</div>
-      <div class="desc">Job change signal example: person's new role, company, and the outreach message Claude generated</div>
-    </div>
+    <img src="img/config-jobs.png" alt="Configure job change signal tracking" class="screenshot fade-up">
+    <div class="screenshot-label">Configuring job change monitoring in Sortlist Signals</div>
 
     <!-- Signal 2 -->
     <div class="dark-card fade-up" style="position:relative;">
@@ -1887,11 +1908,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       </div>
     </div>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#128247;</div>
-      <div class="label">Screenshot</div>
-      <div class="desc">Competitor's LinkedIn post with engagers highlighted + resulting prospect list with ICP match scores</div>
-    </div>
+    <img src="img/config-company.png" alt="Track competitor LinkedIn company engagement" class="screenshot fade-up">
+    <div class="screenshot-label">Setting up competitor tracking — LinkedIn URL, engagement type, daily limit</div>
 
     <!-- Signal 3 -->
     <div class="dark-card fade-up" style="position:relative;">
@@ -1924,11 +1942,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       </div>
     </div>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#128247;</div>
-      <div class="label">Screenshot</div>
-      <div class="desc">Keyword configuration panel with grouped keywords, OR operators, and exact match quotes</div>
-    </div>
+    <img src="img/config-topic.png" alt="Track LinkedIn topic conversations by keyword" class="screenshot fade-up">
+    <div class="screenshot-label">Keyword configuration with time window and daily lead limit</div>
 
     <!-- Signal 4 -->
     <div class="dark-card fade-up" style="position:relative;">
@@ -2000,11 +2015,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
     <span class="section-label fade-up">Part 03 // Architecture</span>
     <h2 class="fade-up">Building your Claude agent swarm</h2>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#9654;</div>
-      <div class="label">Video</div>
-      <div class="desc">5-min walkthrough of setting up Claude Code with the signals command. From install to first signals appearing.</div>
-    </div>
+    <img src="img/dashboard.png" alt="Sortlist Signals Dashboard" class="screenshot fade-up">
+    <div class="screenshot-label">The Sortlist Signals dashboard — 392 leads, 12 active signals</div>
 
     <h3 class="fade-up">What you need</h3>
     <div class="card fade-up">
@@ -2046,11 +2058,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <strong>The key:</strong> Signals and Overloop are natively connected. When a signal fires, the outreach starts. No CSV export, no Zapier, no manual step between detection and action.
     </div>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#128247;</div>
-      <div class="label">Diagram</div>
-      <div class="desc">Visual flowchart of the 3 layers. Use Whimsical or Excalidraw for a clean diagram.</div>
-    </div>
+    <img src="img/add-to-overloop.png" alt="Push signal lead to Overloop campaign" class="screenshot fade-up">
+    <div class="screenshot-label">One click: push a signal lead directly into an Overloop campaign</div>
 
     <div class="divider"></div>
 
@@ -2069,11 +2078,10 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       </div>
     </div>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#128247;</div>
-      <div class="label">Screenshot</div>
-      <div class="desc">ICP configuration screen with fields filled in</div>
-    </div>
+    <img src="img/icp-ai.png" alt="AI generates your ICP automatically" class="screenshot fade-up">
+    <div class="screenshot-label">AI analyzes your website and builds your ICP automatically</div>
+    <img src="img/icp-config.png" alt="ICP configuration" class="screenshot fade-up">
+    <div class="screenshot-label">The resulting ICP: job titles, locations, keywords, industries, company sizes</div>
 
     <!-- Step 2 -->
     <div class="card fade-up">
@@ -2100,11 +2108,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       </table>
     </div>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#128247;</div>
-      <div class="label">Screenshot</div>
-      <div class="desc">Real keyword configuration with grouped keywords showing OR operators</div>
-    </div>
+    <img src="img/config-topic.png" alt="Keyword tracking configuration" class="screenshot fade-up">
+    <div class="screenshot-label">Keyword tracking with time window and daily lead limits</div>
 
     <!-- Step 4 -->
     <div class="card fade-up">
@@ -2132,11 +2137,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       <p>Sortlist Signals starts delivering leads within 24 hours. Each signal includes the person's name, title, company, which signal triggered, their LinkedIn URL, and ICP match score.</p>
     </div>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#128247;</div>
-      <div class="label">Screenshot</div>
-      <div class="desc">Sortlist Signals dashboard showing 5-10 real leads with their signal types and ICP scores</div>
-    </div>
+    <img src="img/leads-table.png" alt="Leads table with scores and contact info" class="screenshot fade-up">
+    <div class="screenshot-label">392 leads with ICP scores, job titles, companies, emails, LinkedIn profiles</div>
 
     <div class="cta-banner fade-up">
       <p>Steps 1-5 take 30 minutes in Sortlist Signals. First leads arrive tomorrow.</p>
@@ -2226,11 +2228,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       </div>
     </div>
 
-    <div class="media-placeholder fade-up" style="margin-top:2em;">
-      <div class="icon">&#128247;</div>
-      <div class="label">Screenshot</div>
-      <div class="desc">Side-by-side comparison: generic cold email vs. Claude signal-based email for the same prospect</div>
-    </div>
+    <img src="img/lead-detail.png" alt="Lead detail with signal context" class="screenshot fade-up" style="margin-top:2em;">
+    <div class="screenshot-label" style="color:#666;">What Claude reads before writing: profile, signal context, engagement history, original post</div>
 
     <div class="divider"></div>
 
@@ -2576,11 +2575,8 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
       </div>
     </div>
 
-    <div class="media-placeholder fade-up">
-      <div class="icon">&#128247;</div>
-      <div class="label">Screenshot</div>
-      <div class="desc">CRM integration settings: field mapping between outbound platform and your CRM</div>
-    </div>
+    <img src="img/integrations.png" alt="Sortlist Signals integrations" class="screenshot fade-up">
+    <div class="screenshot-label">Native integrations: Overloop (connected), Webhook, Zapier, HubSpot, Salesforce, Pipedrive</div>
 
     <h3 class="fade-up">Slack Notifications</h3>
     <div class="card fade-up">
