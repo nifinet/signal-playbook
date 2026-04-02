@@ -1010,6 +1010,10 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   }
 }
 
+/* ===== VIDEO FULLSCREEN ===== */
+.video-wrapper:hover .video-fs-btn { opacity: 1 !important; }
+.video-wrapper:hover .video-play-overlay ~ .video-fs-btn { opacity: 0 !important; }
+
 /* ===== SCROLL ANIMATIONS ===== */
 .fade-up {
   opacity: 0;
@@ -1732,8 +1736,13 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
         loop
         playsinline
         preload="metadata"
-        style="width:100%; display:block;"
+        style="width:100%; display:block; cursor:pointer;"
+        ondblclick="if(this.requestFullscreen)this.requestFullscreen();else if(this.webkitRequestFullscreen)this.webkitRequestFullscreen();"
       ></video>
+      <!-- Fullscreen button -->
+      <div class="video-fs-btn" onclick="var v=document.querySelector('.walkthrough-video');if(v.requestFullscreen)v.requestFullscreen();else if(v.webkitRequestFullscreen)v.webkitRequestFullscreen();" style="position:absolute; bottom:16px; right:16px; width:40px; height:40px; border-radius:8px; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transition:opacity 0.2s; border:1px solid rgba(255,255,255,0.1);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
+      </div>
       <!-- Play overlay -->
       <div class="video-play-overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.3); transition:opacity 0.4s ease;">
         <div style="width:80px; height:80px; border-radius:50%; background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.2); transition:transform 0.2s ease;">
