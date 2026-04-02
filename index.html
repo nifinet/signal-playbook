@@ -1028,6 +1028,183 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
   display: block;
 }
 
+/* ===== SIGNAL FEED ===== */
+.signal-feed {
+  margin: 2em 0;
+}
+
+.signal-feed-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-bottom: 1.2em;
+}
+
+.signal-feed-header .live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #28C840;
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(40,200,64,0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(40,200,64,0); }
+}
+
+.signal-feed-header .feed-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7em;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.sf-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+.sf-card:hover {
+  background: rgba(255,255,255,0.05);
+  border-color: rgba(255,255,255,0.1);
+}
+
+.sf-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 0.8em;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.sf-avatar.green { background: rgba(40,200,64,0.2); color: #28C840; }
+.sf-avatar.orange { background: rgba(232,168,88,0.2); color: #E8A858; }
+.sf-avatar.blue { background: rgba(136,136,255,0.2); color: #8888FF; }
+.sf-avatar.purple { background: rgba(168,85,247,0.2); color: #A855F7; }
+.sf-avatar.red { background: rgba(224,96,96,0.2); color: #E06060; }
+
+.sf-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.sf-name {
+  font-weight: 500;
+  font-size: 0.92em;
+  color: #fff;
+}
+
+.sf-role {
+  font-size: 0.8em;
+  color: #888;
+}
+
+.sf-context {
+  font-size: 0.8em;
+  color: #AAA;
+  margin-top: 2px;
+}
+
+.sf-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.sf-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6em;
+  font-weight: 500;
+  padding: 0.25em 0.6em;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.sf-badge.green { background: rgba(40,200,64,0.12); color: #28C840; }
+.sf-badge.orange { background: rgba(232,168,88,0.12); color: #E8A858; }
+.sf-badge.blue { background: rgba(136,136,255,0.12); color: #8888FF; }
+.sf-badge.purple { background: rgba(168,85,247,0.12); color: #A855F7; }
+.sf-badge.red { background: rgba(224,96,96,0.12); color: #E06060; }
+
+.sf-time {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6em;
+  color: #555;
+  margin-top: 4px;
+}
+
+/* Staggered animation */
+.sf-card:nth-child(1) { transition-delay: 0s; }
+.sf-card:nth-child(2) { transition-delay: 0.08s; }
+.sf-card:nth-child(3) { transition-delay: 0.16s; }
+.sf-card:nth-child(4) { transition-delay: 0.24s; }
+.sf-card:nth-child(5) { transition-delay: 0.32s; }
+
+.fade-up .sf-card {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.fade-up.visible .sf-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* The door / transition */
+.the-door {
+  text-align: center;
+  padding: clamp(48px, 8vh, 80px) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.the-door h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: 1.3em;
+  color: var(--text-primary);
+  margin-bottom: 0.5em;
+}
+
+.the-door p {
+  color: var(--text-muted);
+  font-size: 0.92em;
+  margin-bottom: 1.5em;
+}
+
+.the-door a.door-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75em;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+.the-door a.door-link:hover { text-decoration: underline; }
+
+@media (max-width: 640px) {
+  .sf-card { flex-wrap: wrap; gap: 8px; }
+  .sf-right { width: 100%; text-align: left; margin-left: 54px; }
+}
+
 /* ===== CTA BUTTON ===== */
 .cta-btn {
   display: inline-block;
@@ -1372,10 +1549,147 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
     <p class="subtitle">Claude is the brain. Sortlist Signals is the nervous system. You're the conductor.</p>
     <p class="meta">by Nicolas Finet <span>//</span> 19 meetings in 2 weeks <span>//</span> 12% reply rate <span>//</span> &lt;20 min/day</p>
     <div style="margin-top:2.5em;">
-      <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial on Sortlist Signals</a>
+      <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial</a>
+    </div>
+    <p style="margin-top:1.5em; font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#555;">Scroll for the 5-minute version &nbsp;&darr;&nbsp; or <a href="#toc" style="color:var(--accent-light); text-decoration:none;">jump to the full playbook</a></p>
+  </div>
+</section>
+
+<!-- ===== FAST TRACK: SCREEN 2 — SIGNAL FEED ===== -->
+<section class="dark-section" id="fast-signals" style="padding:clamp(48px,8vh,80px) 0;">
+  <div class="container">
+    <span class="section-label fade-up">This is what your pipeline looks like tomorrow</span>
+
+    <div class="signal-feed fade-up">
+      <div class="signal-feed-header">
+        <div class="live-dot"></div>
+        <div class="feed-title">Sortlist Signals — Live Feed</div>
+      </div>
+
+      <div class="sf-card">
+        <div class="sf-avatar green">SC</div>
+        <div class="sf-info">
+          <div class="sf-name">Sarah Chen</div>
+          <div class="sf-role">VP Marketing at DataCo (200 employees)</div>
+          <div class="sf-context">Just started new role. Reassessing vendor stack.</div>
+        </div>
+        <div class="sf-right">
+          <div class="sf-badge green">Job change</div>
+          <div class="sf-time">12 days ago</div>
+        </div>
+      </div>
+
+      <div class="sf-card">
+        <div class="sf-avatar orange">MD</div>
+        <div class="sf-info">
+          <div class="sf-name">Marc Dupont</div>
+          <div class="sf-role">CMO at Scaleway (450 employees)</div>
+          <div class="sf-context">Liked Apollo.io's post on "outbound best practices"</div>
+        </div>
+        <div class="sf-right">
+          <div class="sf-badge orange">Competitor</div>
+          <div class="sf-time">2 hours ago</div>
+        </div>
+      </div>
+
+      <div class="sf-card">
+        <div class="sf-avatar blue">LP</div>
+        <div class="sf-info">
+          <div class="sf-name">Lisa Park</div>
+          <div class="sf-role">Head of Growth at Rebase (120 employees)</div>
+          <div class="sf-context">Posted: "Our outbound isn't working. Anyone solved this at scale?"</div>
+        </div>
+        <div class="sf-right">
+          <div class="sf-badge blue">Topic</div>
+          <div class="sf-time">6 hours ago</div>
+        </div>
+      </div>
+
+      <div class="sf-card">
+        <div class="sf-avatar purple">JR</div>
+        <div class="sf-info">
+          <div class="sf-name">James Rivera</div>
+          <div class="sf-role">VP Sales at Koyeb (80 employees)</div>
+          <div class="sf-context">Company raised Series B — $18M. Hiring 12 roles.</div>
+        </div>
+        <div class="sf-right">
+          <div class="sf-badge purple">Funding</div>
+          <div class="sf-time">3 days ago</div>
+        </div>
+      </div>
+
+      <div class="sf-card">
+        <div class="sf-avatar red">AW</div>
+        <div class="sf-info">
+          <div class="sf-name">Anna Weber</div>
+          <div class="sf-role">Marketing Director at Teamleader (300 employees)</div>
+          <div class="sf-context">Liked your CEO's post about signal-based outbound</div>
+        </div>
+        <div class="sf-right">
+          <div class="sf-badge red">Your content</div>
+          <div class="sf-time">1 hour ago</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="fade-up" style="color:#BBB; text-align:center; margin-top:1.5em; font-size:1.05em;">
+      <strong style="color:#fff;">Sortlist Signals</strong> detects these 24/7. <strong style="color:#fff;">Claude</strong> writes the outreach. <strong style="color:#fff;">Overloop</strong> sends it.
+    </p>
+
+    <div style="text-align:center; margin-top:1.5em;" class="fade-up">
+      <a href="https://signals.sortlist.com" class="cta-btn outline" target="_blank">Start detecting signals</a>
     </div>
   </div>
 </section>
+
+<!-- ===== FAST TRACK: SCREEN 3 — ONE COMMAND ===== -->
+<section style="padding:clamp(48px,8vh,80px) 0; background:var(--cream);">
+  <div class="container">
+    <span class="section-label fade-up">From zero to full pipeline in 30 seconds</span>
+
+    <div class="cc fade-up" style="max-width:700px;">
+      <div class="cc-header">
+        <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
+        <div class="cc-meta">
+          <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
+          <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span>
+        </div>
+      </div>
+      <div class="cc-body">
+        <div class="cc-prompt">
+          <span class="chevron">&rsaquo;</span>
+          <span class="input">/signals acme-agency https://acme.com</span>
+        </div>
+        <div class="cc-response">
+<span class="agent-tag">Research</span> 6 competitors found. ICP extracted.<br>
+<span class="agent-tag">Strategy</span> 7 subscriptions designed. 120-200 signals/month.<br>
+<span class="agent-tag">Executor</span> All subscriptions created via Signals CLI.<br>
+<br>
+<span class="success">&#10003; Done.</span> Leads start flowing within 24h.
+        </div>
+        <div class="cc-prompt">
+          <span class="chevron">&rsaquo;</span>
+          <span class="cursor"></span>
+        </div>
+      </div>
+    </div>
+
+    <p class="fade-up" style="text-align:center; margin-top:1.5em; color:var(--text-secondary); font-size:1.05em;">
+      That's it. One command. 27 agents do the rest.
+    </p>
+
+    <div style="text-align:center; margin-top:1.5em;" class="fade-up">
+      <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== THE DOOR ===== -->
+<div class="the-door" id="door">
+  <h3>That was the 5-minute version.</h3>
+  <p>Below: the full 9-part playbook. Every signal type explained, 6 copy-paste workflows,<br>the 4-week plan, CLI commands, and the engine room.</p>
+  <a href="#toc" class="door-link">Read the full playbook &darr;</a>
+</div>
 
 <!-- ===== TABLE OF CONTENTS ===== -->
 <section class="toc-section" id="toc">
