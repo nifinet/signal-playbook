@@ -976,6 +976,47 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 
 .footer a { color: var(--accent-light); text-decoration: none; }
 
+/* ===== STICKY CTA ===== */
+.sticky-cta {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9997;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  pointer-events: none;
+}
+
+.sticky-cta.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.sticky-cta a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75em;
+  font-weight: 500;
+  padding: 12px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,210,0.35);
+  transition: all 0.2s ease;
+  letter-spacing: 0.03em;
+}
+
+.sticky-cta a:hover {
+  background: #0000ff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(0,0,210,0.45);
+}
+
 /* ===== FLOATING CLAUDE BOTS ===== */
 .claude-bots {
   position: fixed;
@@ -1592,6 +1633,11 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 </head>
 <body>
 
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="https://signals.sortlist.com" target="_blank">Start free trial &rarr;</a>
+</div>
+
 <!-- FLOATING CLAUDE BOTS -->
 <div class="claude-bots" aria-hidden="true">
   <svg class="claude-bot" style="width:48px; top:8%; left:5%; animation-duration:18s;" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
@@ -1879,6 +1925,7 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 <!-- ===== PART 1: WHY COLD OUTBOUND IS BROKEN ===== -->
 <section id="broken">
   <div class="container">
+    <p class="fade-up" style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--text-muted); text-align:center; margin-bottom:2.5em; letter-spacing:0.03em;">Join 500+ growth teams using Sortlist Signals to detect buying intent.</p>
     <span class="section-label fade-up">Part 01 // The Problem</span>
     <h2 class="fade-up">Why cold outbound is broken</h2>
 
@@ -3111,6 +3158,21 @@ const videoObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.5 });
 
 if (video) videoObserver.observe(video);
+
+// Sticky CTA: show after scrolling past hero, hide near footer
+const stickyCta = document.getElementById('stickyCta');
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const heroHeight = document.querySelector('.hero').offsetHeight;
+  const docHeight = document.body.scrollHeight;
+  const windowHeight = window.innerHeight;
+
+  if (scrolled > heroHeight && scrolled < docHeight - windowHeight - 200) {
+    stickyCta.classList.add('visible');
+  } else {
+    stickyCta.classList.remove('visible');
+  }
+});
 </script>
 </body>
 </html>
