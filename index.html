@@ -1679,15 +1679,22 @@ td:first-child { font-weight: 400; color: var(--text-primary); }
 <section style="padding:clamp(48px,8vh,80px) 0; background:var(--cream);">
   <div class="container" style="text-align:center;">
     <span class="section-label fade-up">See the full system in 69 seconds</span>
-    <div class="fade-up" style="margin:1.5em auto; max-width:900px; border-radius:16px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.12); border:1px solid var(--border);">
+    <div class="fade-up video-wrapper" style="margin:1.5em auto; max-width:900px; border-radius:16px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.12); border:1px solid var(--border); position:relative; cursor:pointer; background:#0A0A0A;">
       <video
+        class="walkthrough-video"
         src="walkthrough.mp4"
-        autoplay
         muted
         loop
         playsinline
+        preload="metadata"
         style="width:100%; display:block;"
       ></video>
+      <!-- Play overlay -->
+      <div class="video-play-overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.3); transition:opacity 0.4s ease;">
+        <div style="width:80px; height:80px; border-radius:50%; background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.2); transition:transform 0.2s ease;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><polygon points="8,5 20,12 8,19"/></svg>
+        </div>
+      </div>
     </div>
     <p style="font-size:0.85em; color:var(--text-muted); margin-top:0.5em;">Setup signals, configure ICP, receive leads, launch outbound with Claude + Overloop</p>
   </div>
@@ -3077,6 +3084,52 @@ window.addEventListener('scroll', () => {
       ? 'var(--accent)' : 'rgba(255,255,255,0.15)';
   });
 });
+
+// Video: auto-play on scroll after 1s in viewport, click to play/pause
+const video = document.querySelector('.walkthrough-video');
+const overlay = document.querySelector('.video-play-overlay');
+let videoStarted = false;
+let autoplayTimer = null;
+
+function playVideo() {
+  video.play();
+  overlay.style.opacity = '0';
+  overlay.style.pointerEvents = 'none';
+  videoStarted = true;
+}
+
+function pauseVideo() {
+  video.pause();
+  overlay.style.opacity = '1';
+  overlay.style.pointerEvents = 'auto';
+}
+
+// Click to toggle
+document.querySelector('.video-wrapper').addEventListener('click', () => {
+  if (video.paused) {
+    playVideo();
+  } else {
+    pauseVideo();
+  }
+});
+
+// Auto-play when scrolled into view after 1s delay
+const videoObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !videoStarted) {
+      autoplayTimer = setTimeout(() => {
+        playVideo();
+      }, 1000);
+    } else if (!entry.isIntersecting) {
+      if (autoplayTimer) clearTimeout(autoplayTimer);
+      if (videoStarted && !video.paused) {
+        video.pause();
+      }
+    }
+  });
+}, { threshold: 0.5 });
+
+if (video) videoObserver.observe(video);
 </script>
 </body>
 </html>
