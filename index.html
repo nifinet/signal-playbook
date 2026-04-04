@@ -3,3205 +3,943 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Signal-Based Outbound Playbook</title>
+<title>How We Booked 19 Meetings in 2 Weeks With Claude</title>
 
 <!-- OG / Link Preview -->
-<meta property="og:title" content="The Signal-Based Outbound Playbook">
-<meta property="og:description" content="19 meetings in 2 weeks. 12% reply rate. Less than 20 min/day. Sortlist Signals + Overloop + Claude.">
+<meta property="og:title" content="How We Booked 19 Meetings in 2 Weeks With Claude">
+<meta property="og:description" content="The full system: 5 buying signals, the exact message sequence, and the 4-week plan. 12% reply rate, less than 20 min/day.">
 <meta property="og:image" content="https://nifinet.github.io/signal-playbook/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://nifinet.github.io/signal-playbook/">
 <meta property="og:type" content="article">
 
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Signal-Based Outbound Playbook">
-<meta name="twitter:description" content="19 meetings in 2 weeks. 12% reply rate. Sortlist Signals + Overloop + Claude.">
+<meta name="twitter:title" content="How We Booked 19 Meetings in 2 Weeks With Claude">
+<meta name="twitter:description" content="The full system: 5 buying signals, the exact message sequence, and the 4-week plan.">
 <meta name="twitter:image" content="https://nifinet.github.io/signal-playbook/og-image.png">
 
-<!-- General -->
-<meta name="description" content="How we use Claude to listen to the market and book meetings on autopilot. The full operational playbook with Sortlist Signals and Overloop.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="description" content="How we turned Claude into an SDR team that books meetings on autopilot. The full system with real screenshots, real messages, and real numbers.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
-  --cream: #F8F6F2;
-  --dark: #0A0A0A;
-  --text-primary: #1A1A1A;
-  --text-secondary: #444;
-  --text-muted: #777;
-  --text-faint: #AAA;
-  --accent: #0000D2;
-  --accent-light: #8888FF;
-  --border: rgba(0,0,0,0.06);
-  --glass: rgba(255,255,255,0.7);
-  --glass-dark: rgba(255,255,255,0.04);
-  --border-dark: rgba(255,255,255,0.08);
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #555;
+  --text-muted: #888;
+  --border: #e5e5e5;
+  --accent: #d35400;
+  --accent-light: #fef3eb;
+  --code-bg: #f5f5f5;
+  --card-bg: #fafafa;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 html { scroll-behavior: smooth; }
 
 body {
-  background: var(--cream);
-  color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-size: 17px;
-  line-height: 1.7;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Grain overlay */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 256px;
-}
-
-/* ===== LAYOUT ===== */
 .container {
-  max-width: 820px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 0 clamp(24px, 5vw, 56px);
+  padding: 0 24px;
 }
 
-section {
-  padding: clamp(64px, 10vh, 120px) 0;
+/* ===== HEADER ===== */
+.header {
+  padding: 48px 0 40px;
+  border-bottom: 1px solid var(--border);
 }
 
-/* ===== HERO ===== */
-.hero {
-  min-height: 100vh;
+.header-meta {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-  background: var(--dark);
-  overflow: hidden;
+  gap: 12px;
+  margin-bottom: 24px;
 }
 
-.hero::before {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 800px; height: 800px;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(0,0,210,0.08) 0%, transparent 70%);
-  pointer-events: none;
+.header-meta img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
-.hero-content { position: relative; z-index: 1; }
-
-.hero .label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent-light);
-  margin-bottom: 2em;
+.header-meta .author-info {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
 
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 400;
-  font-size: clamp(2.2em, 5vw, 3.8em);
-  color: #fff;
-  line-height: 1.15;
-  margin-bottom: 0.6em;
-  max-width: 14em;
-}
-
-.hero h1 em {
-  font-style: italic;
-  color: var(--accent-light);
-}
-
-.hero .subtitle {
-  font-size: 1.1em;
-  color: #888;
-  font-weight: 300;
-  max-width: 32em;
-  margin: 0 auto;
-}
-
-.hero .meta {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65em;
-  color: #555;
-  margin-top: 3em;
-}
-
-.hero .meta span { opacity: 0.3; }
-
-/* ===== TYPOGRAPHY ===== */
-h2 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 400;
-  font-size: clamp(1.6em, 3vw, 2.2em);
-  line-height: 1.2;
-  margin-bottom: 0.8em;
-  color: var(--text-primary);
-}
-
-h3 {
-  font-family: 'Inter', sans-serif;
+.header-meta .author-name {
   font-weight: 600;
-  font-size: 1.05em;
-  margin-bottom: 0.5em;
-  color: var(--text-primary);
+  color: var(--text);
 }
 
-h4 {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 500;
-  font-size: 0.75em;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1.5em;
+h1 {
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
 }
 
-p { margin-bottom: 1.2em; }
-
-strong { font-weight: 500; color: var(--text-primary); }
-
-/* ===== SECTION LABEL ===== */
-.section-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65em;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1.8em;
-  display: block;
-}
-
-/* ===== CARDS ===== */
-.card {
-  background: var(--glass);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: clamp(24px, 3vw, 40px);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.02), 0 4px 16px rgba(0,0,0,0.03);
-  margin-bottom: 1.5em;
-  position: relative;
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 12px; bottom: 12px;
-  width: 2px;
-  background: linear-gradient(to bottom, #E8E4DC, var(--accent));
-  border-radius: 1px;
-}
-
-.card .card-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65em;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.8em;
-}
-
-.card h3 { margin-bottom: 0.4em; }
-
-.card p:last-child { margin-bottom: 0; }
-
-/* ===== DARK SECTIONS ===== */
-.dark-section {
-  background: var(--dark);
-  position: relative;
-  overflow: hidden;
-}
-
-.dark-section::before {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 100%; height: 100%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(0,0,210,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.dark-section .container { position: relative; z-index: 1; }
-
-.dark-section h2 { color: #fff; }
-.dark-section h3 { color: #fff; }
-.dark-section p { color: #BBB; }
-.dark-section strong { color: #fff; }
-.dark-section .section-label { color: var(--accent-light); }
-
-.dark-card {
-  background: var(--glass-dark);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border-dark);
-  border-radius: 12px;
-  padding: clamp(24px, 3vw, 36px);
-  margin-bottom: 1.5em;
-}
-
-.dark-card::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 12px; bottom: 12px;
-  width: 2px;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.05), var(--accent-light));
-  border-radius: 1px;
-}
-
-.dark-card .card-label { color: var(--accent-light); }
-.dark-card h3 { color: #fff; }
-.dark-card p { color: #BBB; }
-
-/* ===== STATS GRID ===== */
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.2em;
-  margin: 2em 0;
+.header-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .stat {
-  text-align: center;
-  padding: 1.5em 1em;
-}
-
-.stat-number {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.4em;
-  font-weight: 700;
-  line-height: 1;
-  margin-bottom: 0.2em;
-}
-
-.stat-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65em;
-  font-weight: 400;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.dark-section .stat-number { color: #fff; }
-.dark-section .stat-label { color: #888; }
-
-/* ===== SIGNAL CARDS ===== */
-.signal-card {
-  position: relative;
-  margin-bottom: 2em;
-}
-
-.signal-header {
-  display: flex;
-  align-items: center;
-  gap: 0.8em;
-  margin-bottom: 1em;
-}
-
-.signal-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3em;
-  flex-shrink: 0;
-}
-
-.signal-icon.high { background: rgba(0,0,210,0.08); }
-.signal-icon.medium { background: rgba(0,0,210,0.05); }
-
-.signal-meta {
-  display: flex;
-  gap: 1.5em;
-  margin-top: 1em;
-  flex-wrap: wrap;
-}
-
-.signal-meta-item {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  color: var(--text-muted);
-}
-
-.signal-meta-item span {
-  font-weight: 500;
+  font-size: 14px;
   color: var(--text-secondary);
 }
 
-/* ===== TABLES ===== */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5em 0;
-  font-size: 0.9em;
-}
-
-th {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  text-align: left;
-  padding: 0.8em 1em;
-  border-bottom: 1px solid var(--border);
-}
-
-td {
-  padding: 0.8em 1em;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-secondary);
-  font-weight: 300;
-}
-
-td:first-child { font-weight: 400; color: var(--text-primary); }
-
-.dark-section th { color: #AAA; border-color: rgba(255,255,255,0.1); }
-.dark-section td { color: #BBB; border-color: var(--border-dark); }
-.dark-section td:first-child { color: #fff; font-weight: 400; }
-
-/* ===== CODE / FLOW ===== */
-.flow-block {
-  background: var(--dark);
-  border-radius: 12px;
-  padding: clamp(20px, 3vw, 32px);
-  margin: 1.5em 0;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78em;
-  line-height: 1.9;
-  color: #BBB;
-  overflow-x: auto;
-}
-
-.flow-block .highlight { color: var(--accent-light); }
-.flow-block .dim { color: #555; }
-.flow-block .green { color: #7DD17D; }
-.flow-block .orange { color: #E8A858; }
-
-/* ===== TIMELINE ===== */
-.timeline {
-  position: relative;
-  padding-left: 3em;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 0.75em;
-  top: 0.5em;
-  bottom: 0.5em;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--accent), rgba(0,0,210,0.1));
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 2.5em;
-}
-
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -2.4em;
-  top: 0.4em;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-}
-
-.timeline-week {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.5em;
-}
-
-.timeline-title {
-  font-weight: 600;
-  font-size: 1.05em;
-  margin-bottom: 0.3em;
-}
-
-.timeline-tasks {
-  list-style: none;
-  padding: 0;
-}
-
-.timeline-tasks li {
-  padding: 0.3em 0;
-  color: var(--text-secondary);
-  font-size: 0.92em;
-}
-
-.timeline-tasks li::before {
-  content: '';
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--text-faint);
-  margin-right: 0.8em;
-  vertical-align: middle;
-}
-
-.timeline-time {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  color: var(--text-muted);
-  margin-top: 0.5em;
-}
-
-/* ===== WORKFLOW CARDS ===== */
-.workflow-card {
-  margin-bottom: 2.5em;
-}
-
-.workflow-number {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-  font-weight: 700;
-  color: rgba(0,0,210,0.08);
-  line-height: 1;
-  margin-bottom: -0.2em;
-}
-
-.dark-section .workflow-number { color: rgba(136,136,255,0.12); }
-
-.workflow-meta {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5em 2em;
-  margin: 1em 0;
-  font-size: 0.88em;
-}
-
-.workflow-meta dt {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75em;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.workflow-meta dd {
-  color: var(--text-secondary);
-  margin-bottom: 0.5em;
-}
-
-.dark-section .workflow-meta dt { color: #666; }
-.dark-section .workflow-meta dd { color: #BBB; }
-
-/* ===== EMAIL EXAMPLE ===== */
-.email-example {
-  background: #fff;
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 12px;
-  padding: clamp(20px, 3vw, 32px);
-  margin: 1.5em 0;
-  font-size: 0.92em;
-}
-
-.email-subject {
-  font-weight: 500;
-  padding-bottom: 0.8em;
-  margin-bottom: 0.8em;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
-  font-size: 0.95em;
-}
-
-.email-body {
-  color: var(--text-secondary);
-  line-height: 1.8;
-}
-
-.email-body p { margin-bottom: 0.8em; }
-
-/* ===== VS COMPARE ===== */
-.compare-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5em;
-  margin: 2em 0;
-}
-
-@media (max-width: 640px) {
-  .compare-grid { grid-template-columns: 1fr; }
-}
-
-.compare-col h4 { margin-bottom: 1em; }
-
-.compare-col.bad { opacity: 0.5; }
-
-.compare-col.bad .email-example {
-  background: #f5f3ef;
-}
-
-/* ===== MEDIA PLACEHOLDER ===== */
-.media-placeholder {
-  border: 1px dashed rgba(0,0,210,0.2);
-  border-radius: 12px;
-  padding: 2.5em 2em;
-  text-align: center;
-  margin: 1.5em 0;
-  background: rgba(0,0,210,0.02);
-}
-
-.media-placeholder .icon {
-  font-size: 1.8em;
-  margin-bottom: 0.5em;
-  opacity: 0.5;
-}
-
-.media-placeholder .label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.3em;
-}
-
-.media-placeholder .desc {
-  font-size: 0.85em;
-  color: var(--text-muted);
-  max-width: 30em;
-  margin: 0 auto;
-}
-
-.dark-section .media-placeholder {
-  border-color: rgba(136,136,255,0.2);
-  background: rgba(136,136,255,0.03);
-}
-.dark-section .media-placeholder .label { color: var(--accent-light); }
-.dark-section .media-placeholder .desc { color: #666; }
-
-/* ===== TERMINAL ===== */
-.terminal {
-  background: #0C0C0C;
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 2em 0;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-}
-
-.terminal-bar {
-  background: #1A1A1A;
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.terminal-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.terminal-dot.red { background: #FF5F57; }
-.terminal-dot.yellow { background: #FFBD2E; }
-.terminal-dot.green { background: #28C840; }
-
-.terminal-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65em;
-  color: #666;
-  margin-left: 8px;
-}
-
-.terminal-body {
-  padding: clamp(16px, 2.5vw, 28px);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78em;
-  line-height: 1.9;
-  color: #BBB;
-  overflow-x: auto;
-}
-
-.terminal-body .prompt {
-  color: #28C840;
-  user-select: none;
-}
-
-.terminal-body .cmd {
-  color: #fff;
-}
-
-.terminal-body .flag {
-  color: var(--accent-light);
-}
-
-.terminal-body .string {
-  color: #E8A858;
-}
-
-.terminal-body .comment {
-  color: #555;
-  font-style: italic;
-}
-
-.terminal-body .output {
-  color: #888;
-}
-
-.terminal-body .success {
-  color: #28C840;
-}
-
-.terminal-body .json-key {
-  color: var(--accent-light);
-}
-
-.terminal-body .json-val {
-  color: #E8A858;
-}
-
-.terminal-body .json-num {
-  color: #7DD17D;
-}
-
-.terminal-body .dim {
-  color: #444;
-}
-
-.terminal-body .blank {
+.stat strong {
   display: block;
-  height: 1em;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
 }
 
-/* Terminal typing animation for the hero command */
-.terminal-hero {
-  margin: 3em 0 0;
-  max-width: 600px;
-  display: inline-block;
-  text-align: left;
+/* ===== CONTENT ===== */
+.content {
+  padding: 48px 0;
 }
 
-.terminal-hero .terminal-body {
-  font-size: 0.85em;
+h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 56px 0 16px;
+  letter-spacing: -0.01em;
 }
 
-/* Blueprint grid background */
-.blueprint-section {
-  background: var(--dark);
-  position: relative;
-  overflow: hidden;
+h2:first-child {
+  margin-top: 0;
 }
 
-.blueprint-section::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-}
-
-.blueprint-section::after {
-  content: '';
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 100%; height: 100%;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(0,0,210,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.blueprint-section .container { position: relative; z-index: 1; }
-.blueprint-section h2 { color: #fff; }
-.blueprint-section h3 { color: #fff; }
-.blueprint-section p { color: #BBB; }
-.blueprint-section strong { color: #fff; }
-.blueprint-section .section-label { color: var(--accent-light); }
-
-/* Step connector line */
-.engine-step {
-  position: relative;
-  padding-left: 3em;
-  margin-bottom: 3em;
-}
-
-.engine-step::before {
-  content: '';
-  position: absolute;
-  left: 12px;
-  top: 30px;
-  bottom: -2em;
-  width: 1px;
-  background: linear-gradient(to bottom, #E06060, rgba(224,96,96,0.1));
-}
-
-.engine-step:last-child::before { display: none; }
-
-.engine-step-number {
-  position: absolute;
-  left: -2px;
-  top: -2px;
-  width: 28px;
-  height: 28px;
-  z-index: 1;
-  image-rendering: pixelated;
-}
-
-/* Hide the text content of engine-step-number, replaced by SVG */
-.engine-step-number { font-size: 0; color: transparent; }
-
-.engine-step-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65em;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent-light);
-  margin-bottom: 0.3em;
-}
-
-.engine-step-title {
+h3 {
+  font-size: 17px;
   font-weight: 600;
-  font-size: 1.1em;
-  color: #fff;
-  margin-bottom: 0.5em;
+  margin: 32px 0 8px;
 }
 
-.engine-step-desc {
-  font-size: 0.92em;
-  color: #888;
-  margin-bottom: 1em;
+p {
+  margin-bottom: 16px;
+  color: var(--text-secondary);
 }
 
-/* One-command hero */
-.one-cmd {
-  text-align: center;
-  padding: 3em 0;
-  margin: 2em 0;
-  border-top: 1px solid rgba(255,255,255,0.05);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+p strong {
+  color: var(--text);
+  font-weight: 600;
 }
-
-.one-cmd-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65em;
-  color: #555;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 1.5em;
-}
-
-.one-cmd-code {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: clamp(1.1em, 2.5vw, 1.6em);
-  color: #fff;
-  background: rgba(255,255,255,0.04);
-  display: inline-block;
-  padding: 0.5em 1.2em;
-  border-radius: 8px;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-
-.one-cmd-code .prompt { color: #28C840; }
-.one-cmd-code .flag { color: var(--accent-light); }
-
-.one-cmd-sub {
-  font-size: 0.85em;
-  color: #666;
-  margin-top: 1em;
-}
-
-/* ===== MATRIX TABLE ===== */
-.matrix {
-  margin: 2em 0;
-  overflow-x: auto;
-}
-
-.matrix table { min-width: 600px; }
-
-.pill {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  font-weight: 500;
-  padding: 0.2em 0.7em;
-  border-radius: 20px;
-  letter-spacing: 0.03em;
-}
-
-.pill.high { background: rgba(40,200,64,0.12); color: #28C840; }
-.pill.medium { background: rgba(232,168,88,0.12); color: #E8A858; }
-.pill.low { background: rgba(255,255,255,0.06); color: #BBB; }
-.pill.very-high { background: rgba(40,200,64,0.18); color: #28C840; font-weight:500; }
-
-.dark-section .pill.high { background: rgba(40,200,64,0.12); color: #28C840; }
-.dark-section .pill.medium { background: rgba(232,168,88,0.12); color: #E8A858; }
-.dark-section .pill.low { background: rgba(255,255,255,0.06); color: #BBB; }
-.dark-section .pill.very-high { background: rgba(40,200,64,0.18); color: #28C840; }
 
 /* ===== CALLOUT ===== */
 .callout {
-  background: rgba(0,0,210,0.04);
-  border-left: 2px solid var(--accent);
-  border-radius: 0 12px 12px 0;
-  padding: 1.2em 1.5em;
-  margin: 1.5em 0;
-  font-size: 0.95em;
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 15px;
+  color: var(--text);
 }
 
-.dark-section .callout {
-  background: rgba(136,136,255,0.06);
-  border-left-color: var(--accent-light);
+.callout strong {
+  font-weight: 600;
 }
 
-/* ===== MATH BLOCK ===== */
-.math-block {
-  text-align: center;
-  padding: 2em;
-  margin: 2em 0;
-}
-
-.math-line {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.95em;
-  color: #BBB;
-  margin-bottom: 0.4em;
-}
-
-.math-result {
-  font-family: 'Playfair Display', serif;
-  font-size: 2em;
-  font-weight: 700;
-  color: #fff;
-  margin-top: 0.5em;
-}
-
-.math-result small {
-  font-size: 0.5em;
-  font-weight: 400;
-  color: #888;
-  display: block;
-  font-family: 'Inter', sans-serif;
-}
-
-/* ===== LIST RULES ===== */
-.rules-list {
-  list-style: none;
-  padding: 0;
-  counter-reset: rules;
-}
-
-.rules-list li {
-  counter-increment: rules;
-  padding: 1em 0;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  gap: 1em;
-  align-items: flex-start;
-}
-
-.rules-list li::before {
-  content: counter(rules);
-  font-family: 'Playfair Display', serif;
-  font-size: 1.6em;
-  font-weight: 700;
-  color: rgba(0,0,210,0.12);
-  line-height: 1;
-  flex-shrink: 0;
-  width: 1.5em;
-  text-align: center;
-}
-
-.rules-list li:last-child { border-bottom: none; }
-
-/* ===== NAV ===== */
-.toc {
-  position: fixed;
-  right: clamp(16px, 2vw, 32px);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.toc a {
-  display: block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.12);
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-.toc a:hover {
-  background: var(--accent);
-  transform: scale(1.5);
-}
-
-.toc a .tip {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6em;
-  white-space: nowrap;
-  color: var(--text-muted);
-  opacity: 0;
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-
-.toc a:hover .tip { opacity: 1; }
-
-.toc a.active .tip {
-  opacity: 1;
-  color: #fff;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(4px);
-  padding: 4px 10px;
-  border-radius: 4px;
-  right: 22px;
-}
-
-@media (max-width: 1100px) { .toc { display: none; } }
-
-/* ===== FOOTER ===== */
-.footer {
-  text-align: center;
-  padding: 4em 0;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  color: #555;
-}
-
-.footer a { color: var(--accent-light); text-decoration: none; }
-
-/* ===== STICKY CTA ===== */
-.sticky-cta {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 9997;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  pointer-events: none;
-}
-
-.sticky-cta.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.sticky-cta a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--accent);
-  color: #fff;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75em;
-  font-weight: 500;
-  padding: 12px 24px;
-  border-radius: 10px;
-  text-decoration: none;
-  box-shadow: 0 4px 20px rgba(0,0,210,0.35);
-  transition: all 0.2s ease;
-  letter-spacing: 0.03em;
-}
-
-.sticky-cta a:hover {
-  background: #0000ff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 28px rgba(0,0,210,0.45);
-}
-
-/* ===== FLOATING CLAUDE BOTS ===== */
-.claude-bots {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  pointer-events: none;
-  z-index: 9998;
-  overflow: hidden;
-}
-
-.claude-bot {
-  position: absolute;
-  image-rendering: pixelated;
-  opacity: 0.12;
-  animation: floatBot linear infinite;
-}
-
-@keyframes floatBot {
-  0% {
-    transform: translateY(0) translateX(0) rotate(0deg);
-  }
-  25% {
-    transform: translateY(-15px) translateX(8px) rotate(3deg);
-  }
-  50% {
-    transform: translateY(-5px) translateX(-6px) rotate(-2deg);
-  }
-  75% {
-    transform: translateY(-20px) translateX(10px) rotate(4deg);
-  }
-  100% {
-    transform: translateY(0) translateX(0) rotate(0deg);
-  }
-}
-
-/* ===== VIDEO FULLSCREEN ===== */
-.video-wrapper:hover .video-fs-btn { opacity: 1 !important; }
-.video-wrapper:hover .video-play-overlay ~ .video-fs-btn { opacity: 0 !important; }
-
-/* ===== SCROLL ANIMATIONS ===== */
-.fade-up {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.fade-up.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ===== KEYWORD PILLS ===== */
-.keyword-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-  margin: 1em 0;
-}
-
-.keyword {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72em;
-  padding: 0.4em 0.8em;
-  border-radius: 6px;
-  border: 1px solid;
-}
-
-.keyword.good { border-color: rgba(0,180,80,0.2); background: rgba(0,180,80,0.05); color: #1a7a3a; }
-.keyword.bad { border-color: rgba(200,0,0,0.15); background: rgba(200,0,0,0.03); color: #a04040; text-decoration: line-through; }
-
-/* ===== DIVIDER ===== */
-.divider {
-  width: 40px;
-  height: 1px;
-  background: var(--border);
-  margin: 3em 0;
-}
-
-.dark-section .divider { background: var(--border-dark); }
-
-/* ===== STEP INDICATOR ===== */
-.step-number {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65em;
-  font-weight: 500;
-  color: var(--accent);
-  letter-spacing: 0.08em;
-  margin-bottom: 0.5em;
-  display: block;
-}
-
-/* ===== PRODUCT SCREENSHOTS ===== */
-.screenshot {
-  width: 100%;
-  border-radius: 12px;
+/* ===== SIGNAL CARDS ===== */
+.signal-card {
+  background: var(--card-bg);
   border: 1px solid var(--border);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  margin: 1.5em 0;
-  display: block;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
 }
 
-.dark-section .screenshot,
-.blueprint-section .screenshot {
-  border-color: rgba(255,255,255,0.08);
-  box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+.signal-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
 }
 
-.screenshot-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62em;
-  color: var(--text-muted);
-  text-align: center;
-  margin-top: -0.8em;
-  margin-bottom: 1.5em;
+.signal-card p {
+  font-size: 14px;
+  margin-bottom: 0;
+  color: var(--text-secondary);
 }
 
-.dark-section .screenshot-label { color: #666; }
-
-/* ===== SIGNAL FEED ===== */
-.signal-feed {
-  margin: 2em 0;
-}
-
-.signal-feed-header {
-  display: flex;
-  align-items: center;
-  gap: 0.8em;
-  margin-bottom: 1.2em;
-}
-
-.signal-feed-header .live-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #28C840;
-  animation: livePulse 2s ease-in-out infinite;
-}
-
-@keyframes livePulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(40,200,64,0.4); }
-  50% { box-shadow: 0 0 0 6px rgba(40,200,64,0); }
-}
-
-.signal-feed-header .feed-title {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #888;
-}
-
-.sf-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 18px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 10px;
-  margin-bottom: 8px;
-  transition: all 0.3s ease;
-}
-
-.sf-card:hover {
-  background: rgba(255,255,255,0.05);
-  border-color: rgba(255,255,255,0.1);
-}
-
-.sf-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
+.signal-number {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Inter', sans-serif;
+  width: 24px;
+  height: 24px;
+  background: var(--text);
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
   font-weight: 600;
-  font-size: 0.8em;
-  color: #fff;
+  margin-right: 8px;
   flex-shrink: 0;
 }
 
-.sf-avatar.green { background: rgba(40,200,64,0.2); color: #28C840; }
-.sf-avatar.orange { background: rgba(232,168,88,0.2); color: #E8A858; }
-.sf-avatar.blue { background: rgba(136,136,255,0.2); color: #8888FF; }
-.sf-avatar.purple { background: rgba(168,85,247,0.2); color: #A855F7; }
-.sf-avatar.red { background: rgba(224,96,96,0.2); color: #E06060; }
-
-.sf-info {
-  flex: 1;
-  min-width: 0;
-}
-
-.sf-name {
-  font-weight: 500;
-  font-size: 0.92em;
-  color: #fff;
-}
-
-.sf-role {
-  font-size: 0.8em;
-  color: #888;
-}
-
-.sf-context {
-  font-size: 0.8em;
-  color: #AAA;
-  margin-top: 2px;
-}
-
-.sf-right {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.sf-badge {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6em;
-  font-weight: 500;
-  padding: 0.25em 0.6em;
-  border-radius: 4px;
-  letter-spacing: 0.03em;
-  white-space: nowrap;
-}
-
-.sf-badge.green { background: rgba(40,200,64,0.12); color: #28C840; }
-.sf-badge.orange { background: rgba(232,168,88,0.12); color: #E8A858; }
-.sf-badge.blue { background: rgba(136,136,255,0.12); color: #8888FF; }
-.sf-badge.purple { background: rgba(168,85,247,0.12); color: #A855F7; }
-.sf-badge.red { background: rgba(224,96,96,0.12); color: #E06060; }
-
-.sf-time {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6em;
-  color: #555;
-  margin-top: 4px;
-}
-
-/* Staggered animation */
-.sf-card:nth-child(1) { transition-delay: 0s; }
-.sf-card:nth-child(2) { transition-delay: 0.08s; }
-.sf-card:nth-child(3) { transition-delay: 0.16s; }
-.sf-card:nth-child(4) { transition-delay: 0.24s; }
-.sf-card:nth-child(5) { transition-delay: 0.32s; }
-
-.fade-up .sf-card {
-  opacity: 0;
-  transform: translateY(12px);
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.fade-up.visible .sf-card {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* The door / transition */
-.the-door {
-  text-align: center;
-  padding: clamp(48px, 8vh, 80px) 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-
-.the-door h3 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 400;
-  font-size: 1.3em;
-  color: var(--text-primary);
-  margin-bottom: 0.5em;
-}
-
-.the-door p {
-  color: var(--text-muted);
-  font-size: 0.92em;
-  margin-bottom: 1.5em;
-}
-
-.the-door a.door-link {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.75em;
-  color: var(--accent);
-  text-decoration: none;
-  letter-spacing: 0.05em;
-}
-
-.the-door a.door-link:hover { text-decoration: underline; }
-
-@media (max-width: 640px) {
-  .sf-card { flex-wrap: wrap; gap: 8px; }
-  .sf-right { width: 100%; text-align: left; margin-left: 54px; }
-}
-
-/* ===== CTA BUTTON ===== */
-.cta-btn {
-  display: inline-block;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8em;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  padding: 0.8em 1.8em;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.cta-btn.primary {
-  background: var(--accent);
-  color: #fff;
-}
-
-.cta-btn.primary:hover {
-  background: #0000ff;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0,0,210,0.3);
-}
-
-.cta-btn.outline {
-  background: transparent;
-  color: var(--accent-light);
-  border: 1px solid rgba(136,136,255,0.3);
-}
-
-.cta-btn.outline:hover {
-  background: rgba(136,136,255,0.08);
-  border-color: var(--accent-light);
-}
-
-.cta-banner {
-  text-align: center;
-  padding: 2em;
-  margin: 2em 0;
-  border-radius: 12px;
-  background: rgba(0,0,210,0.04);
-  border: 1px solid rgba(0,0,210,0.1);
-}
-
-.dark-section .cta-banner,
-.blueprint-section .cta-banner {
-  background: rgba(136,136,255,0.06);
-  border-color: rgba(136,136,255,0.15);
-}
-
-.cta-banner p {
-  margin-bottom: 1em;
-  font-size: 0.92em;
-}
-
-/* Cost comparison */
-.cost-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5em 0;
-}
-
-.cost-table th {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7em;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 0.8em 1em;
-  text-align: left;
-}
-
-.cost-table td {
-  padding: 0.6em 1em;
-  font-size: 0.9em;
-  border-bottom: 1px solid var(--border);
-}
-
-.cost-table .old { color: var(--text-muted); text-decoration: line-through; }
-.cost-table .new { color: var(--accent); font-weight: 500; }
-
-.dark-section .cost-table td { border-color: rgba(255,255,255,0.05); }
-.dark-section .cost-table .old { color: #666; }
-.dark-section .cost-table .new { color: var(--accent-light); font-weight: 500; }
-
-.price-tag {
-  font-family: 'Playfair Display', serif;
-  font-size: 2em;
-  font-weight: 700;
-}
-
-.price-tag .strike {
-  text-decoration: line-through;
-  color: #666;
-  font-size: 0.6em;
-  font-weight: 400;
-}
-
-/* ===== TABLE OF CONTENTS ===== */
-.toc-section {
-  padding: clamp(48px, 8vh, 80px) 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.toc-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  margin-top: 2em;
-}
-
-@media (max-width: 600px) {
-  .toc-grid { grid-template-columns: 1fr; }
-}
-
-.toc-item {
-  display: flex;
-  align-items: baseline;
-  gap: 1em;
-  padding: 0.8em 0;
-  border-bottom: 1px solid var(--border);
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.toc-item:hover { padding-left: 0.5em; }
-
-.toc-item:nth-child(odd) { padding-right: 2em; border-right: 1px solid var(--border); }
-.toc-item:nth-child(even) { padding-left: 2em; }
-
-@media (max-width: 600px) {
-  .toc-item:nth-child(odd) { padding-right: 0; border-right: none; }
-  .toc-item:nth-child(even) { padding-left: 0; }
-}
-
-.toc-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.4em;
-  font-weight: 700;
-  color: rgba(0,0,210,0.12);
-  flex-shrink: 0;
-  width: 2em;
-  text-align: right;
-}
-
-.toc-text {
-  flex: 1;
-}
-
-.toc-title {
-  font-weight: 500;
-  font-size: 0.95em;
-  color: var(--text-primary);
-  display: block;
-}
-
-.toc-item:hover .toc-title { color: var(--accent); }
-
-.toc-desc {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62em;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-  display: block;
-  margin-top: 0.2em;
-}
-
-/* ===== CLAUDE CODE TERMINAL ===== */
-.cc {
-  background: #1a1a1a;
-  border-radius: 12px;
-  overflow: hidden;
-  margin: 2em 0;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* Header mimicking real Claude Code startup */
-.cc-header {
-  padding: 20px 24px 16px;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  border-bottom: 1px solid #333;
-}
-
-/* Pixel art robot logo */
-.cc-logo {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  image-rendering: pixelated;
-}
-
-.cc-meta {
-  font-size: 0.75em;
-  line-height: 1.6;
-}
-
-.cc-meta .title {
-  color: #fff;
-  font-weight: 500;
-}
-
-.cc-meta .version {
-  color: #888;
-}
-
-.cc-meta .info {
-  color: #666;
-}
-
-.cc-meta .info .dot {
-  color: #444;
-  margin: 0 0.3em;
-}
-
-/* Body */
-.cc-body {
-  padding: clamp(16px, 2.5vw, 24px);
-  font-size: 0.78em;
-  line-height: 1.9;
-  color: #BBB;
-  overflow-x: auto;
-}
-
-/* Prompt line: ❯ with blue cursor */
-.cc-prompt {
+.signal-card h4 {
   display: flex;
   align-items: center;
-  gap: 0.5em;
-  margin: 1.2em 0 0.3em;
 }
 
-.cc-prompt .chevron {
-  color: #888;
-  user-select: none;
+/* ===== SCREENSHOTS ===== */
+.screenshot {
+  margin: 24px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
 }
 
-.cc-prompt .input {
-  color: #fff;
+.screenshot img {
+  width: 100%;
+  display: block;
 }
 
-.cc-prompt .cursor {
-  display: inline-block;
-  width: 8px;
-  height: 1.2em;
-  background: #5B8DEF;
-  vertical-align: middle;
-  animation: cursorBlink 1s step-end infinite;
+.screenshot-caption {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 8px 16px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
 }
 
-@keyframes cursorBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes decaySlide {
-  0% { transform: translateX(0); opacity: 1; }
-  100% { transform: translateX(0); opacity: 1; }
-}
-
-/* Decay bar shrink animation on scroll */
-.decay-bar {
-  transition: width 2s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.fade-up.visible .decay-bar {
-  animation: none;
-}
-
-/* Claude response block */
-.cc-response {
-  padding: 0.8em 0 0.8em 1.6em;
-  border-left: 2px solid #333;
-  margin: 0.5em 0 1em;
-  color: #ccc;
-  line-height: 1.8;
-}
-
-.cc-response .agent-tag {
-  display: inline-block;
-  background: rgba(217,119,6,0.15);
-  color: #E8A858;
-  padding: 0.15em 0.5em;
-  border-radius: 4px;
-  font-size: 0.88em;
-  margin-right: 0.3em;
-}
-
-.cc-response .dim { color: #555; }
-.cc-response .highlight { color: var(--accent-light); }
-.cc-response .success { color: #28C840; }
-.cc-response .warn { color: #E8A858; }
-
-/* Strategy box inside response */
-.cc-strategy {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid #333;
-  border-radius: 6px;
-  padding: 0.8em 1em;
-  margin: 0.8em 0;
-  color: #BBB;
+/* ===== MESSAGE EXAMPLES ===== */
+.message-example {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+  font-size: 14px;
   line-height: 1.7;
 }
 
-.cc-strategy .label {
-  color: #666;
-  font-size: 0.85em;
-  margin-bottom: 0.3em;
+.message-example .msg-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* Separator line */
-.cc-sep {
+.channel-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.channel-icon.linkedin {
+  color: #0A66C2;
+}
+
+.channel-icon.email {
+  color: var(--text-muted);
+}
+
+.message-example p {
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.message-example p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== STEP LIST ===== */
+.step {
+  margin: 32px 0;
+  padding-left: 36px;
+  position: relative;
+}
+
+.step::before {
+  content: attr(data-step);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  background: var(--text);
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step h3 {
+  margin-top: 0;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  margin: 24px 0;
+}
+
+.timeline-week {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.timeline-week:last-child {
+  border-bottom: none;
+}
+
+.week-label {
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.week-content {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.week-time {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* ===== COMPARISON ===== */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.comparison-col {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.comparison-col.bad {
+  opacity: 0.6;
+}
+
+.comparison-col h4 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+}
+
+.comparison-col ul {
+  list-style: none;
+  font-size: 14px;
+}
+
+.comparison-col ul li {
+  padding: 4px 0;
+  color: var(--text-secondary);
+}
+
+/* ===== NUMBERS TABLE ===== */
+.numbers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.number-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.number-card .value {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.number-card .label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 56px 0;
+}
+
+/* ===== CTA ===== */
+.cta-section {
+  text-align: center;
+  padding: 64px 0 80px;
+  border-top: 1px solid var(--border);
+}
+
+.cta-section h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  margin-bottom: 24px;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--text);
+  color: white;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: opacity 0.2s;
+}
+
+.cta-button:hover {
+  opacity: 0.85;
+}
+
+.cta-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+/* ===== PROMPT BLOCK ===== */
+.prompt-block {
+  margin: 24px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #1a1a1a;
+}
+
+.prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #252525;
+  font-size: 13px;
+  font-weight: 500;
+  color: #999;
+}
+
+.copy-btn {
+  background: #333;
+  color: #ccc;
   border: none;
-  border-top: 1px solid #333;
-  margin: 0.8em 0;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: #444;
+}
+
+.copy-btn.copied {
+  background: #2d5a2d;
+  color: #8f8;
+}
+
+.prompt-content {
+  padding: 16px;
+  margin: 0;
+  font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #d4d4d4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 24px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+  .header-stats {
+    gap: 16px;
+  }
+  .timeline-week {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .week-time {
+    margin-left: 0;
+  }
 }
 </style>
 </head>
 <body>
 
-<!-- STICKY CTA -->
-<div class="sticky-cta" id="stickyCta">
-  <a href="https://signals.sortlist.com" target="_blank">Start free trial &rarr;</a>
-</div>
+<div class="container">
 
-<!-- FLOATING CLAUDE BOTS -->
-<div class="claude-bots" aria-hidden="true">
-  <svg class="claude-bot" style="width:48px; top:8%; left:5%; animation-duration:18s;" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-  <svg class="claude-bot" style="width:36px; top:22%; right:8%; animation-duration:22s; animation-delay:-5s;" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-  <svg class="claude-bot" style="width:42px; top:45%; left:3%; animation-duration:20s; animation-delay:-8s;" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-  <svg class="claude-bot" style="width:30px; top:60%; right:4%; animation-duration:25s; animation-delay:-12s;" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-  <svg class="claude-bot" style="width:40px; top:80%; left:7%; animation-duration:19s; animation-delay:-3s;" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-  <svg class="claude-bot" style="width:34px; top:35%; right:12%; animation-duration:23s; animation-delay:-15s;" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-  <svg class="claude-bot" style="width:26px; top:92%; right:15%; animation-duration:21s; animation-delay:-9s;" viewBox="0 0 16 16" fill="none"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-</div>
-
-<!-- NAV DOTS -->
-<nav class="toc">
-  <a href="#hero"><span class="tip">Top</span></a>
-  <a href="#broken"><span class="tip">Why it's broken</span></a>
-  <a href="#signals"><span class="tip">5 signals</span></a>
-  <a href="#agents"><span class="tip">Agent swarm</span></a>
-  <a href="#sequence"><span class="tip">3-step sequence</span></a>
-  <a href="#workflows"><span class="tip">6 workflows</span></a>
-  <a href="#plan"><span class="tip">4-week plan</span></a>
-  <a href="#stack"><span class="tip">Connect stack</span></a>
-  <a href="#numbers"><span class="tip">Real numbers</span></a>
-  <a href="#engine"><span class="tip">Engine room</span></a>
-</nav>
-
-<!-- ===== HERO ===== -->
-<section class="hero" id="hero">
-  <div class="hero-content">
-    <div class="label">Operational Playbook</div>
-    <h1>The Signal-Based<br><em>Outbound</em> Playbook</h1>
-    <p class="subtitle">Claude is the brain. Sortlist Signals is the nervous system. You're the conductor.</p>
-    <p class="meta">by Nicolas Finet <span>//</span> 19 meetings in 2 weeks <span>//</span> 12% reply rate <span>//</span> &lt;20 min/day</p>
-    <div style="margin-top:2.5em;">
-      <a href="#fast-signals" class="cta-btn primary">See the system in 60 seconds &darr;</a>
-    </div>
-    <p style="margin-top:1.5em; font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#555;">or <a href="#toc" style="color:var(--accent-light); text-decoration:none;">jump to the full playbook</a></p>
-  </div>
-</section>
-
-<!-- ===== FAST TRACK: SCREEN 2: SIGNAL FEED ===== -->
-<section class="dark-section" id="fast-signals" style="padding:clamp(48px,8vh,80px) 0;">
-  <div class="container">
-    <span class="section-label fade-up">This is what your pipeline looks like tomorrow</span>
-
-    <div class="signal-feed fade-up">
-      <div class="signal-feed-header">
-        <div class="live-dot"></div>
-        <div class="feed-title">Sortlist Signals // Live Feed</div>
-      </div>
-
-      <div class="sf-card">
-        <div class="sf-avatar green">SC</div>
-        <div class="sf-info">
-          <div class="sf-name">Sarah Chen</div>
-          <div class="sf-role">VP Marketing at DataCo (200 employees)</div>
-          <div class="sf-context">Just started new role. Reassessing vendor stack.</div>
-        </div>
-        <div class="sf-right">
-          <div class="sf-badge green">Job change</div>
-          <div class="sf-time">12 days ago</div>
-        </div>
-      </div>
-
-      <div class="sf-card">
-        <div class="sf-avatar orange">MD</div>
-        <div class="sf-info">
-          <div class="sf-name">Marc Dupont</div>
-          <div class="sf-role">CMO at Scaleway (450 employees)</div>
-          <div class="sf-context">Liked Apollo.io's post on "outbound best practices"</div>
-        </div>
-        <div class="sf-right">
-          <div class="sf-badge orange">Competitor</div>
-          <div class="sf-time">2 hours ago</div>
-        </div>
-      </div>
-
-      <div class="sf-card">
-        <div class="sf-avatar blue">LP</div>
-        <div class="sf-info">
-          <div class="sf-name">Lisa Park</div>
-          <div class="sf-role">Head of Growth at Rebase (120 employees)</div>
-          <div class="sf-context">Posted: "Our outbound isn't working. Anyone solved this at scale?"</div>
-        </div>
-        <div class="sf-right">
-          <div class="sf-badge blue">Topic</div>
-          <div class="sf-time">6 hours ago</div>
-        </div>
-      </div>
-
-      <div class="sf-card">
-        <div class="sf-avatar purple">JR</div>
-        <div class="sf-info">
-          <div class="sf-name">James Rivera</div>
-          <div class="sf-role">VP Sales at Koyeb (80 employees)</div>
-          <div class="sf-context">Company raised Series B, $18M. Hiring 12 roles.</div>
-        </div>
-        <div class="sf-right">
-          <div class="sf-badge purple">Funding</div>
-          <div class="sf-time">3 days ago</div>
-        </div>
-      </div>
-
-      <div class="sf-card">
-        <div class="sf-avatar red">AW</div>
-        <div class="sf-info">
-          <div class="sf-name">Anna Weber</div>
-          <div class="sf-role">Marketing Director at Teamleader (300 employees)</div>
-          <div class="sf-context">Liked your CEO's post about signal-based outbound</div>
-        </div>
-        <div class="sf-right">
-          <div class="sf-badge red">Your content</div>
-          <div class="sf-time">1 hour ago</div>
-        </div>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-meta">
+      <img src="nicolas.jpg" alt="Nicolas Finet" onerror="this.style.background='#ddd'">
+      <div class="author-info">
+        <div class="author-name"><a href="https://www.linkedin.com/in/nifinet" target="_blank" style="color:inherit;text-decoration:none">Nicolas Finet</a></div>
+        CEO @ Sortlist
       </div>
     </div>
 
-    <p class="fade-up" style="color:#BBB; text-align:center; margin-top:1.5em; font-size:1.05em;">
-      <strong style="color:#fff;">Sortlist Signals</strong> detects these 24/7. <strong style="color:#fff;">Claude</strong> writes the outreach. <strong style="color:#fff;">Overloop</strong> sends it.
-    </p>
+    <h1>We turned Claude into an SDR team that booked 19 meetings in 2 weeks.</h1>
+    <p>This is the full system. No fluff, no pitch. Just what we did, step by step, with the real screenshots.</p>
 
-    <div class="divider fade-up" style="background:rgba(255,255,255,0.05); margin:2.5em auto;"></div>
-
-    <p class="fade-up" style="color:#888; text-align:center; font-size:0.95em; margin-bottom:0.5em;">Next morning, you open your inbox:</p>
-    <img src="img/email-digest.png" alt="Daily email: 14 new leads while you slept" class="screenshot fade-up" style="max-width:660px; margin:0.5em auto; display:block;">
-    <div class="screenshot-label" style="color:#555;">14 new leads while you slept. Every morning. Automatic.</div>
-
-    <div style="text-align:center; margin-top:2em;" class="fade-up">
-      <a href="https://signals.sortlist.com" class="cta-btn outline" target="_blank">Start detecting signals</a>
+    <div class="header-stats">
+      <div class="stat"><strong>12%</strong> reply rate</div>
+      <div class="stat"><strong>19</strong> meetings / 2 weeks</div>
+      <div class="stat"><strong>&lt;20 min</strong> per day</div>
+      <div class="stat"><strong>$0</strong> ad spend</div>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ===== FAST TRACK: VIDEO WALKTHROUGH ===== -->
-<section style="padding:clamp(48px,8vh,80px) 0; background:var(--cream);">
-  <div class="container" style="text-align:center;">
-    <span class="section-label fade-up">See the full system in 69 seconds</span>
-    <div class="fade-up video-wrapper" style="margin:1.5em auto; max-width:900px; border-radius:16px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.12); border:1px solid var(--border); position:relative; cursor:pointer; background:#0A0A0A;">
-      <video
-        class="walkthrough-video"
-        src="walkthrough.mp4"
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        style="width:100%; display:block; cursor:pointer;"
-        ondblclick="if(this.requestFullscreen)this.requestFullscreen();else if(this.webkitRequestFullscreen)this.webkitRequestFullscreen();"
-      ></video>
-      <!-- Fullscreen button -->
-      <div class="video-fs-btn" onclick="var v=document.querySelector('.walkthrough-video');if(v.requestFullscreen)v.requestFullscreen();else if(v.webkitRequestFullscreen)v.webkitRequestFullscreen();" style="position:absolute; bottom:16px; right:16px; width:40px; height:40px; border-radius:8px; background:rgba(0,0,0,0.5); backdrop-filter:blur(4px); display:flex; align-items:center; justify-content:center; cursor:pointer; opacity:0; transition:opacity 0.2s; border:1px solid rgba(255,255,255,0.1);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
-      </div>
-      <!-- Play overlay -->
-      <div class="video-play-overlay" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,0.3); transition:opacity 0.4s ease;">
-        <div style="width:80px; height:80px; border-radius:50%; background:rgba(255,255,255,0.15); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.2); transition:transform 0.2s ease;">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="white"><polygon points="8,5 20,12 8,19"/></svg>
-        </div>
-      </div>
-    </div>
-    <p style="font-size:0.85em; color:var(--text-muted); margin-top:0.5em;">Setup signals, configure ICP, receive leads, launch outbound with Claude + Overloop</p>
-  </div>
-</section>
+  <!-- CONTENT -->
+  <div class="content">
 
-<!-- ===== FAST TRACK: SCREEN 3: ONE COMMAND ===== -->
-<section style="padding:clamp(48px,8vh,80px) 0; background:var(--cream);">
-  <div style="border-top:1px solid var(--border);"></div>
-  <div class="container">
-    <span class="section-label fade-up">From zero to full pipeline in 30 seconds</span>
+    <!-- THE PROBLEM -->
+    <h2>Cold outbound is broken. Here's why.</h2>
 
-    <div class="cc fade-up" style="max-width:700px;">
-      <div class="cc-header">
-        <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-        <div class="cc-meta">
-          <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
-          <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span>
-        </div>
-      </div>
-      <div class="cc-body">
-        <div class="cc-prompt">
-          <span class="chevron">&rsaquo;</span>
-          <span class="input">/signals acme-agency https://acme.com</span>
-        </div>
-        <div class="cc-response">
-<span class="agent-tag">Research</span> 6 competitors found. ICP extracted.<br>
-<span class="agent-tag">Strategy</span> 7 subscriptions designed. 120-200 signals/month.<br>
-<span class="agent-tag">Executor</span> All subscriptions created via Signals CLI.<br>
-<br>
-<span class="success">&#10003; Done.</span> Leads start flowing within 24h.
-        </div>
-        <div class="cc-prompt">
-          <span class="chevron">&rsaquo;</span>
-          <span class="cursor"></span>
-        </div>
-      </div>
+    <p>97 out of 100 people ignore cold outreach. Not because your product sucks. Because your timing does.</p>
+
+    <p>Traditional outbound: buy a list, blast emails, hope someone replies. <strong>3% reply rate if you're lucky.</strong></p>
+
+    <p>We flipped it. We stopped contacting people. We started listening first.</p>
+
+    <div class="callout">
+      <strong>The idea:</strong> Claude monitors LinkedIn 24/7 for buying signals. When someone shows intent, Claude writes a message based on what they actually did. When they don't show a signal, they hear nothing.
     </div>
 
-    <p class="fade-up" style="text-align:center; margin-top:1.5em; color:var(--text-secondary); font-size:1.05em;">
-      That's it. One command. 27 agents do the rest.
-    </p>
+    <!-- THE 5 SIGNALS -->
+    <h2>The 5 buying signals we monitor</h2>
 
-    <div style="text-align:center; margin-top:1.5em;" class="fade-up">
-      <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial</a>
-    </div>
-  </div>
-</section>
+    <p>These are the signals that actually predict who's ready to buy. Not lookalike scores. Not firmographic filters. Real behavior.</p>
 
-<!-- ===== THE DOOR ===== -->
-<div class="the-door" id="door">
-  <h3>That was the 5-minute version.</h3>
-  <p>Below: the full 9-part playbook. Every signal type explained, 6 copy-paste workflows,<br>the 4-week plan, CLI commands, and the engine room.</p>
-  <a href="#toc" class="door-link">Read the full playbook &darr;</a>
-</div>
-
-<!-- ===== TABLE OF CONTENTS ===== -->
-<section class="toc-section" id="toc">
-  <div class="container">
-    <span class="section-label">What's inside</span>
-    <div class="toc-grid">
-      <a href="#broken" class="toc-item">
-        <span class="toc-num">01</span>
-        <span class="toc-text">
-          <span class="toc-title">Why cold outbound is broken</span>
-          <span class="toc-desc">The timing problem nobody talks about</span>
-        </span>
-      </a>
-      <a href="#signals" class="toc-item">
-        <span class="toc-num">02</span>
-        <span class="toc-text">
-          <span class="toc-title">The 5 buying signals</span>
-          <span class="toc-desc">Job changes, competitors, topics, funding, engagement</span>
-        </span>
-      </a>
-      <a href="#agents" class="toc-item">
-        <span class="toc-num">03</span>
-        <span class="toc-text">
-          <span class="toc-title">Building your Claude agent swarm</span>
-          <span class="toc-desc">3-layer architecture + step-by-step setup</span>
-        </span>
-      </a>
-      <a href="#sequence" class="toc-item">
-        <span class="toc-num">04</span>
-        <span class="toc-text">
-          <span class="toc-title">The 3-step message sequence</span>
-          <span class="toc-desc">Signal-triggered fast: 3 touches, 7 days</span>
-        </span>
-      </a>
-      <a href="#workflows" class="toc-item">
-        <span class="toc-num">05</span>
-        <span class="toc-text">
-          <span class="toc-title">6 workflows you can copy-paste</span>
-          <span class="toc-desc">From signal to meeting, fully automated</span>
-        </span>
-      </a>
-      <a href="#plan" class="toc-item">
-        <span class="toc-num">06</span>
-        <span class="toc-text">
-          <span class="toc-title">The 4-week implementation plan</span>
-          <span class="toc-desc">From zero to 10+ qualified calls/week</span>
-        </span>
-      </a>
-      <a href="#stack" class="toc-item">
-        <span class="toc-num">07</span>
-        <span class="toc-text">
-          <span class="toc-title">Connecting to your stack</span>
-          <span class="toc-desc">CRM, Slack, Notion dashboard</span>
-        </span>
-      </a>
-      <a href="#numbers" class="toc-item">
-        <span class="toc-num">08</span>
-        <span class="toc-text">
-          <span class="toc-title">Realistic numbers</span>
-          <span class="toc-desc">No inflated promises. Real benchmarks.</span>
-        </span>
-      </a>
-      <a href="#engine" class="toc-item" style="grid-column: 1 / -1; border-right:none; padding-left:0; padding-right:0;">
-        <span class="toc-num">09</span>
-        <span class="toc-text">
-          <span class="toc-title">The Engine Room</span>
-          <span class="toc-desc">Advanced // CLI terminals, full stack, one-command orchestration</span>
-        </span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PART 1: WHY COLD OUTBOUND IS BROKEN ===== -->
-<section id="broken">
-  <div class="container">
-    <p class="fade-up" style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--text-muted); text-align:center; margin-bottom:2.5em; letter-spacing:0.03em;">Join 500+ growth teams using Sortlist Signals to detect buying intent.</p>
-    <span class="section-label fade-up">Part 01 // The Problem</span>
-    <h2 class="fade-up">Why cold outbound is broken</h2>
-
-    <p class="fade-up">The average cold outreach reply rate is 3%.</p>
-
-    <p class="fade-up">That means for every 100 messages you send, 97 people ignore you. Not because your copy is bad. Because you're reaching out to people who have zero reason to care about you right now.</p>
-
-    <div class="card fade-up">
-      <div class="card-label">Traditional Outbound</div>
-      <p>Build a list based on job titles and company size. Write a "personalized" message with &#123;&#123;first_name&#125;&#125; and &#123;&#123;company&#125;&#125;. Blast 500 people. Hope someone replies.</p>
-      <p><strong>The fundamental flaw: there's no timing.</strong></p>
+    <div class="signal-card">
+      <h4><span class="signal-number">1</span> Job changes into decision-making roles</h4>
+      <p>New CMO? New VP Marketing? They reassess every vendor in the first 90 days. That's the window. This is our highest-converting signal.</p>
     </div>
 
-    <p class="fade-up">You're contacting a VP Marketing who's been in their role for 3 years, has their vendors locked in, and gets 47 cold messages a week. Why would they reply?</p>
-
-    <div class="divider"></div>
-
-    <p class="fade-up">Now imagine this instead:</p>
-
-    <p class="fade-up">That same VP Marketing just changed jobs 2 weeks ago. They're reassessing every vendor relationship. They just commented on a LinkedIn post about exactly the problem you solve. And your message references that specific post.</p>
-
-    <div class="callout fade-up">
-      <strong>Same person. Different timing. Completely different conversation.</strong><br>
-      That's signal-based outbound. Claude is the brain. Sortlist Signals is what makes it possible.
+    <div class="signal-card">
+      <h4><span class="signal-number">2</span> Competitor engagement</h4>
+      <p>Someone likes your competitor's post? They care about the topic. They just don't know you yet. These people are actively evaluating.</p>
     </div>
 
-    <div class="divider"></div>
-
-    <!-- Cost comparison -->
-    <h3 class="fade-up">The traditional stack vs. one integrated system</h3>
-    <p class="fade-up">Most teams duct-tape 4-5 tools together. Each one adds cost, complexity, and failure points.</p>
-
-    <div class="card fade-up">
-      <table class="cost-table">
-        <thead>
-          <tr><th>Tool</th><th>What it does</th><th>Cost/month</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="old">Sales Navigator</td><td class="old">Find prospects</td><td class="old">$99</td></tr>
-          <tr><td class="old">Apollo / ZoomInfo</td><td class="old">Get emails</td><td class="old">$99-249</td></tr>
-          <tr><td class="old">Clay</td><td class="old">Enrich data</td><td class="old">$149</td></tr>
-          <tr><td class="old">PhantomBuster</td><td class="old">Scrape LinkedIn</td><td class="old">$69</td></tr>
-          <tr><td class="old">Bombora / 6sense</td><td class="old">Intent data</td><td class="old">$2,500+</td></tr>
-          <tr style="border-top:2px solid var(--border);"><td colspan="2"><strong>Total traditional stack</strong></td><td><strong>$500-3,000+/mo</strong></td></tr>
-        </tbody>
-      </table>
+    <div class="signal-card">
+      <h4><span class="signal-number">3</span> Topic conversations</h4>
+      <p>People literally post about the problem you solve. Every day. Nobody reaches out to them. We do.</p>
     </div>
 
-    <div class="card fade-up" style="border-left-color:var(--accent);">
-      <div class="card-label">The replacement</div>
-      <table class="cost-table">
-        <tbody>
-          <tr><td><strong>Sortlist Signals</strong></td><td>5 buying signals, real-time LinkedIn intent, ICP matching</td><td class="new">From €59/mo</td></tr>
-          <tr><td><strong>Overloop</strong></td><td>Email + LinkedIn campaigns, AI personalization, 450M+ contacts</td><td class="new">From €79/mo</td></tr>
-          <tr><td><strong>Native connection</strong></td><td>Signals auto-push to Overloop, Overloop auto-push to CRM</td><td class="new">Included</td></tr>
-          <tr><td><strong>Claude</strong></td><td>Writes every message from scratch, orchestrates agents</td><td class="new">From €20/mo</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:0.85em; color:var(--text-muted); margin-bottom:0;">One integrated stack. No duct tape. Real intent data instead of cold lists.</p>
+    <div class="signal-card">
+      <h4><span class="signal-number">4</span> Funding announcements</h4>
+      <p>Fresh capital = active budget. These companies are buying. The window is 2-4 weeks after the announcement.</p>
     </div>
 
-    <div class="cta-banner fade-up">
-      <p><strong>The shortcut:</strong> Skip the 4-tool stack. Start with the system that has signals, contacts, and outbound built in.</p>
-      <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PART 2: THE 5 BUYING SIGNALS ===== -->
-<section class="dark-section" id="signals">
-  <div class="container">
-    <span class="section-label fade-up">Part 02 // Detection</span>
-    <h2 class="fade-up">The 5 buying signals</h2>
-    <p class="fade-up">Sortlist Signals monitors LinkedIn 24/7 for 5 types of buying signals. Not all are equal. Here's what each one detects and why it converts.</p>
-
-    <img src="img/signal-types.png" alt="Sortlist Signals. 8 signal types available" class="screenshot fade-up">
-    <div class="screenshot-label">All signal types available in Sortlist Signals</div>
-
-    <!-- Signal 1 -->
-    <div class="dark-card fade-up" style="position:relative;">
-      <div class="signal-header">
-        <div class="signal-icon high">&#128100;</div>
-        <div>
-          <div class="card-label">Signal 01</div>
-          <h3>Job Changes</h3>
-        </div>
-      </div>
-      <p>People who recently moved into decision-making roles (CMO, VP Sales, Head of Growth, CTO...). New executives reassess every vendor, tool, and agency relationship in their <strong>first 90 days</strong>. They have both the mandate and the budget to make changes.</p>
-      <div class="signal-meta">
-        <div class="signal-meta-item">Volume: <span>Low</span></div>
-        <div class="signal-meta-item">Conversion: <span>Very High</span></div>
-        <div class="signal-meta-item">Best for: <span>High-ticket B2B</span></div>
-      </div>
+    <div class="signal-card">
+      <h4><span class="signal-number">5</span> Profile and content engagement</h4>
+      <p>Who's already interacting with your content? That's your warmest lead hiding in plain sight.</p>
     </div>
 
-    <img src="img/config-jobs.png" alt="Configure job change signal tracking" class="screenshot fade-up">
-    <div class="screenshot-label">Configuring job change monitoring in Sortlist Signals</div>
-
-    <!-- Signal 2 -->
-    <div class="dark-card fade-up" style="position:relative;">
-      <div class="signal-header">
-        <div class="signal-icon high">&#128065;</div>
-        <div>
-          <div class="card-label">Signal 02</div>
-          <h3>Competitor Content Engagement</h3>
-        </div>
-      </div>
-      <p>People who like, comment, or interact with your competitors' LinkedIn posts. If someone engages with a competitor's content, <strong>they care about the topic</strong>. They're in-market. They just don't know about you yet.</p>
-      <div class="signal-meta">
-        <div class="signal-meta-item">Volume: <span>Medium</span></div>
-        <div class="signal-meta-item">Conversion: <span>High</span></div>
-        <div class="signal-meta-item">Best for: <span>Competitive markets</span></div>
-      </div>
+    <div class="screenshot">
+      <img src="img/signal-types.png" alt="Signal types configured in the platform">
+      <div class="screenshot-caption">The 5 signal types we monitor, configured and running</div>
     </div>
 
-    <img src="img/config-company.png" alt="Track competitor LinkedIn company engagement" class="screenshot fade-up">
-    <div class="screenshot-label">Setting up competitor tracking. LinkedIn URL, engagement type, daily limit</div>
+    <!-- HOW IT WORKS -->
+    <h2>How Claude monitors these signals</h2>
 
-    <!-- Signal 3 -->
-    <div class="dark-card fade-up" style="position:relative;">
-      <div class="signal-header">
-        <div class="signal-icon medium">&#128172;</div>
-        <div>
-          <div class="card-label">Signal 03</div>
-          <h3>Topic Conversations</h3>
-        </div>
-      </div>
-      <p>People posting or commenting about specific topics on LinkedIn. The highest volume signal. People literally announce their problems in public: "Looking for a new CRM." "Struggling with our outbound." Every day. <strong>Nobody reaches out.</strong></p>
+    <p>We use <a href="https://signals.sortlist.com" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Sortlist Signals</a> to detect intent signals across LinkedIn. Claude sits on top and processes everything. Here's the actual setup.</p>
 
-      <p style="margin-top:1em; margin-bottom:0.5em;"><strong>Keyword craft is everything.</strong></p>
-      <div class="keyword-grid">
-        <span class="keyword good">"looking for agency"</span>
-        <span class="keyword good">"need help with SEO"</span>
-        <span class="keyword good">"outbound not working"</span>
-        <span class="keyword good">"pipeline is empty"</span>
-        <span class="keyword good">"alternative to [competitor]"</span>
-        <span class="keyword bad">"marketing"</span>
-        <span class="keyword bad">"sales"</span>
-        <span class="keyword bad">"B2B"</span>
-        <span class="keyword bad">"growth"</span>
-      </div>
-
-      <div class="signal-meta">
-        <div class="signal-meta-item">Volume: <span>Very High</span></div>
-        <div class="signal-meta-item">Conversion: <span>Variable</span></div>
-        <div class="signal-meta-item">Best for: <span>Pain detection</span></div>
-      </div>
-    </div>
-
-    <img src="img/config-topic.png" alt="Track LinkedIn topic conversations by keyword" class="screenshot fade-up">
-    <div class="screenshot-label">Keyword configuration with time window and daily lead limit</div>
-
-    <!-- Signal 4 -->
-    <div class="dark-card fade-up" style="position:relative;">
-      <div class="signal-header">
-        <div class="signal-icon medium">&#128176;</div>
-        <div>
-          <div class="card-label">Signal 04</div>
-          <h3>Funding Announcements</h3>
-        </div>
-      </div>
-      <p>Companies that recently announced funding rounds, matched with decision-makers who fit your ICP. <strong>Fresh capital = active budget.</strong> Funded companies invest in marketing, hiring, tools, and scaling. They need partners and vendors.</p>
-      <div class="signal-meta">
-        <div class="signal-meta-item">Volume: <span>Low</span></div>
-        <div class="signal-meta-item">Conversion: <span>High</span></div>
-        <div class="signal-meta-item">Best for: <span>SaaS, tools, services</span></div>
-      </div>
-    </div>
-
-    <!-- Signal 5 -->
-    <div class="dark-card fade-up" style="position:relative;">
-      <div class="signal-header">
-        <div class="signal-icon high">&#128293;</div>
-        <div>
-          <div class="card-label">Signal 05</div>
-          <h3>Profile &amp; Page Engagement</h3>
-        </div>
-      </div>
-      <p>People who engage with YOUR LinkedIn content. These people already know you exist. They've shown interest by engaging. <strong>This is the warmest signal hiding in plain sight</strong>, and most companies do nothing with it.</p>
-      <div class="signal-meta">
-        <div class="signal-meta-item">Volume: <span>Medium</span></div>
-        <div class="signal-meta-item">Conversion: <span>High</span></div>
-        <div class="signal-meta-item">Best for: <span>Content-led companies</span></div>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <!-- Signal Matrix -->
-    <h3 class="fade-up">Signal Strength Matrix</h3>
-    <div class="matrix fade-up">
-      <table>
-        <thead>
-          <tr><th>Signal</th><th>Volume</th><th>Conversion</th><th>Best For</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Job Changes</td><td><span class="pill low">Low</span></td><td><span class="pill very-high">Very High</span></td><td>High-ticket B2B, agency services</td></tr>
-          <tr><td>Competitor Engagement</td><td><span class="pill medium">Medium</span></td><td><span class="pill high">High</span></td><td>Competitive markets</td></tr>
-          <tr><td>Topic Conversations</td><td><span class="pill very-high">Very High</span></td><td><span class="pill medium">Variable</span></td><td>Broad awareness, pain detection</td></tr>
-          <tr><td>Funding</td><td><span class="pill low">Low</span></td><td><span class="pill high">High</span></td><td>SaaS, tools, services</td></tr>
-          <tr><td>Page Engagement</td><td><span class="pill medium">Medium</span></td><td><span class="pill high">High</span></td><td>Content-led, personal brands</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="callout fade-up">
-      Start with <strong>Job Changes + Competitor Engagement + Topic Conversations</strong>. Add the others once you've validated your ICP and keywords.
-    </div>
-
-    <div class="cta-banner fade-up">
-      <p>All 5 signal types are available in <strong>Sortlist Signals</strong>. Configure your radars in minutes.</p>
-      <a href="https://signals.sortlist.com" class="cta-btn outline" target="_blank">Configure your signals</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PART 3: CLAUDE AGENT SWARM ===== -->
-<section id="agents">
-  <div class="container">
-    <span class="section-label fade-up">Part 03 // Architecture</span>
-    <h2 class="fade-up">Building your Claude agent swarm</h2>
-
-    <img src="img/dashboard.png" alt="Sortlist Signals Dashboard" class="screenshot fade-up">
-    <div class="screenshot-label">The Sortlist Signals dashboard. 392 leads, 12 active signals</div>
-
-    <h3 class="fade-up">What you need</h3>
-    <div class="card fade-up">
-      <ul style="list-style:none; padding:0;">
-        <li style="padding:0.3em 0; color:var(--text-secondary);"><strong>Sortlist Signals</strong>. Detects buying signals (free trial at <a href="https://signals.sortlist.com" target="_blank" style="color:var(--accent);">signals.sortlist.com</a>)</li>
-        <li style="padding:0.3em 0; color:var(--text-secondary);"><strong>Overloop</strong>. Runs LinkedIn + Email campaigns from those signals (<a href="https://overloop.com" target="_blank" style="color:var(--accent);">overloop.com</a>)</li>
-        <li style="padding:0.3em 0; color:var(--text-secondary);"><strong>Claude Pro</strong> or Team. Writes every message (from €20/mo)</li>
-        <li style="padding:0.3em 0; color:var(--text-secondary);">A LinkedIn account + 30 minutes for setup</li>
-      </ul>
-    </div>
-
-    <h3 class="fade-up">The 3-layer architecture</h3>
-
-    <div class="flow-block fade-up">
-      <span class="highlight">Layer 1: DETECTION</span> <span class="dim">//</span> Sortlist Signals<br>
-      Monitors LinkedIn 24/7 for buying signals.<br>
-      Matches leads against your ICP. Scores intent.<br>
-      <span class="dim">signals.sortlist.com</span><br>
-      <br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">|</span> <span style="color:#E8A858;">auto-push signal leads</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">v</span><br>
-      <br>
-      <span class="highlight">Layer 2: CAMPAIGNS</span> <span class="dim">//</span> Overloop<br>
-      Receives signals. Claude writes a unique message per lead.<br>
-      Launches LinkedIn + Email sequences automatically.<br>
-      450M+ contact DB. 10-year safety algorithm. Always-on.<br>
-      <span class="dim">overloop.com</span><br>
-      <br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">|</span> <span style="color:#7DD17D;">prospect replies</span><br>
-      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dim">v</span><br>
-      <br>
-      <span class="highlight">Layer 3: PIPELINE</span> <span class="dim">//</span> Your CRM<br>
-      Deal created automatically. Tagged "signal-sourced".<br>
-      Full context: signal type, messages sent, reply history.<br>
-      <span class="dim">HubSpot / Pipedrive / Salesforce</span>
-    </div>
-
-    <div class="callout fade-up">
-      <strong>The key:</strong> Signals and Overloop are natively connected. When a signal fires, the outreach starts. No CSV export, no Zapier, no manual step between detection and action.
-    </div>
-
-    <img src="img/add-to-overloop.png" alt="Push signal lead to Overloop campaign" class="screenshot fade-up">
-    <div class="screenshot-label">One click: push a signal lead directly into an Overloop campaign</div>
-
-    <div class="divider"></div>
-
-    <h3 class="fade-up">Configure your radars on Sortlist Signals</h3>
-
-    <!-- Step 1 -->
-    <div class="card fade-up">
-      <span class="step-number">Step 01</span>
+    <div class="step" data-step="1">
       <h3>Define your ICP</h3>
-      <p>Your ICP config tells the system which signals matter and which are noise.</p>
-      <div class="flow-block" style="margin-bottom:0;">
-        <span class="highlight">Target titles:</span> CMO, VP Marketing, Head of Growth, Marketing Director<br>
-        <span class="highlight">Industries:</span> Software, SaaS, Professional Services<br>
-        <span class="highlight">Company sizes:</span> 51-200, 201-500, 501-1000<br>
-        <span class="highlight">Locations:</span> United States, United Kingdom, France, Germany
+      <p>Tell Claude who you're looking for: role, company size, industry, geo. Claude uses this to filter noise and only surface relevant signals.</p>
+    </div>
+
+    <div class="screenshot">
+      <img src="img/icp-config.png" alt="ICP configuration screen">
+      <div class="screenshot-caption">Our ICP configuration: VP/CMO, 50-500 employees, SaaS, Europe</div>
+    </div>
+
+    <div class="step" data-step="2">
+      <h3>Configure your signals</h3>
+      <p>Pick which signals to monitor. We run all 5, but you can start with just job changes and competitor engagement. Those two alone drove 60% of our meetings.</p>
+    </div>
+
+    <div class="screenshot">
+      <img src="img/config-jobs.png" alt="Job change signal configuration">
+      <div class="screenshot-caption">Job change monitoring: tracking CMO, VP Marketing, Head of Growth appointments</div>
+    </div>
+
+    <div class="step" data-step="3">
+      <h3>Claude detects and qualifies</h3>
+      <p>Every day, Claude scans for new signals matching your ICP. No manual work. You get a feed of qualified leads with the signal that triggered them.</p>
+    </div>
+
+    <div class="screenshot">
+      <img src="img/leads-table.png" alt="Leads table with signals">
+      <div class="screenshot-caption">Our daily feed: 10-20 qualified signals per day, each with context</div>
+    </div>
+
+    <div class="step" data-step="4">
+      <h3>Review and push to outreach</h3>
+      <p>Quick scan of the daily leads. Takes 10 minutes. Approve the good ones, they go straight into your outreach sequence.</p>
+    </div>
+
+    <div class="screenshot">
+      <img src="img/lead-detail.png" alt="Lead detail with signal context">
+      <div class="screenshot-caption">Each lead comes with full signal context: what they did, when, and why it matters</div>
+    </div>
+
+    <!-- THE CLAUDE PROMPT -->
+    <h2>The exact Claude prompt we use</h2>
+
+    <p>This is the engine. We don't write messages. We don't use templates. We feed <a href="https://claude.ai" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Claude</a> the signal and it figures out the angle. <strong>The key: Claude never mentions the signal directly.</strong> It uses the signal to understand what the person cares about right now, then starts a conversation about that problem.</p>
+
+    <p>Copy this. Paste it into <a href="https://claude.ai" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Claude</a>. Replace the [bracketed parts] with your business.</p>
+
+    <div class="prompt-block">
+      <div class="prompt-header">
+        <span>Claude Prompt - Copy & Paste</span>
+        <button onclick="copyPrompt()" class="copy-btn" id="copyBtn">Copy</button>
       </div>
+      <pre class="prompt-content" id="promptContent">You are writing outbound messages for me. I'll give you a buying signal about a prospect. Your job is to turn that signal into a natural, human conversation starter.
+
+MY COMPANY (replace with yours):
+- Company: Sortlist
+- What we sell: We match companies with the right marketing agencies in 2 weeks instead of 3 months
+- Who we sell to: CMOs, VPs Marketing, Heads of Growth at companies with 50-500 employees
+- One proof point: Helped a Series B fintech go from 0 to 3 vetted agency proposals in 11 days
+
+THE PROSPECT:
+- Name: {{name}}
+- Role: {{role}}
+- Company: {{company}}
+
+THE SIGNAL:
+- Type: {{signal_type}} (job_change / competitor_engagement / topic_conversation / funding / content_engagement)
+- Detail: {{signal_detail}}
+- Date: {{signal_date}}
+
+CRITICAL RULES:
+
+1. NEVER reference the signal directly. Don't say "I saw your post", "I noticed you liked", "Congrats on the new role", "I saw you raised". The prospect should not feel watched.
+
+2. Instead, USE the signal to identify what problem they likely have RIGHT NOW, then open with that problem. The signal is your intel, not your opener.
+
+3. The message should feel like it comes from someone who lives in the same world and genuinely understands their current situation — not someone who scraped their LinkedIn.
+
+4. ANGLE STRATEGY by signal type:
+   - Job change → Talk about the challenge that comes with the new role. Don't mention the move.
+   - Competitor engagement → Talk about the topic they engaged with. Don't mention the competitor or the post.
+   - Topic conversation → Respond to the idea, add a contrarian or complementary take. Don't say "I saw your post."
+   - Funding → Talk about the scaling challenge that follows growth. Don't mention the round.
+   - Content engagement → Talk about the theme of the content. Don't mention the like/comment.
+
+5. Tone: short, direct, zero fluff. Like a text from a smart friend who works in the same industry. No "Hope you're well." No "I'd love to." No "I wanted to reach out."
+
+6. Max 60 words for Message 1. Max 40 words for Messages 2 and 3.
+
+7. End Message 1 with a genuine question, not a meeting request. The goal is a reply, not a booking.
+
+8. Include ONE specific proof point (company name or metric) — but weave it in naturally, don't list it.
+
+WRITE A 3-TOUCH CROSS-CHANNEL SEQUENCE:
+
+Touch 1 — LinkedIn connection request + note (Day 0):
+- Problem-led opener based on the signal intel. Ask a question.
+- Must fit in 300 characters (LinkedIn limit for connection notes).
+
+Touch 2 — Email (Day 2):
+- Share something useful (a number, a benchmark, a take). No "following up."
+- Max 60 words. Reference the same theme as Touch 1 but don't repeat yourself.
+- Subject line: max 5 words, no clickbait, no caps.
+
+Touch 3 — LinkedIn message (Day 5):
+- Only if they accepted the connection. One sentence. Give them an easy out.
+- Max 30 words. Conversational, like a DM to a peer.</pre>
     </div>
 
-    <img src="img/icp-ai.png" alt="AI generates your ICP automatically" class="screenshot fade-up">
-    <div class="screenshot-label">AI analyzes your website and builds your ICP automatically</div>
-    <img src="img/icp-config.png" alt="ICP configuration" class="screenshot fade-up">
-    <div class="screenshot-label">The resulting ICP: job titles, locations, keywords, industries, company sizes</div>
-
-    <!-- Step 2 -->
-    <div class="card fade-up">
-      <span class="step-number">Step 02</span>
-      <h3>Map your competitive landscape</h3>
-      <p>List 5-8 competitors whose audiences overlap with yours. For each one, grab their LinkedIn company page URL and key executives' profile URLs.</p>
+    <div class="callout">
+      <strong>How to use this:</strong> For each lead from <a href="https://signals.sortlist.com" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Signals</a>, paste the signal data into the {{fields}}. Claude generates 3 unique messages in under 10 seconds. Every message is different because every signal is different.
     </div>
 
-    <!-- Step 3 -->
-    <div class="card fade-up">
-      <span class="step-number">Step 03</span>
-      <h3>Craft your keywords</h3>
-      <p>This is the most important step. Bad keywords = bad signals = wasted outreach.</p>
-      <table style="font-size:0.85em;">
-        <thead>
-          <tr><th>Category</th><th>Example Keywords</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Pain points</td><td>"struggling with outbound", "pipeline is empty"</td></tr>
-          <tr><td>Buying intent</td><td>"looking for agency", "recommend a tool for"</td></tr>
-          <tr><td>Competitor</td><td>"alternative to [X]", "vs [competitor]"</td></tr>
-          <tr><td>Trend</td><td>"AI for [your domain]", "[service] in 2026"</td></tr>
-        </tbody>
-      </table>
+    <!-- WHAT THE OUTPUT LOOKS LIKE -->
+    <h2>What the output looks like</h2>
+
+    <p>Same prompt, different signals, completely different messages. This is how we use it at Sortlist to sell agency matching. Notice: <strong>none of them mention the signal.</strong></p>
+
+    <h3>Signal: New CMO just joined a Series B SaaS company (job change)</h3>
+
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touch 1 — LinkedIn connection note (Day 0)</div>
+      <p>Inheriting an agency roster you didn't pick is the worst. Most CMOs I talk to want to audit it but don't have 3 months for an RFP. Curious how you're handling that.</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Touch 2 — Email (Day 2)</div>
+      <p><em>Subject: agency audit</em></p>
+      <p>A fintech CMO we worked with went from "I need a new performance agency" to 3 vetted proposals on her desk in 11 days. No RFP, no pitch decks to sit through. If you're rethinking your agency stack, might be worth a look.</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touch 3 — LinkedIn DM (Day 5)</div>
+      <p>If the current agency setup works, ignore me. If not, happy to show you how we shortcut the search.</p>
     </div>
 
-    <img src="img/config-topic.png" alt="Keyword tracking configuration" class="screenshot fade-up">
-    <div class="screenshot-label">Keyword tracking with time window and daily lead limits</div>
+    <h3>Signal: Liked a post from a Sortlist competitor about agency selection (competitor engagement)</h3>
 
-    <!-- Step 4 -->
-    <div class="card fade-up">
-      <span class="step-number">Step 04</span>
-      <h3>Configure your subscriptions</h3>
-      <table style="font-size:0.85em;">
-        <thead>
-          <tr><th>Priority</th><th>Signal</th><th>Config</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><span class="pill very-high">P1</span></td><td>Job Changes</td><td>ICP filter, weekly scan</td></tr>
-          <tr><td><span class="pill very-high">P1</span></td><td>Competitor Engagement</td><td>3-5 competitor URLs</td></tr>
-          <tr><td><span class="pill very-high">P1</span></td><td>Topic Monitoring</td><td>3-5 keyword groups</td></tr>
-          <tr><td><span class="pill high">P2</span></td><td>Funding</td><td>ICP filter only</td></tr>
-          <tr><td><span class="pill high">P2</span></td><td>Your Engagement</td><td>Company page + CEO profile</td></tr>
-        </tbody>
-      </table>
-      <p style="margin-top:1em; font-size:0.9em; color:var(--text-muted);">Total: 7-9 active subscriptions covering all angles.</p>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touch 1 — LinkedIn connection note (Day 0)</div>
+      <p>Finding the right agency is still broken. Ask your network, get 3 random names. Run an RFP, drown in responses. Have you found a way around that?</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Touch 2 — Email (Day 2)</div>
+      <p><em>Subject: agency shortlisting</em></p>
+      <p>Interesting pattern we see: companies that shortlist agencies based on actual project fit (not brand name) end up 2x more satisfied 6 months in. We measured this across 800+ matches last year. Happy to share the data if useful.</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touch 3 — LinkedIn DM (Day 5)</div>
+      <p>Last note. If agency selection isn't a headache for you, all good.</p>
     </div>
 
-    <!-- Step 5 -->
-    <div class="card fade-up">
-      <span class="step-number">Step 05</span>
-      <h3>Let it run</h3>
-      <p>Sortlist Signals starts delivering leads within 24 hours. Each signal includes the person's name, title, company, which signal triggered, their LinkedIn URL, and ICP match score.</p>
+    <h3>Signal: Posted about needing to scale content production (topic conversation)</h3>
+
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touch 1 — LinkedIn connection note (Day 0)</div>
+      <p>Scaling content looks like a hiring problem but it's usually a partner problem. Teams that move fast bring in a specialized agency for 3-6 months instead. Something you've considered?</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Touch 2 — Email (Day 2)</div>
+      <p><em>Subject: content scaling</em></p>
+      <p>A B2B SaaS at your stage went from 2 blog posts/month to 12 in 6 weeks by pairing with a niche content agency we matched them with. No new hires, no 6-month ramp-up. If content is the bottleneck right now, this might be relevant.</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touch 3 — LinkedIn DM (Day 5)</div>
+      <p>If you've already found your setup, ignore this. If not, I can share how others solved it.</p>
     </div>
 
-    <img src="img/leads-table.png" alt="Leads table with scores and contact info" class="screenshot fade-up">
-    <div class="screenshot-label">392 leads with ICP scores, job titles, companies, emails, LinkedIn profiles</div>
+    <!-- WE USE OVERLOOP -->
+    <h2>How we send these across channels</h2>
 
-    <div class="cta-banner fade-up">
-      <p>Steps 1-5 take 30 minutes in Sortlist Signals. First leads arrive tomorrow.</p>
-      <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial</a>
-    </div>
-  </div>
-</section>
+    <p>This is where <a href="https://overloop.com" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Overloop</a> comes in. One sequence, multiple channels. Overloop handles the orchestration: LinkedIn connection request on Day 0, email on Day 2, LinkedIn DM on Day 5. All automated, all personalized by Claude.</p>
 
-<!-- ===== PART 4: THE 3-STEP MESSAGE SEQUENCE ===== -->
-<section class="dark-section" id="sequence">
-  <div class="container">
-    <span class="section-label fade-up">Part 04 // Personalization</span>
-    <h2 class="fade-up">The 3-step message sequence</h2>
-
-    <p class="fade-up">Signal-based outreach is different. The prospect already showed intent. You don't need to create awareness. You need to convert it. Shorter, faster, more relevant.</p>
-
-    <h3 class="fade-up">The Pattern: Signal-Triggered Fast (7 days)</h3>
-
-    <table class="fade-up">
-      <thead>
-        <tr><th>Day</th><th>Channel</th><th>Action</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Day 0</td><td>Email</td><td>Signal-based first touch</td></tr>
-        <tr><td>Day 2</td><td>LinkedIn</td><td>Connection request with note</td></tr>
-        <tr><td>Day 5</td><td>Email</td><td>Follow-up with additional value</td></tr>
-        <tr><td>Day 7</td><td>Internal</td><td>Notification if no reply</td></tr>
-      </tbody>
-    </table>
-
-    <p class="fade-up" style="font-family:'JetBrains Mono',monospace; font-size:0.75em; color:#666;">3 touches // 7 days // 2 channels</p>
-
-    <div class="divider"></div>
-
-    <h3 class="fade-up">How Claude writes each message</h3>
-    <p class="fade-up">Claude doesn't use templates. For each prospect, it reads their LinkedIn profile, the signal that triggered outreach, their company's website, and your value proposition. Then it writes a message from scratch.</p>
-
-    <!-- Example 1: Job Change -->
-    <p class="fade-up" style="margin-top:2em;"><strong>Example: Job Change Signal</strong></p>
-    <p class="fade-up" style="font-size:0.9em; color:#888;">Sarah just became VP Marketing at a 200-person SaaS company 2 weeks ago.</p>
-
-    <div class="dark-card fade-up" style="position:relative; background:rgba(255,255,255,0.06); font-size:0.9em;">
-      <div style="font-weight:500; color:#fff; padding-bottom:0.6em; margin-bottom:0.6em; border-bottom:1px solid rgba(255,255,255,0.06);">
-        Subject: Congrats on the VP Marketing role at [Company]
-      </div>
-      <div style="color:#BBB; line-height:1.8;">
-        <p>Sarah,</p>
-        <p>Saw you just moved to [Company]. Congrats. The first 90 days in a new role are when most marketing leaders reassess their agency and vendor stack.</p>
-        <p>We help [type of companies] [specific outcome]. Worked with [similar company] on [specific result].</p>
-        <p style="margin-bottom:0;">Worth a 15-min call this week to see if it's relevant?</p>
-      </div>
+    <div class="callout">
+      <strong>Why cross-channel matters:</strong> Email-only sequences get 3-5% reply rates. Add LinkedIn and you hit 10-12%. People who ignore an email will accept a LinkedIn request. People who ignore a LinkedIn note will open an email. Different people, different habits. You need both.
     </div>
 
-    <!-- Example 2: Competitor -->
-    <p class="fade-up" style="margin-top:2em;"><strong>Example: Competitor Engagement Signal</strong></p>
-    <p class="fade-up" style="font-size:0.9em; color:#888;">Marc commented on a competitor's post about "outbound best practices."</p>
-
-    <div class="dark-card fade-up" style="position:relative; background:rgba(255,255,255,0.06); font-size:0.9em;">
-      <div style="font-weight:500; color:#fff; padding-bottom:0.6em; margin-bottom:0.6em; border-bottom:1px solid rgba(255,255,255,0.06);">
-        Subject: Re: outbound best practices
-      </div>
-      <div style="color:#BBB; line-height:1.8;">
-        <p>Marc,</p>
-        <p>Noticed you engaged with [competitor]'s recent post on outbound. If you're actively thinking about this, we took a different approach with [similar company]: [specific metric].</p>
-        <p style="margin-bottom:0;">Happy to share what worked. 15 min?</p>
-      </div>
-    </div>
-
-    <!-- Example 3: Topic -->
-    <p class="fade-up" style="margin-top:2em;"><strong>Example: Topic Conversation Signal</strong></p>
-    <p class="fade-up" style="font-size:0.9em; color:#888;">Lisa posted: "Anyone have a good recommendation for a B2B lead gen agency?"</p>
-
-    <div class="dark-card fade-up" style="position:relative; background:rgba(255,255,255,0.06); font-size:0.9em;">
-      <div style="font-weight:500; color:#fff; padding-bottom:0.6em; margin-bottom:0.6em; border-bottom:1px solid rgba(255,255,255,0.06);">
-        Subject: Re: your LinkedIn post on lead gen
-      </div>
-      <div style="color:#BBB; line-height:1.8;">
-        <p>Lisa,</p>
-        <p>Saw your post looking for a lead gen partner. We've been doing this for [X years]. Recently helped [company] go from [X] to [Y].</p>
-        <p style="margin-bottom:0;">No pitch, just happy to share what we've seen work. Open to a quick call?</p>
-      </div>
-    </div>
-
-    <img src="img/lead-detail.png" alt="Lead detail with signal context" class="screenshot fade-up" style="margin-top:2em;">
-    <div class="screenshot-label" style="color:#666;">What Claude reads before writing: profile, signal context, engagement history, original post</div>
-
-    <div class="divider"></div>
-
-    <h3 class="fade-up">Message rules</h3>
-    <ol class="fade-up" style="list-style:none; padding:0; counter-reset:msg-rules;">
-      <li style="counter-increment:msg-rules; padding:0.6em 0; border-bottom:1px solid rgba(255,255,255,0.05); color:#BBB;">
-        <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--accent-light); margin-right:0.8em;">01</span>
-        <strong style="color:#fff;">Reference the signal.</strong> Always mention what they did.
-      </li>
-      <li style="counter-increment:msg-rules; padding:0.6em 0; border-bottom:1px solid rgba(255,255,255,0.05); color:#BBB;">
-        <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--accent-light); margin-right:0.8em;">02</span>
-        <strong style="color:#fff;">Keep it short.</strong> 4-6 sentences max.
-      </li>
-      <li style="counter-increment:msg-rules; padding:0.6em 0; border-bottom:1px solid rgba(255,255,255,0.05); color:#BBB;">
-        <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--accent-light); margin-right:0.8em;">03</span>
-        <strong style="color:#fff;">One proof point.</strong> One client, one result, one number.
-      </li>
-      <li style="counter-increment:msg-rules; padding:0.6em 0; border-bottom:1px solid rgba(255,255,255,0.05); color:#BBB;">
-        <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--accent-light); margin-right:0.8em;">04</span>
-        <strong style="color:#fff;">One CTA.</strong> "15 min call this week?" Period.
-      </li>
-      <li style="counter-increment:msg-rules; padding:0.6em 0; color:#BBB;">
-        <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--accent-light); margin-right:0.8em;">05</span>
-        <strong style="color:#fff;">No buzzwords.</strong> Factual. Specific. Short.
-      </li>
+    <p>The flow in Overloop:</p>
+    <ol style="padding-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+      <li><strong>LinkedIn connection + note</strong> — first touchpoint, low friction, starts the relationship</li>
+      <li><strong>Email</strong> — 2 days later, add value with a proof point or data</li>
+      <li><strong>LinkedIn DM</strong> — only if they accepted, soft close, one sentence</li>
     </ol>
-  </div>
-</section>
 
-<!-- ===== PART 5: 6 WORKFLOWS ===== -->
-<section id="workflows">
-  <div class="container">
-    <span class="section-label fade-up">Part 05 // Execution</span>
-    <h2 class="fade-up">6 workflows you can copy-paste</h2>
+    <p>Claude writes all 3 touches. Overloop sends them in the right order, on the right channel, at the right time. You review the daily batch and hit go.</p>
 
-    <!-- Workflow 1 -->
-    <div class="workflow-card fade-up">
-      <div class="workflow-number">01</div>
-      <div class="card">
-        <h3>New Decision-Maker Alert</h3>
-        <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>New signal in Sortlist: job change matching ICP</dd>
-          <dt>Pattern</dt><dd>Signal-Triggered Fast (7 days)</dd>
-          <dt>Angle</dt><dd>"First 90 days = vendor reassessment"</dd>
-          <dt>Volume</dt><dd>5-15 signals/week</dd>
-        </dl>
-        <div class="flow-block">
-          <span class="highlight">Signal:</span> job-changers<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> ICP match check<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> Claude writes email (references new role + company)<br>
-          &nbsp;&nbsp;<span class="highlight">Sequence:</span> Email D0 <span class="dim">&rarr;</span> LinkedIn D2 <span class="dim">&rarr;</span> Email D5<br>
-          &nbsp;&nbsp;<span class="green">Reply?</span> Route to calendar<br>
-          &nbsp;&nbsp;<span class="orange">No reply?</span> Nurture tag, re-enter in 45 days
-        </div>
-      </div>
+    <div class="screenshot">
+      <img src="img/add-to-overloop.png" alt="Adding leads to Overloop cross-channel sequence">
+      <div class="screenshot-caption">Signal-qualified leads go into a cross-channel Overloop sequence: LinkedIn + Email automated</div>
     </div>
-    <!-- Workflow 2 -->
-    <div class="workflow-card fade-up">
-      <div class="workflow-number">02</div>
-      <div class="card">
-        <h3>Competitor Audience Capture</h3>
-        <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>New signal in Sortlist: competitor engagement</dd>
-          <dt>Pattern</dt><dd>Multichannel Standard (25 days)</dd>
-          <dt>Angle</dt><dd>"Here's what we do differently"</dd>
-          <dt>Volume</dt><dd>20-50 signals/week per competitor</dd>
-        </dl>
-        <div class="flow-block">
-          <span class="highlight">Signal:</span> linkedin-company-engagers (competitor URL)<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> ICP match check<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> Claude references the competitor content they engaged with<br>
-          &nbsp;&nbsp;<span class="highlight">Sequence:</span> Visit D0 <span class="dim">&rarr;</span> Invite D1 <span class="dim">&rarr;</span> Email D3 <span class="dim">&rarr;</span> Message D8 <span class="dim">&rarr;</span> Email D13<br>
-          &nbsp;&nbsp;<span class="green">Reply?</span> Route to calendar<br>
-          &nbsp;&nbsp;<span class="orange">No reply?</span> Fresh angle in 45 days
-        </div>
+
+    <!-- THE 4-WEEK PLAN -->
+    <h2>The 4-week plan: 0 to 10+ qualified calls per week</h2>
+
+    <p>Here's exactly how we ramped this up. You don't need to do everything at once.</p>
+
+    <div class="timeline">
+      <div class="timeline-week">
+        <div class="week-label">Week 1</div>
+        <div class="week-content">Set up ICP, configure 2 signal types (job changes + competitor engagement), write your first message templates with Claude</div>
+        <div class="week-time">~4 hours</div>
       </div>
-    </div>
-    <!-- Workflow 3 -->
-    <div class="workflow-card fade-up">
-      <div class="workflow-number">03</div>
-      <div class="card">
-        <h3>Pain Point Radar</h3>
-        <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>New signal in Sortlist: topic conversation</dd>
-          <dt>Pattern</dt><dd>Signal-Triggered Fast (7 days)</dd>
-          <dt>Angle</dt><dd>"Saw your post. We work on exactly this."</dd>
-          <dt>Volume</dt><dd>30-100+ signals/week</dd>
-        </dl>
-        <div class="flow-block">
-          <span class="highlight">Signal:</span> linkedin-keyword-posters<br>
-          <span class="highlight">Keywords:</span> "looking for agency", "outbound not working"<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> ICP match (critical: volume is high, filter hard)<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> Claude reads their actual post + profile<br>
-          &nbsp;&nbsp;<span class="highlight">Sequence:</span> Email D0 <span class="dim">&rarr;</span> LinkedIn D2 <span class="dim">&rarr;</span> Email D5<br>
-          &nbsp;&nbsp;<span class="green">Reply?</span> Route to calendar<br>
-          &nbsp;&nbsp;<span class="orange">No reply?</span> Different keyword group in 45 days
-        </div>
-        <div class="callout" style="margin-top:1em; margin-bottom:0;">
-          Keyword quality is everything. Spend 80% of your setup time here. Bad keywords = spam. Good keywords = gold.
-        </div>
+      <div class="timeline-week">
+        <div class="week-label">Week 2</div>
+        <div class="week-content">Launch first campaigns, review daily leads, refine messaging based on early replies. Add signal type #3 (topic conversations)</div>
+        <div class="week-time">~20 min/day</div>
+      </div>
+      <div class="timeline-week">
+        <div class="week-label">Week 3</div>
+        <div class="week-content">Add remaining signal types, A/B test message angles, connect CRM. You should be at 3-5 meetings/week by now</div>
+        <div class="week-time">~20 min/day</div>
+      </div>
+      <div class="timeline-week">
+        <div class="week-label">Week 4</div>
+        <div class="week-content">Full autopilot. Claude handles detection + messaging. You just review the daily feed and take the calls. Target: 10+ qualified calls/week</div>
+        <div class="week-time">~15 min/day</div>
       </div>
     </div>
 
-    <!-- Workflow 4 -->
-    <div class="workflow-card fade-up">
-      <div class="workflow-number">04</div>
-      <div class="card">
-        <h3>Funded Company Blitz</h3>
-        <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>New signal in Sortlist: funding announced</dd>
-          <dt>Pattern</dt><dd>Signal-Triggered Fast (7 days)</dd>
-          <dt>Angle</dt><dd>"Post-funding = investment phase"</dd>
-          <dt>Volume</dt><dd>5-10 signals/week</dd>
-        </dl>
-        <div class="flow-block">
-          <span class="highlight">Signal:</span> recently-funded<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> ICP match at company level<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> Claude identifies decision-makers + reads funding news<br>
-          &nbsp;&nbsp;<span class="highlight">Sequence:</span> Email D0 <span class="dim">&rarr;</span> LinkedIn D2 <span class="dim">&rarr;</span> Email D5<br>
-          &nbsp;&nbsp;<span class="green">Reply?</span> Route to calendar<br>
-          &nbsp;&nbsp;<span class="orange">No reply?</span> Follow up in 45 days
-        </div>
-      </div>
-    </div>
-    <!-- Workflow 5 -->
-    <div class="workflow-card fade-up">
-      <div class="workflow-number">05</div>
-      <div class="card">
-        <h3>Warm Audience Activation</h3>
-        <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>New signal in Sortlist: your content engagement</dd>
-          <dt>Pattern</dt><dd>LinkedIn-First Warm (20 days)</dd>
-          <dt>Angle</dt><dd>"Thanks for engaging. Here's more."</dd>
-          <dt>Volume</dt><dd>10-30/week if you post regularly</dd>
-        </dl>
-        <div class="flow-block">
-          <span class="highlight">Signal:</span> linkedin-company-engagers (YOUR page)<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ linkedin-profile-engagers (YOUR profile)<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> ICP match check<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> Claude references the specific post they engaged with<br>
-          &nbsp;&nbsp;<span class="highlight">Sequence:</span> Visit D0 <span class="dim">&rarr;</span> Invite D1 <span class="dim">&rarr;</span> Message D4 <span class="dim">&rarr;</span> Message D11<br>
-          &nbsp;&nbsp;<span class="green">Reply?</span> Route to calendar<br>
-          &nbsp;&nbsp;<span class="orange">No reply?</span> Keep warm, don't burn
-        </div>
-      </div>
-    </div>
-    <!-- Workflow 6 -->
-    <div class="workflow-card fade-up">
-      <div class="workflow-number">06</div>
-      <div class="card">
-        <h3>Always-On Recycling Engine</h3>
-        <dl class="workflow-meta">
-          <dt>Trigger</dt><dd>Sortlist sequence completed, no reply</dd>
-          <dt>Pattern</dt><dd>45-day wait, then re-enroll</dd>
-          <dt>Angle</dt><dd>Fresh angle every cycle</dd>
-          <dt>Max cycles</dt><dd>3 per prospect</dd>
-        </dl>
-        <div class="flow-block">
-          <span class="dim">Prospect completes Workflow 1-5 without reply</span><br>
-          &nbsp;&nbsp;<span class="orange">Tag:</span> "no-reply-[workflow]-[date]"<br>
-          &nbsp;&nbsp;<span class="dim">Wait 45 days</span><br>
-          &nbsp;&nbsp;<span class="highlight">Re-enroll</span> in DIFFERENT campaign<br>
-          &nbsp;&nbsp;<span class="green">&#10003;</span> Claude writes fresh message (never same approach twice)<br>
-          &nbsp;&nbsp;<span class="dim">Cycle repeats until: reply, unsubscribe, or 3 cycles</span>
-        </div>
-        <div class="callout" style="margin-bottom:0;">
-          Most "no replies" aren't "no." They're "not now." The 45-day recycling engine catches them when timing changes.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- THE NUMBERS -->
+    <h2>Real numbers, no BS</h2>
 
-<!-- ===== PART 6: 4-WEEK PLAN ===== -->
-<section class="dark-section" id="plan">
-  <div class="container">
-    <span class="section-label fade-up">Part 06 // Implementation</span>
-    <h2 class="fade-up">The 4-week plan</h2>
+    <p>Here's what we actually measured over the first 2 weeks of running this system.</p>
 
-    <div class="stats-grid fade-up">
-      <div class="stat dark-card" style="position:relative;">
-        <div class="stat-number">4h</div>
-        <div class="stat-label">Week 1</div>
+    <div class="numbers-grid">
+      <div class="number-card">
+        <div class="value">12%</div>
+        <div class="label">Reply rate (vs. 2-3% cold)</div>
       </div>
-      <div class="stat dark-card" style="position:relative;">
-        <div class="stat-number">3h</div>
-        <div class="stat-label">Week 2</div>
+      <div class="number-card">
+        <div class="value">19</div>
+        <div class="label">Meetings booked in 14 days</div>
       </div>
-      <div class="stat dark-card" style="position:relative;">
-        <div class="stat-number">2h</div>
-        <div class="stat-label">Week 3</div>
+      <div class="number-card">
+        <div class="value">142</div>
+        <div class="label">Signal-qualified leads contacted</div>
       </div>
-      <div class="stat dark-card" style="position:relative;">
-        <div class="stat-number">1.5h</div>
-        <div class="stat-label">Week 4</div>
+      <div class="number-card">
+        <div class="value">&lt;20 min</div>
+        <div class="label">Human time per day</div>
       </div>
     </div>
 
-    <div class="timeline fade-up" style="margin-top:3em;">
-
-      <!-- Week 1 -->
-      <div class="timeline-item">
-        <div class="timeline-week">Week 01 // Foundation</div>
-        <div class="timeline-title" style="color:#fff;">Setup everything. Send nothing.</div>
-        <ul class="timeline-tasks">
-          <li style="color:#BBB;">Sign up at <span style="color:var(--accent-light);">signals.sortlist.com</span> + install Claude Code</li>
-          <li style="color:#BBB;">Define your ICP (titles, industries, sizes, locations)</li>
-          <li style="color:#BBB;">Map 5-8 competitors + grab LinkedIn URLs</li>
-          <li style="color:#BBB;">Craft keyword groups (3-5 groups)</li>
-          <li style="color:#BBB;">Configure all signal subscriptions (7-9 total)</li>
-          <li style="color:#BBB;">Set up outbound platform + connect LinkedIn</li>
-          <li style="color:#BBB;">Buy 2-3 sending domains + DNS (SPF/DKIM/DMARC)</li>
-          <li style="color:#BBB;">Start email warmup (5/day, ramps over 2-3 weeks)</li>
+    <div class="comparison">
+      <div class="comparison-col bad">
+        <h4>Before (cold outbound)</h4>
+        <ul>
+          <li>Buy lists from Apollo/ZoomInfo</li>
+          <li>Blast generic sequences</li>
+          <li>2-3% reply rate</li>
+          <li>1-2 meetings per week</li>
+          <li>Hours of manual research</li>
         </ul>
-        <div class="timeline-time" style="color:#888;">~4 hours total</div>
       </div>
-      <!-- Week 2 -->
-      <div class="timeline-item">
-        <div class="timeline-week">Week 02 // First Campaigns</div>
-        <div class="timeline-title" style="color:#fff;">Review signals. Launch 2 workflows. Approve manually.</div>
-        <ul class="timeline-tasks">
-          <li style="color:#BBB;">Review first signals batch, check ICP match quality</li>
-          <li style="color:#BBB;">Adjust keywords (remove noisy, add specific)</li>
-          <li style="color:#BBB;">Set up Workflow 1 (Job Changes) + Workflow 2 (Competitors)</li>
-          <li style="color:#BBB;">Write pitch settings for Claude</li>
-          <li style="color:#BBB;">Review first 5 Claude-generated messages, adjust tone</li>
-          <li style="color:#BBB;">Launch in review mode (approve each before sending)</li>
+      <div class="comparison-col">
+        <h4>After (signal-based)</h4>
+        <ul>
+          <li>Claude detects intent signals</li>
+          <li>Every message references real behavior</li>
+          <li>12% reply rate</li>
+          <li>9-10 meetings per week</li>
+          <li>Under 20 min/day</li>
         </ul>
-        <div class="timeline-time" style="color:#888;">~3 hours total // Expect 10-30 messages sent</div>
-      </div>
-      <!-- Week 3 -->
-      <div class="timeline-item">
-        <div class="timeline-week">Week 03 // Scale</div>
-        <div class="timeline-title" style="color:#fff;">Add workflows. Switch to auto-send. First replies.</div>
-        <ul class="timeline-tasks">
-          <li style="color:#BBB;">Check reply rates from Week 2</li>
-          <li style="color:#BBB;">Set up Workflow 3 (Pain Point Radar) + Workflow 5 (Warm Audience)</li>
-          <li style="color:#BBB;">Switch from review mode to auto-send</li>
-          <li style="color:#BBB;">Set up Workflow 6 (Recycling Engine)</li>
-          <li style="color:#BBB;">Set up CRM integration</li>
-          <li style="color:#BBB;">Weekly review: signal quality, message quality, reply rates</li>
-        </ul>
-        <div class="timeline-time" style="color:#888;">~2 hours total // Expect 3-5 replies, 1-3 meetings</div>
-      </div>
-
-      <!-- Week 4 -->
-      <div class="timeline-item">
-        <div class="timeline-week">Week 04 // Full Auto</div>
-        <div class="timeline-title" style="color:#fff;">Optimize. Add funded companies. Go autonomous.</div>
-        <ul class="timeline-tasks">
-          <li style="color:#BBB;">A/B test analysis: double winning angle, pause loser</li>
-          <li style="color:#BBB;">Set up Workflow 4 (Funded Companies)</li>
-          <li style="color:#BBB;">Refine keywords based on 3 weeks of data</li>
-          <li style="color:#BBB;">Set up Slack notifications for hot replies</li>
-          <li style="color:#BBB;">Full pipeline review: signals to meetings</li>
-        </ul>
-        <div class="timeline-time" style="color:#888;">~1.5 hours total // System is now autonomous: &lt;20 min/day</div>
       </div>
     </div>
 
-    <div class="callout fade-up" style="margin-top:2em;">
-      <strong>End of Week 4:</strong> All 6 workflows running on autopilot. 20 min/day max. Expect 8-12 qualified meetings booked. System runs continuously.
-    </div>
-  </div>
-</section>
+    <!-- THE STACK -->
+    <h2>The tools we used</h2>
 
-<!-- ===== PART 7: CONNECT STACK ===== -->
-<section id="stack">
-  <div class="container">
-    <span class="section-label fade-up">Part 07 // Integration</span>
-    <h2 class="fade-up">Connecting Claude to your stack</h2>
+    <p>Full transparency on the stack. Nothing hidden.</p>
 
-    <h3 class="fade-up">CRM Integration</h3>
-    <div class="card fade-up">
-      <table style="font-size:0.88em;">
-        <thead>
-          <tr><th>Event</th><th>CRM Action</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Positive reply</td><td>Create deal, assign to owner, tag "signal-sourced"</td></tr>
-          <tr><td>Soft positive</td><td>Create contact, tag "nurture", add to follow-up</td></tr>
-          <tr><td>Meeting booked</td><td>Create deal, move to "Meeting Scheduled"</td></tr>
-          <tr><td>Unsubscribe</td><td>Add to exclusion list, flag "do not contact"</td></tr>
-        </tbody>
-      </table>
-      <p style="font-size:0.85em; color:var(--text-muted); margin-bottom:0;">Supported: HubSpot, Pipedrive, Salesforce (native). Add CRM step at end of every sequence.</p>
-      <div class="callout" style="margin-top:1em; margin-bottom:0;">
-        <strong>The full loop is automatic:</strong> Sortlist Signals detects the buying signal and pushes it to Overloop. Overloop launches the LinkedIn + Email campaign with Claude-written messages. When a prospect replies, the deal is created in your CRM. No export, no import, no manual step.
-      </div>
+    <ul style="padding-left: 20px; color: var(--text-secondary);">
+      <li><a href="https://signals.sortlist.com" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">Sortlist Signals</a> for detecting buying signals across LinkedIn (starts at &euro;59/mo)</li>
+      <li><a href="https://overloop.com" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">Overloop</a> for running outreach sequences (email + LinkedIn)</li>
+      <li><a href="https://claude.ai" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">Claude</a> for ICP qualification and message generation</li>
+      <li>Your existing CRM (we use HubSpot, but any works)</li>
+    </ul>
+
+    <div class="screenshot">
+      <img src="img/integrations.png" alt="Stack integrations">
+      <div class="screenshot-caption">The full stack connected: Signals detects, Claude qualifies, Overloop sends, CRM tracks</div>
     </div>
 
-    <img src="img/integrations.png" alt="Sortlist Signals integrations" class="screenshot fade-up">
-    <div class="screenshot-label">Native integrations: Overloop (connected), Webhook, Zapier, HubSpot, Salesforce, Pipedrive</div>
+    <!-- TRY IT -->
+    <h2>Want to try it yourself?</h2>
 
-    <h3 class="fade-up">Slack Notifications</h3>
-    <div class="card fade-up">
-      <ul style="list-style:none; padding:0;">
-        <li style="padding:0.4em 0; color:var(--text-secondary);"><strong>Hot reply</strong> &rarr; #sales-alerts channel</li>
-        <li style="padding:0.4em 0; color:var(--text-secondary);"><strong>Meeting booked</strong> &rarr; #sales-alerts channel</li>
-        <li style="padding:0.4em 0; color:var(--text-secondary);"><strong>Weekly digest</strong> &rarr; #sales-weekly channel</li>
-      </ul>
-    </div>
-    <h3 class="fade-up">Notion Dashboard</h3>
-    <div class="card fade-up">
-      <table style="font-size:0.88em;">
-        <thead>
-          <tr><th>Metric</th><th>Target</th><th>Source</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Signals/week</td><td>50-200</td><td>Signal dashboard</td></tr>
-          <tr><td>Messages/week</td><td>50-150</td><td>Outbound analytics</td></tr>
-          <tr><td>Reply rate</td><td>8-12%</td><td>Outbound analytics</td></tr>
-          <tr><td>Meetings/week</td><td>3-5</td><td>CRM pipeline</td></tr>
-          <tr><td>Human time/day</td><td>&lt;20 min</td><td>Your calendar</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+    <p>You can run this entire playbook manually with Claude and LinkedIn. It works. It's just slow.</p>
 
-<!-- ===== PART 8: REAL NUMBERS ===== -->
-<section class="dark-section" id="numbers">
-  <div class="container">
-    <span class="section-label fade-up">Part 08 // Results</span>
-    <h2 class="fade-up">What to expect (realistic numbers)</h2>
+    <p>If you want to automate it, <a href="https://signals.sortlist.com" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Signals</a> comes with <strong>100 free leads</strong> on the trial. That's enough to run your first campaign end-to-end and see if signal-based outbound works for your market. No credit card, no call needed.</p>
 
-    <p class="fade-up">No inflated promises. Here's what actually happens.</p>
-
-    <div class="fade-up" style="overflow-x:auto;">
-      <table>
-        <thead>
-          <tr><th>Metric</th><th>Cold Outbound</th><th>Signal-Based</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Reply rate</td><td>2-3%</td><td><strong style="color:var(--accent-light);">8-12%</strong></td></tr>
-          <tr><td>Positive reply rate</td><td>0.5-1%</td><td><strong style="color:var(--accent-light);">3-5%</strong></td></tr>
-          <tr><td>Meeting conversion</td><td>Low</td><td><strong style="color:var(--accent-light);">30-50%</strong> of positive replies</td></tr>
-          <tr><td>Time investment</td><td>2-4 hours/day</td><td><strong style="color:var(--accent-light);">&lt;20 min/day</strong></td></tr>
-          <tr><td>Ramp-up</td><td>Immediate (and bad)</td><td><strong style="color:var(--accent-light);">2-3 weeks</strong> (then compounds)</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="math-block fade-up">
-      <div class="math-line">100 signal-based outreach/week</div>
-      <div class="math-line">&times; 10% reply rate = 10 replies</div>
-      <div class="math-line">&times; 40% positive = 4 meetings/week</div>
-      <div class="math-result">
-        16 meetings/month
-        <small>with 20 minutes a day</small>
-      </div>
-    </div>
-
-    <div class="divider"></div>
-
-    <h3 class="fade-up">The 5 things that make this work</h3>
-
-    <ol class="rules-list fade-up" style="border-top:1px solid rgba(255,255,255,0.05);">
-      <li style="border-color:rgba(255,255,255,0.05);">
-        <div>
-          <strong style="color:#fff;">Signals before outreach.</strong>
-          <p style="font-size:0.92em;">Never contact someone who hasn't shown intent. The monitoring runs 24/7.</p>
-        </div>
-      </li>
-      <li style="border-color:rgba(255,255,255,0.05);">
-        <div>
-          <strong style="color:#fff;">Claude writes every message.</strong>
-          <p style="font-size:0.92em;">Not templates with variables. Each message is unique. This is why reply rates are 3-4x higher.</p>
-        </div>
-      </li>
-      <li style="border-color:rgba(255,255,255,0.05);">
-        <div>
-          <strong style="color:#fff;">Speed on signals.</strong>
-          <p style="font-size:0.92em;">A job change is most valuable in the first 2 weeks. The system contacts people within hours, not weeks.</p>
-        </div>
-      </li>
-      <li style="border-color:rgba(255,255,255,0.05);">
-        <div>
-          <strong style="color:#fff;">Always-on recycling.</strong>
-          <p style="font-size:0.92em;">70% of "no replies" are "not now." The 45-day engine catches them when timing changes.</p>
-        </div>
-      </li>
-      <li style="border-color:rgba(255,255,255,0.05);">
-        <div>
-          <strong style="color:#fff;">Less is more.</strong>
-          <p style="font-size:0.92em;">100 signal-based messages beat 500 cold blasts. Quality over quantity. Always.</p>
-        </div>
-      </li>
+    <p>The setup takes about 30 minutes:</p>
+    <ol style="padding-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+      <li>Define your ICP in Signals (5 min)</li>
+      <li>Pick 2 signal types to monitor (2 min)</li>
+      <li>Copy the Claude prompt above and adapt it to your business (10 min)</li>
+      <li>Connect Overloop for cross-channel sending (10 min)</li>
+      <li>Review your first batch of signal-qualified leads the next morning</li>
     </ol>
+
+    <p>By day 3 you'll know if this works for you. Most people know by the first reply.</p>
+
   </div>
-</section>
 
-<!-- ===== PART 9: THE ENGINE ROOM ===== -->
-<section class="blueprint-section" id="engine">
-  <div class="container">
-    <span class="section-label fade-up">Part 09 // Advanced</span>
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Ready to try it?</h2>
+    <p>Start with the 100 free leads. See the signals. Run the prompt. Send the messages. Then decide.</p>
+    <a href="https://signals.sortlist.com" class="cta-button" target="_blank">Get 100 free leads</a>
+    <div class="cta-sub">Or <a href="https://www.linkedin.com/in/nifinet" target="_blank" style="color:var(--text-secondary)">DM me on LinkedIn</a> if you want me to walk you through the setup.</div>
+  </div>
 
-    <!-- Claude Code logo + title -->
-    <div class="fade-up" style="display:flex; align-items:center; gap:20px; margin-bottom:1.5em;">
-      <svg style="width:56px; height:56px; image-rendering:pixelated; flex-shrink:0;" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-      <div>
-        <h2 style="margin-bottom:0.1em;">The Engine Room</h2>
-        <p style="font-family:'JetBrains Mono',monospace; font-size:0.72em; color:#666; margin:0;">Two commands. 27 agents. Full pipeline.</p>
-      </div>
-    </div>
+  <!-- FOOTER -->
+  <footer class="footer">
+    Written by <a href="https://www.linkedin.com/in/nifinet" target="_blank">Nicolas Finet</a> &middot; CEO @ Sortlist
+  </footer>
 
-    <p class="fade-up">You type two commands. Claude researches the company, designs the signal strategy, creates the subscriptions, writes the outreach, builds the campaigns, and activates everything. Here's what it looks like.</p>
-
-    <!-- ===== THE HERO: /signals ===== -->
-    <div class="cc fade-up">
-      <div class="cc-header">
-        <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-        <div class="cc-meta">
-          <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
-          <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
-          <span class="info">/Users/nicolasfinet</span>
-        </div>
-      </div>
-      <div class="cc-body">
-
-        <div class="cc-prompt">
-          <span class="chevron">&rsaquo;</span>
-          <span class="input">/signals acme-agency https://www.acme-agency.com</span>
-        </div>
-
-        <div class="cc-response">
-Setting up signal monitoring for Acme Agency.<br>
-<br>
-<span class="agent-tag">Research Analyst</span> Scanning website, LinkedIn, competitors...<br>
-Found <span class="highlight">6 competitors</span>: Apollo.io, Lemlist, Clay, Instantly, Outreach, Salesloft<br>
-Extracted ICP: B2B SaaS, 50-500 employees, US/UK/FR<br>
-<br>
-<span class="agent-tag">Signals Planner</span> Designing signal strategy...<br>
-
-<div class="cc-strategy">
-P1&nbsp;&nbsp;Competitor engagers: Apollo.io, Lemlist, Clay<br>
-P1&nbsp;&nbsp;Topic: "outbound not working" OR "need more leads"<br>
-P1&nbsp;&nbsp;Job changes: CMO, VP Marketing, Head of Growth<br>
-P2&nbsp;&nbsp;Funding: SaaS, 51-500 employees<br>
-P2&nbsp;&nbsp;Profile engagers: CEO personal page<br>
-<span class="highlight">Expected: 120-200 signals/month</span>
 </div>
 
-<strong style="color:#fff;">7 subscriptions across 5 signal types. Approve?</strong>
-        </div>
-
-        <div class="cc-prompt">
-          <span class="chevron">&rsaquo;</span>
-          <span class="input">y</span>
-        </div>
-
-        <div class="cc-response">
-<span class="agent-tag">Signals Executor</span> Creating via Signals CLI...<br>
-<br>
-Business created... <span class="success">&#10003;</span>&nbsp; ICP configured... <span class="success">&#10003;</span><br>
-Subscription 1/7: Competitor // Apollo.io <span class="success">&#10003;</span><br>
-Subscription 2/7: Competitor // Lemlist <span class="success">&#10003;</span><br>
-Subscription 3/7: Competitor // Clay <span class="success">&#10003;</span><br>
-Subscription 4/7: Pain // outbound keywords <span class="success">&#10003;</span><br>
-Subscription 5/7: Pain // pipeline keywords <span class="success">&#10003;</span><br>
-Subscription 6/7: Job changes // Marketing <span class="success">&#10003;</span><br>
-Subscription 7/7: Funding // SaaS <span class="success">&#10003;</span><br>
-<br>
-<span class="success">&#10003; All 7 subscriptions active.</span> Leads arrive within 24h.
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ===== THE HERO: /outbound ===== -->
-    <p class="fade-up" style="font-family:'JetBrains Mono',monospace; font-size:0.65em; color:#555; letter-spacing:0.1em; text-transform:uppercase; text-align:center; margin:1.5em 0 0.5em;">One week later, signals are flowing. Time to launch outbound.</p>
-
-    <div class="cc fade-up">
-      <div class="cc-header">
-        <svg class="cc-logo" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="1" width="12" height="3" fill="#E06060"/><rect x="1" y="4" width="14" height="8" fill="#E06060"/><rect x="3" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="10" y="5" width="3" height="3" fill="#1a1a1a"/><rect x="4" y="6" width="1" height="1" fill="#fff"/><rect x="11" y="6" width="1" height="1" fill="#fff"/><rect x="1" y="12" width="3" height="2" fill="#E06060"/><rect x="12" y="12" width="3" height="2" fill="#E06060"/><rect x="6" y="9" width="4" height="1" fill="#1a1a1a"/></svg>
-        <div class="cc-meta">
-          <span class="title">Claude Code</span> <span class="version">v2.1.89</span><br>
-          <span class="info">Opus 4.6 (1M context) <span class="dot">&middot;</span> Claude Team</span><br>
-          <span class="info">/Users/nicolasfinet</span>
-        </div>
-      </div>
-      <div class="cc-body">
-
-        <div class="cc-prompt">
-          <span class="chevron">&rsaquo;</span>
-          <span class="input">/outbound acme-agency --with-signals</span>
-        </div>
-
-        <div class="cc-response">
-4 agents running in parallel.<br>
-<br>
-<span class="agent-tag">Copywriter</span> 2 personas x 2 angles (A/B). Anti-slop checked. <span class="highlight">4 variants ready.</span><br>
-<span class="agent-tag">Sequence Designer</span> Pattern D (7 days) for signals. Pattern A (25 days) for cold.<br>
-<span class="agent-tag">List Builder</span> 450M+ DB: 12,400 &rarr; 4,200 &rarr; 1,850 <span class="success">&#10003;</span><br>
-<br>
-<span class="agent-tag">Outbound Executor</span> Creating in Overloop via CLI...<br>
-Exclusion list <span class="success">&#10003;</span> Campaign v1 <span class="success">&#10003;</span> Campaign v2 <span class="success">&#10003;</span> Sourcing 30/day <span class="success">&#10003;</span> Pipedrive sync <span class="success">&#10003;</span><br>
-<br>
-<strong style="color:#fff;">2 campaigns ready. A/B test configured. Activate?</strong>
-        </div>
-
-        <div class="cc-prompt">
-          <span class="chevron">&rsaquo;</span>
-          <span class="input">y</span>
-        </div>
-
-        <div class="cc-response">
-<span class="success">&#10003; Live.</span> 30 prospects/day. Email + LinkedIn. Every message unique.<br>
-<span class="dim">Review in 2 weeks: /outbound:optimize acme-agency</span>
-        </div>
-
-        <div class="cc-prompt">
-          <span class="chevron">&rsaquo;</span>
-          <span class="cursor"></span>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="fade-up" style="background:rgba(40,200,64,0.06); border-left:2px solid #28C840; border-radius:0 12px 12px 0; padding:1.2em 1.5em; margin:1.5em 0;">
-      <strong style="color:#28C840; font-size:0.95em;">Not ready to go full-auto?</strong>
-      <p style="color:#ccc; margin:0.4em 0 0; font-size:0.95em;">Set "Review Mode" to approve Claude's first 20 messages before the system sends on its own. Most teams switch to auto after 5-10 reviewed messages.</p>
-    </div>
-
-    <!-- ===== UNDER THE HOOD (collapsible detail) ===== -->
-    <details class="fade-up" style="margin:2.5em 0;">
-      <summary style="cursor:pointer; font-family:'JetBrains Mono',monospace; font-size:0.75em; font-weight:500; color:var(--accent-light); letter-spacing:0.05em; padding:1em 0; border-top:1px solid rgba(255,255,255,0.05); border-bottom:1px solid rgba(255,255,255,0.05); user-select:none;">
-        UNDER THE HOOD // What the CLI commands look like (for builders)
-      </summary>
-      <div style="padding:1.5em 0; color:#888; font-size:0.9em; line-height:1.8;">
-        <p style="margin-bottom:1em;">When Claude runs <code style="color:var(--accent-light);">/signals</code>, it executes these Signals CLI commands:</p>
-        <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:1em 1.2em; font-family:'JetBrains Mono',monospace; font-size:0.82em; line-height:2; margin-bottom:1.5em; overflow-x:auto;">
-<span style="color:#28C840;">$</span> signals businesses:create --website https://acme-agency.com<br>
-<span style="color:#28C840;">$</span> signals businesses:update biz_8f3k2m --icp '{"target_job_titles": [...]}'<br>
-<span style="color:#28C840;">$</span> signals subscriptions:create --signal linkedin-company-engagers --config '{"linkedin_url": "..."}'<br>
-<span style="color:#28C840;">$</span> signals subscriptions:create --signal linkedin-keyword-posters --config '{"keywords": "..."}'<br>
-<span style="color:#28C840;">$</span> signals subscriptions:create --signal job-changers<br>
-<span style="color:#555;">// ... repeated for each signal type</span><br>
-<span style="color:#28C840;">$</span> signals leads:list --business biz_8f3k2m
-        </div>
-        <p style="margin-bottom:1em;">When Claude runs <code style="color:var(--accent-light);">/outbound</code>, it executes these Overloop CLI commands:</p>
-        <div style="background:rgba(255,255,255,0.03); border-radius:8px; padding:1em 1.2em; font-family:'JetBrains Mono',monospace; font-size:0.82em; line-height:2; overflow-x:auto;">
-<span style="color:#28C840;">$</span> overloop campaigns:create --name "Acme // US // CMO // v1" --pitch_settings '{...}'<br>
-<span style="color:#28C840;">$</span> overloop campaigns:add-steps camp_2k9f1 --steps '[{"type":"email","generate_with_ai":true}, ...]'<br>
-<span style="color:#28C840;">$</span> overloop sourcings:estimate --job_titles "CMO, VP Marketing" --locations "US" --industries "SaaS"<br>
-<span style="color:#555;">// estimated_count: 3,847 &#10003;</span><br>
-<span style="color:#28C840;">$</span> overloop sourcings:create --campaign camp_2k9f1 --auto_enroll true --limit '{"period":"day","quantity":30}'<br>
-<span style="color:#28C840;">$</span> overloop campaigns:activate camp_2k9f1<br>
-<span style="color:#555;">// &#10003; Campaign live. 30 prospects/day. Email + LinkedIn.</span>
-        </div>
-      </div>
-    </details>
-
-    <!-- ===== WHY THIS IS DIFFERENT ===== -->
-    <div class="divider" style="background:rgba(255,255,255,0.05);"></div>
-
-    <h3 class="fade-up" style="color:#fff; margin-top:2em;">Why this isn't another "AI outbound" tool</h3>
-
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5em; margin:2em 0;" class="fade-up">
-      <div class="dark-card" style="position:relative;">
-        <div class="card-label" style="color:var(--accent-light);">Everyone else</div>
-        <ul style="list-style:none; padding:0; font-size:0.9em; color:#888;">
-          <li style="padding:0.3em 0;">Plug Claude into Apollo for contacts</li>
-          <li style="padding:0.3em 0;">Plug Claude into Clay for enrichment</li>
-          <li style="padding:0.3em 0;">Plug Claude into Lemlist for sending</li>
-          <li style="padding:0.3em 0;">Plug Claude into Bombora for intent</li>
-          <li style="padding:0.3em 0;">4 tools, 4 subscriptions, 4 failure points</li>
-        </ul>
-      </div>
-      <div class="dark-card" style="position:relative; border-color:rgba(136,136,255,0.2);">
-        <div class="card-label" style="color:var(--accent-light);">This system</div>
-        <ul style="list-style:none; padding:0; font-size:0.9em; color:#BBB;">
-          <li style="padding:0.3em 0;"><strong style="color:#fff;">Sortlist Signals</strong> detects buying moments</li>
-          <li style="padding:0.3em 0;"><span style="color:#555;">&#8594;</span> auto-pushes to <strong style="color:#fff;">Overloop</strong></li>
-          <li style="padding:0.3em 0;"><strong style="color:#fff;">Overloop</strong> runs LinkedIn + Email + 450M DB</li>
-          <li style="padding:0.3em 0;"><span style="color:#555;">&#8594;</span> auto-pushes to <strong style="color:#fff;">your CRM</strong></li>
-          <li style="padding:0.3em 0;"><strong style="color:#fff;">Claude</strong> writes every message</li>
-          <li style="padding:0.3em 0;"><strong style="color:var(--accent-light);">Signal to meeting. Zero manual steps.</strong></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="dark-card fade-up" style="position:relative; text-align:center; padding:2em;">
-      <p style="font-size:0.92em; color:#888; margin-bottom:0.5em;">Account safety track record</p>
-      <div style="font-family:'Playfair Display',serif; font-size:2.5em; font-weight:700; color:#fff;">100,000+</div>
-      <p style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:#888; letter-spacing:0.05em;">CAMPAIGNS RUN // ZERO ACCOUNTS BANNED // 10 YEARS</p>
-    </div>
-
-    <!-- ===== THE SECRET WEAPON: PROMPT ===== -->
-    <div class="divider" style="background:rgba(255,255,255,0.05);"></div>
-
-    <h3 class="fade-up" style="color:#fff; margin-top:2em;">The prompt that turns signals into meetings</h3>
-    <p class="fade-up" style="color:#888;">Copy this prompt into Claude. Paste your Sortlist Signals export. Get ready-to-send outreach in seconds.</p>
-
-    <div class="terminal fade-up">
-      <div class="terminal-bar">
-        <div class="terminal-dot red"></div>
-        <div class="terminal-dot yellow"></div>
-        <div class="terminal-dot green"></div>
-        <div class="terminal-title">Claude prompt // copy-paste this</div>
-      </div>
-      <div class="terminal-body" style="font-size:0.75em; line-height:1.8;">
-<span class="string">You are an outbound sales agent. I'm giving you a CSV export from
-Sortlist Signals containing prospects who showed buying intent.</span>
-<span class="blank"></span>
-<span class="string">For each row in the CSV:</span>
-<span class="string">1. Read the person's name, title, company, and signal type</span>
-<span class="string">2. Read the signal context (what they did: job change, post,</span>
-<span class="string">&nbsp;&nbsp;&nbsp;competitor engagement, funding, or content engagement)</span>
-<span class="string">3. Write a personalized 4-sentence email that:</span>
-<span class="string">&nbsp;&nbsp;&nbsp;- References the specific signal in sentence 1</span>
-<span class="string">&nbsp;&nbsp;&nbsp;- Connects it to a relevant pain point in sentence 2</span>
-<span class="string">&nbsp;&nbsp;&nbsp;- Mentions one proof point in sentence 3</span>
-<span class="string">&nbsp;&nbsp;&nbsp;- Ends with a single CTA: "15-min call this week?"</span>
-<span class="blank"></span>
-<span class="string">Rules:</span>
-<span class="string">- No buzzwords. No "innovative" or "leverage".</span>
-<span class="string">- Each email must be different. No templates.</span>
-<span class="string">- Subject line must reference the signal.</span>
-<span class="string">- Max 6 sentences total.</span>
-<span class="blank"></span>
-<span class="string">My company: [YOUR COMPANY DESCRIPTION]</span>
-<span class="string">My proof points: [YOUR BEST RESULTS]</span>
-<span class="blank"></span>
-<span class="comment">// Paste your Sortlist Signals CSV export below:</span>
-      </div>
-    </div>
-
-    <div class="callout fade-up" style="background:rgba(217,119,6,0.08); border-left-color:#E8A858;">
-      <strong style="color:#fff;">Why this only works with Sortlist data:</strong>
-      <p style="color:#888; margin-bottom:0;">The prompt needs the <em>signal context column</em> . What the prospect actually did (liked a competitor post, changed jobs, posted about a problem). Cold databases don't have this. Only real-time intent data makes the personalization work. Without it, you're back to &#123;&#123;first_name&#125;&#125; templates.</p>
-    </div>
-
-    <!-- ===== URGENCY ===== -->
-    <div class="divider" style="background:rgba(255,255,255,0.05);"></div>
-
-    <h3 class="fade-up" style="color:#fff; margin-top:2em;">Signals decay. Speed wins.</h3>
-    <p class="fade-up" style="color:#888;">Every signal has a half-life. Miss the window and the prospect goes cold, gets contacted by a competitor, or moves on. This is what's happening right now while you read this:</p>
-
-    <!-- Animated decay bars -->
-    <div class="fade-up" style="margin:2em 0;">
-
-      <!-- Job change -->
-      <div style="margin-bottom:1.5em;">
-        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4em;">
-          <span style="color:#fff; font-weight:500; font-size:0.92em;">Job change signal</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--accent-light);">14 day window</span>
-        </div>
-        <div style="background:rgba(255,255,255,0.05); border-radius:6px; height:8px; overflow:hidden; position:relative;">
-          <div style="position:absolute; top:0; left:0; height:100%; width:100%; border-radius:6px; background:linear-gradient(90deg, #28C840 0%, #28C840 30%, #E8A858 60%, #E05050 85%, #444 100%); animation:decaySlide 4s ease-out forwards;" class="decay-bar"></div>
-        </div>
-        <div style="display:flex; justify-content:space-between; margin-top:0.3em;">
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#28C840;">Day 1: They're reassessing vendors</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#E05050;">Day 14: Decisions are made</span>
-        </div>
-      </div>
-
-      <!-- Competitor engagement -->
-      <div style="margin-bottom:1.5em;">
-        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4em;">
-          <span style="color:#fff; font-weight:500; font-size:0.92em;">Competitor engagement</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:#E8A858;">48 hour window</span>
-        </div>
-        <div style="background:rgba(255,255,255,0.05); border-radius:6px; height:8px; overflow:hidden; position:relative;">
-          <div style="position:absolute; top:0; left:0; height:100%; width:65%; border-radius:6px; background:linear-gradient(90deg, #28C840 0%, #E8A858 50%, #E05050 80%, #444 100%); animation:decaySlide 3s ease-out forwards;" class="decay-bar"></div>
-        </div>
-        <div style="display:flex; justify-content:space-between; margin-top:0.3em;">
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#28C840;">Hour 1: Topic is top of mind</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#E05050;">Hour 48: They've moved on</span>
-        </div>
-      </div>
-
-      <!-- Topic post -->
-      <div style="margin-bottom:1.5em;">
-        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4em;">
-          <span style="color:#fff; font-weight:500; font-size:0.92em;">Topic conversation</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:#E8A858;">72 hour window</span>
-        </div>
-        <div style="background:rgba(255,255,255,0.05); border-radius:6px; height:8px; overflow:hidden; position:relative;">
-          <div style="position:absolute; top:0; left:0; height:100%; width:75%; border-radius:6px; background:linear-gradient(90deg, #28C840 0%, #E8A858 40%, #E05050 75%, #444 100%); animation:decaySlide 3.5s ease-out forwards;" class="decay-bar"></div>
-        </div>
-        <div style="display:flex; justify-content:space-between; margin-top:0.3em;">
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#28C840;">Hour 1: Actively seeking answers</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#E05050;">Hour 72: Found a solution (not you)</span>
-        </div>
-      </div>
-
-      <!-- Funding -->
-      <div style="margin-bottom:0;">
-        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.4em;">
-          <span style="color:#fff; font-weight:500; font-size:0.92em;">Funding announcement</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.7em; color:var(--accent-light);">7 day window</span>
-        </div>
-        <div style="background:rgba(255,255,255,0.05); border-radius:6px; height:8px; overflow:hidden; position:relative;">
-          <div style="position:absolute; top:0; left:0; height:100%; width:90%; border-radius:6px; background:linear-gradient(90deg, #28C840 0%, #28C840 40%, #E8A858 65%, #E05050 90%, #444 100%); animation:decaySlide 3.8s ease-out forwards;" class="decay-bar"></div>
-        </div>
-        <div style="display:flex; justify-content:space-between; margin-top:0.3em;">
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#28C840;">Day 1: Budget is unlocked</span>
-          <span style="font-family:'JetBrains Mono',monospace; font-size:0.6em; color:#E05050;">Day 7: Every vendor already called</span>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="callout fade-up" style="background:rgba(224,80,80,0.08); border-left-color:#E05050;">
-      <strong style="color:#fff;">The math is brutal:</strong>
-      <p style="color:#888; margin-bottom:0;">If you detect a signal on Monday but your sales team doesn't reach out until Thursday, the competitor engagement signal is already dead and the topic conversation prospect already found another vendor. Sortlist Signals detects in real-time. Claude writes in seconds. The outreach goes out the same day.</p>
-    </div>
-
-    <!-- ===== FINAL CTA ===== -->
-    <div class="cta-banner fade-up" style="margin-top:3em; padding:3em 2em; border-color:rgba(136,136,255,0.25);">
-      <div style="font-family:'Playfair Display',serif; font-size:1.4em; color:#fff; margin-bottom:0.5em;">Stop chasing. Start listening.</div>
-      <p style="color:#888;">Set up Sortlist Signals in 30 minutes. First leads tomorrow. Claude handles the rest.</p>
-      <div style="display:flex; gap:1em; justify-content:center; flex-wrap:wrap; margin-top:1.5em;">
-        <a href="https://signals.sortlist.com" class="cta-btn primary" target="_blank">Start free trial</a>
-        <a href="https://www.linkedin.com/in/nicolasfinet/" class="cta-btn outline" target="_blank">Connect with Nicolas</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="footer" style="background:var(--dark);">
-  <p style="color:#555;">Built with Claude + Sortlist Signals</p>
-  <p style="margin-top:0.5em;"><a href="https://signals.sortlist.com">signals.sortlist.com</a> <span style="color:#333;">&middot;</span> <a href="https://www.linkedin.com/in/nicolasfinet/">LinkedIn</a></p>
-</footer>
-
-<!-- ===== SCROLL ANIMATION ===== -->
 <script>
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+function copyPrompt() {
+  const text = document.getElementById('promptContent').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 2000);
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-// Active nav dot
-const sections = document.querySelectorAll('section[id]');
-const navDots = document.querySelectorAll('.toc a');
-
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(section => {
-    const top = section.offsetTop;
-    if (scrollY >= top - 300) current = section.getAttribute('id');
-  });
-  navDots.forEach(dot => {
-    const isActive = dot.getAttribute('href') === '#' + current;
-    dot.style.background = isActive ? 'var(--accent)' : 'rgba(255,255,255,0.15)';
-    dot.classList.toggle('active', isActive);
-  });
-});
-
-// Video: auto-play on scroll after 1s in viewport, click to play/pause
-const video = document.querySelector('.walkthrough-video');
-const overlay = document.querySelector('.video-play-overlay');
-let videoStarted = false;
-let autoplayTimer = null;
-
-function playVideo() {
-  video.play();
-  overlay.style.opacity = '0';
-  overlay.style.pointerEvents = 'none';
-  videoStarted = true;
 }
-
-function pauseVideo() {
-  video.pause();
-  overlay.style.opacity = '1';
-  overlay.style.pointerEvents = 'auto';
-}
-
-// Click to toggle
-document.querySelector('.video-wrapper').addEventListener('click', () => {
-  if (video.paused) {
-    playVideo();
-  } else {
-    pauseVideo();
-  }
-});
-
-// Auto-play when scrolled into view after 1s delay
-const videoObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting && !videoStarted) {
-      autoplayTimer = setTimeout(() => {
-        playVideo();
-      }, 1000);
-    } else if (!entry.isIntersecting) {
-      if (autoplayTimer) clearTimeout(autoplayTimer);
-      if (videoStarted && !video.paused) {
-        video.pause();
-      }
-    }
-  });
-}, { threshold: 0.5 });
-
-if (video) videoObserver.observe(video);
-
-// Sticky CTA: show after scrolling past hero, hide near footer
-const stickyCta = document.getElementById('stickyCta');
-window.addEventListener('scroll', () => {
-  const scrolled = window.scrollY;
-  const heroHeight = document.querySelector('.hero').offsetHeight;
-  const docHeight = document.body.scrollHeight;
-  const windowHeight = window.innerHeight;
-
-  if (scrolled > heroHeight && scrolled < docHeight - windowHeight - 200) {
-    stickyCta.classList.add('visible');
-  } else {
-    stickyCta.classList.remove('visible');
-  }
-});
 </script>
 </body>
 </html>
