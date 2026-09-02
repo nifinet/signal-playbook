@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment on a booké 19 rendez-vous en 2 semaines avec Claude</title>
+
+<!-- OG / Link Preview -->
+<meta property="og:title" content="Comment on a booké 19 rendez-vous en 2 semaines avec Claude">
+<meta property="og:description" content="Le système complet : 5 signaux d'achat, la séquence de messages exacte, le plan sur 4 semaines. 12% de réponses, moins de 20 min par jour.">
+<meta property="og:image" content="https://nifinet.github.io/signal-playbook/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="alternate" hreflang="en" href="https://nifinet.github.io/signal-playbook/">
+<link rel="alternate" hreflang="fr" href="https://nifinet.github.io/signal-playbook/fr/">
+<link rel="canonical" href="https://nifinet.github.io/signal-playbook/fr/">
+<meta property="og:url" content="https://nifinet.github.io/signal-playbook/fr/">
+<meta property="og:type" content="article">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Comment on a booké 19 rendez-vous en 2 semaines avec Claude">
+<meta name="twitter:description" content="Le système complet : 5 signaux d'achat, la séquence de messages exacte, le plan sur 4 semaines.">
+<meta name="twitter:image" content="https://nifinet.github.io/signal-playbook/og-image.png">
+
+<meta name="description" content="Comment on a transformé Claude en équipe SDR qui prend des rendez-vous en pilote automatique. Le système complet, vrais screenshots, vrais messages, vrais chiffres.">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --text-secondary: #555;
+  --text-muted: #888;
+  --border: #e5e5e5;
+  --accent: #d35400;
+  --accent-light: #fef3eb;
+  --code-bg: #f5f5f5;
+  --card-bg: #fafafa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  padding: 48px 0 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.header-meta img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header-meta .author-info {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.header-meta .author-name {
+  font-weight: 600;
+  color: var(--text);
+}
+
+h1 {
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.header-stats {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.stat {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.stat strong {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  padding: 48px 0;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 56px 0 16px;
+  letter-spacing: -0.01em;
+}
+
+h2:first-child {
+  margin-top: 0;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 600;
+  margin: 32px 0 8px;
+}
+
+p {
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+}
+
+p strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ===== CALLOUT ===== */
+.callout {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  margin: 24px 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.callout strong {
+  font-weight: 600;
+}
+
+/* ===== SIGNAL CARDS ===== */
+.signal-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+}
+
+.signal-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.signal-card p {
+  font-size: 14px;
+  margin-bottom: 0;
+  color: var(--text-secondary);
+}
+
+.signal-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--text);
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.signal-card h4 {
+  display: flex;
+  align-items: center;
+}
+
+/* ===== SCREENSHOTS ===== */
+.screenshot {
+  margin: 24px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.screenshot img {
+  width: 100%;
+  display: block;
+}
+
+.screenshot-caption {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 8px 16px;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+}
+
+/* ===== MESSAGE EXAMPLES ===== */
+.message-example {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.message-example .msg-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.channel-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.channel-icon.linkedin {
+  color: #0A66C2;
+}
+
+.channel-icon.email {
+  color: var(--text-muted);
+}
+
+.message-example p {
+  color: var(--text);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.message-example p:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== STEP LIST ===== */
+.step {
+  margin: 32px 0;
+  padding-left: 36px;
+  position: relative;
+}
+
+.step::before {
+  content: attr(data-step);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  background: var(--text);
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step h3 {
+  margin-top: 0;
+}
+
+/* ===== TIMELINE ===== */
+.timeline {
+  margin: 24px 0;
+}
+
+.timeline-week {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
+}
+
+.timeline-week:last-child {
+  border-bottom: none;
+}
+
+.week-label {
+  font-weight: 600;
+  font-size: 14px;
+  min-width: 90px;
+  flex-shrink: 0;
+}
+
+.week-content {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.week-time {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* ===== COMPARISON ===== */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.comparison-col {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.comparison-col.bad {
+  opacity: 0.6;
+}
+
+.comparison-col h4 {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+  color: var(--text-muted);
+}
+
+.comparison-col ul {
+  list-style: none;
+  font-size: 14px;
+}
+
+.comparison-col ul li {
+  padding: 4px 0;
+  color: var(--text-secondary);
+}
+
+/* ===== NUMBERS TABLE ===== */
+.numbers-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 24px 0;
+}
+
+.number-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.number-card .value {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.number-card .label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 56px 0;
+}
+
+/* ===== CTA ===== */
+.cta-section {
+  text-align: center;
+  padding: 64px 0 80px;
+  border-top: 1px solid var(--border);
+}
+
+.cta-section h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.cta-section p {
+  margin-bottom: 24px;
+}
+
+.cta-button {
+  display: inline-block;
+  background: var(--text);
+  color: white;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: opacity 0.2s;
+}
+
+.cta-button:hover {
+  opacity: 0.85;
+}
+
+.cta-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 12px;
+}
+
+/* ===== PROMPT BLOCK ===== */
+.prompt-block {
+  margin: 24px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #1a1a1a;
+}
+
+.prompt-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: #252525;
+  font-size: 13px;
+  font-weight: 500;
+  color: #999;
+}
+
+.copy-btn {
+  background: #333;
+  color: #ccc;
+  border: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.copy-btn:hover {
+  background: #444;
+}
+
+.copy-btn.copied {
+  background: #2d5a2d;
+  color: #8f8;
+}
+
+.prompt-content {
+  padding: 16px;
+  margin: 0;
+  font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #d4d4d4;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-x: auto;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 24px 0;
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+
+.footer a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+
+/* ===== HERO VIDEO ===== */
+.video-hero { margin: 36px 0 4px; }
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+}
+.video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-frame > a { display: block; position: absolute; inset: 0; }
+.video-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.video-poster { display: block; position: absolute; inset: 0; background: linear-gradient(135deg, #241f1b 0%, #d35400 58%, #d81b60 100%); }
+.video-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.15); transition: background 0.2s; }
+.video-frame > a:hover .video-play { background: rgba(0,0,0,0.25); }
+.video-play > span { width: 72px; height: 72px; border-radius: 50%; background: rgba(255,255,255,0.96); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 24px rgba(0,0,0,0.3); }
+.video-play > span::after { content: ""; margin-left: 5px; border-style: solid; border-width: 11px 0 11px 18px; border-color: transparent transparent transparent var(--accent); }
+.video-caption { font-size: 13px; color: var(--text-muted); text-align: center; margin-top: 10px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+  .header-stats {
+    gap: 16px;
+  }
+  .timeline-week {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .week-time {
+    margin-left: 0;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-meta">
+      <img src="../nicolas.jpg" alt="Nicolas Finet" onerror="this.style.background='#ddd'">
+      <div class="author-info">
+        <div class="author-name"><a href="https://www.linkedin.com/in/nifinet" target="_blank" style="color:inherit;text-decoration:none">Nicolas Finet</a></div>
+        CEO @ Sortlist
+      </div>
+    </div>
+
+    <h1>On a transformé Claude en équipe SDR qui a booké 19 rendez-vous en 2 semaines.</h1>
+    <p>Voici le système complet. Vole tout. Pas de blabla, pas de pitch, pas de gate. Juste ce qu'on a fait, étape par étape, avec les vrais screenshots.</p>
+
+    <div class="header-stats">
+      <div class="stat"><strong>12%</strong> de réponses</div>
+      <div class="stat"><strong>19</strong> rdv / 2 semaines</div>
+      <div class="stat"><strong>&lt;20 min</strong> par jour</div>
+      <div class="stat"><strong>0&euro;</strong> de pub</div>
+    </div>
+  </header>
+
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- FRAMING: why Claude, and where Max fits -->
+    <div class="callout">
+      <strong>Deux mots sur le "pourquoi Claude".</strong> On a d'abord monté tout ce système à la main, nous-mêmes, avec Claude : un signal d'achat, on le colle dans Claude, il écrit le message. Ça a tellement bien marché qu'on en a eu marre de la partie manuelle (chasser les signaux un par un, copier-coller chaque lead) et qu'on l'a productisé dans Max.<br><br>
+      Donc dans ce playbook : <strong>Claude, c'est le cerveau que tu pilotes toi-même pour écrire</strong>, gratuit, dès aujourd'hui. <strong>Max, c'est ce qui détecte et enrichit les signaux à ta place</strong>, pour que tu n'aies plus à les chasser. Tout ce qui suit marche à la main avec Claude. Max enlève juste le grind.
+    </div>
+
+    <!-- THE PROBLEM -->
+    <h2>Le cold outbound est cassé. Voici pourquoi.</h2>
+
+    <p>97 personnes sur 100 ignorent le cold. Pas parce que ton produit est mauvais. Parce que ton timing l'est.</p>
+
+    <p>Outbound classique : tu achètes une liste, tu balances des emails, tu espères une réponse. <strong>3% de réponses si t'as de la chance.</strong></p>
+
+    <p>On a inversé. On a arrêté de contacter les gens. On a commencé par écouter.</p>
+
+    <div class="callout">
+      <strong>L'idée :</strong> Claude surveille LinkedIn 24/7 pour repérer les signaux d'achat. Quand quelqu'un montre de l'intention, Claude écrit un message basé sur ce qu'il a vraiment fait. Quand il n'y a pas de signal, il n'entend rien.
+    </div>
+
+    <!-- THE 5 SIGNALS -->
+    <h2>Les 5 signaux d'achat qu'on surveille</h2>
+
+    <p>Ce sont les signaux qui prédisent vraiment qui est prêt à acheter. Pas des scores de lookalike. Pas des filtres firmographiques. Du comportement réel.</p>
+
+    <div class="signal-card">
+      <h4><span class="signal-number">1</span> Changement de poste vers un rôle de décision</h4>
+      <p>Nouveau CMO ? Nouveau VP Marketing ? Ils réévaluent chaque prestataire dans les 90 premiers jours. C'est la fenêtre. C'est notre signal qui convertit le mieux.</p>
+    </div>
+
+    <div class="signal-card">
+      <h4><span class="signal-number">2</span> Engagement avec un concurrent</h4>
+      <p>Quelqu'un like le post de ton concurrent ? Le sujet l'intéresse. Il ne te connaît juste pas encore. Ces gens évaluent activement.</p>
+    </div>
+
+    <div class="signal-card">
+      <h4><span class="signal-number">3</span> Conversations sur le sujet</h4>
+      <p>Les gens postent littéralement sur le problème que tu résous. Tous les jours. Personne ne les contacte. Nous si.</p>
+    </div>
+
+    <div class="signal-card">
+      <h4><span class="signal-number">4</span> Levées de fonds</h4>
+      <p>Du cash frais = du budget actif. Ces boîtes achètent. La fenêtre, c'est 2 à 4 semaines après l'annonce.</p>
+    </div>
+
+    <div class="signal-card">
+      <h4><span class="signal-number">5</span> Engagement profil et contenu</h4>
+      <p>Qui interagit déjà avec ton contenu ? C'est ton lead le plus chaud, caché en pleine vue.</p>
+    </div>
+
+    <div class="screenshot">
+      <img src="../img/signal-types.png" alt="Types de signaux configurés dans la plateforme">
+      <div class="screenshot-caption">La bibliothèque de signaux dans Max. On en a activé cinq pour commencer.</div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <h2>Comment Claude surveille ces signaux</h2>
+
+    <p>Tu peux les suivre à la main : surveiller quelques profils clés, pages concurrentes et recherches LinkedIn chaque matin. C'est comme ça qu'on a commencé. Puis on en a eu marre du scan manuel et on a laissé <a href="https://yourmax.ai" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Max</a> faire remonter les signaux, avec Claude qui écrit par-dessus. Voici le setup exact.</p>
+
+    <div class="step" data-step="1">
+      <h3>Définis ton ICP</h3>
+      <p>Dis à Claude qui tu cherches : rôle, taille de boîte, secteur, géo. Claude s'en sert pour filtrer le bruit et ne faire remonter que les signaux pertinents.</p>
+    </div>
+
+    <div class="screenshot">
+      <img src="../img/icp-config.png" alt="Écran de configuration de l'ICP">
+      <div class="screenshot-caption">Setup ICP : intitulés de poste, localisations, secteurs et taille de boîte.</div>
+    </div>
+
+    <div class="step" data-step="2">
+      <h3>Configure tes signaux</h3>
+      <p>Choisis les signaux à surveiller. Nous on tourne les 5, mais tu peux démarrer juste avec changements de poste et engagement concurrent. Ces deux-là ont généré 60% de nos rdv.</p>
+    </div>
+
+    <div class="screenshot">
+      <img src="../img/config-jobs.png" alt="Configuration du signal changement de poste">
+      <div class="screenshot-caption">Max fait tourner nos signaux en live, et en suggère de nouveaux à suivre.</div>
+    </div>
+
+    <div class="step" data-step="3">
+      <h3>Claude détecte et qualifie</h3>
+      <p>Chaque jour, Claude scanne les nouveaux signaux qui matchent ton ICP. Zéro travail manuel. Tu reçois un feed de leads qualifiés avec le signal qui les a déclenchés.</p>
+    </div>
+
+    <div class="screenshot">
+      <img src="../img/leads-table.png" alt="Tableau de leads avec signaux">
+      <div class="screenshot-caption">Le feed du jour : leads qualifiés par signal en attente de validation, chacun scoré sur le fit ICP.</div>
+    </div>
+
+    <div class="step" data-step="4">
+      <h3>Valide et pousse en outreach</h3>
+      <p>Rapide coup d'œil aux leads du jour. 10 minutes. Tu approuves les bons, ils partent direct dans ta séquence.</p>
+    </div>
+
+    <div class="screenshot">
+      <img src="../img/lead-detail.png" alt="Détail d'un lead avec contexte du signal">
+      <div class="screenshot-caption">Chaque lead montre pourquoi il a été sourcé. Swipe pour accepter ou passer.</div>
+    </div>
+
+    <!-- THE CLAUDE PROMPT -->
+    <h2>Le prompt Claude exact qu'on utilise</h2>
+
+    <p>C'est le moteur. On n'écrit pas les messages. On n'utilise pas de templates. On donne le signal à <a href="https://claude.ai" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Claude</a> et il trouve l'angle. <strong>La clé : Claude ne cite jamais le signal directement.</strong> Il utilise le signal pour comprendre ce qui compte pour la personne maintenant, puis lance une conversation sur ce problème.</p>
+
+    <p>Copie ça. Colle dans <a href="https://claude.ai" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Claude</a>. Remplace les [parties entre crochets] par ton business.</p>
+
+    <div class="prompt-block">
+      <div class="prompt-header">
+        <span>Prompt Claude &middot; Copier-coller</span>
+        <button onclick="copyPrompt()" class="copy-btn" id="copyBtn">Copier</button>
+      </div>
+      <pre class="prompt-content" id="promptContent">Tu écris des messages d'outbound pour moi. Je te donne un signal d'achat sur un prospect. Ton job : transformer ce signal en une amorce de conversation naturelle et humaine.
+
+MON ENTREPRISE (remplace par la tienne) :
+- Entreprise : Sortlist
+- Ce qu'on vend : on connecte les entreprises avec la bonne agence marketing en 2 semaines au lieu de 3 mois
+- À qui : CMO, VP Marketing, Head of Growth dans des boîtes de 50 à 500 employés
+- Une preuve : on a aidé une fintech en Série B à passer de 0 à 3 propositions d'agences qualifiées en 11 jours
+
+LE PROSPECT :
+- Nom : {{name}}
+- Rôle : {{role}}
+- Entreprise : {{company}}
+
+LE SIGNAL :
+- Type : {{signal_type}} (job_change / competitor_engagement / topic_conversation / funding / content_engagement)
+- Détail : {{signal_detail}}
+- Date : {{signal_date}}
+
+RÈGLES CRITIQUES :
+
+1. Ne fais JAMAIS référence au signal directement. Ne dis pas "j'ai vu votre post", "j'ai remarqué que vous aviez liké", "félicitations pour le nouveau poste", "j'ai vu que vous aviez levé". Le prospect ne doit pas se sentir surveillé.
+
+2. À la place, SERS-toi du signal pour identifier le problème qu'il a probablement MAINTENANT, puis ouvre sur ce problème. Le signal est ton intel, pas ton accroche.
+
+3. Le message doit sembler venir de quelqu'un qui vit dans le même monde et comprend vraiment sa situation actuelle, pas de quelqu'un qui a scrapé son LinkedIn.
+
+4. STRATÉGIE D'ANGLE par type de signal :
+   - Changement de poste : parle du défi qui vient avec le nouveau rôle. Ne mentionne pas le move.
+   - Engagement concurrent : parle du sujet qu'il a engagé. Ne mentionne ni le concurrent ni le post.
+   - Conversation sur le sujet : réponds à l'idée, ajoute un angle contrarian ou complémentaire. Ne dis pas "j'ai vu votre post".
+   - Levée de fonds : parle du défi de scale qui suit la croissance. Ne mentionne pas le tour.
+   - Engagement contenu : parle du thème du contenu. Ne mentionne pas le like ou le commentaire.
+
+5. Ton : court, direct, zéro blabla. Comme un message d'un ami intelligent qui bosse dans le même secteur. Pas de "J'espère que vous allez bien." Pas de "Je serais ravi de." Pas de "Je me permets de vous contacter."
+
+6. Écris en français, au vouvoiement. Max 60 mots pour le Message 1. Max 40 mots pour les Messages 2 et 3.
+
+7. Termine le Message 1 par une vraie question, pas une demande de rdv. Le but, c'est une réponse, pas un booking.
+
+8. Inclus UNE preuve précise (nom de boîte ou chiffre), mais glisse-la naturellement, ne la liste pas.
+
+ÉCRIS UNE SÉQUENCE CROSS-CANAL EN 3 TOUCHES :
+
+Touche 1 : demande de connexion LinkedIn + note (Jour 0)
+- Accroche par le problème, basée sur l'intel du signal. Pose une question.
+- Doit tenir en 300 caractères (limite LinkedIn pour les notes de connexion).
+
+Touche 2 : email (Jour 2)
+- Partage quelque chose d'utile (un chiffre, un benchmark, un angle). Pas de "je reviens vers vous".
+- Max 60 mots. Reprends le même thème que la Touche 1 sans te répéter.
+- Objet : max 5 mots, pas de clickbait, pas de majuscules.
+
+Touche 3 : message LinkedIn (Jour 5)
+- Seulement s'il a accepté la connexion. Une phrase. Laisse-lui une porte de sortie facile.
+- Max 30 mots. Conversationnel, comme un DM à un pair.</pre>
+    </div>
+
+    <div class="callout">
+      <strong>Comment t'en servir :</strong> pour chaque lead de <a href="https://yourmax.ai" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Max</a>, colle les données du signal dans les {{champs}}. Claude génère 3 messages uniques en moins de 10 secondes. Chaque message est différent parce que chaque signal est différent.
+    </div>
+
+    <!-- WHAT THE OUTPUT LOOKS LIKE -->
+    <h2>À quoi ressemble le résultat</h2>
+
+    <p>Même prompt, signaux différents, messages complètement différents. Voici comment on s'en sert chez Sortlist pour vendre le matching d'agences. Remarque : <strong>aucun ne cite le signal.</strong></p>
+
+    <h3>Signal : nouveau CMO qui vient d'arriver dans une boîte SaaS en Série B (changement de poste)</h3>
+
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touche 1 : note de connexion LinkedIn (Jour 0)</div>
+      <p>Hériter d'un portefeuille d'agences que vous n'avez pas choisi, c'est le pire. La plupart des CMO que je croise veulent l'auditer mais n'ont pas 3 mois pour un appel d'offres. Curieux de savoir comment vous gérez ça.</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Touche 2 : email (Jour 2)</div>
+      <p><em>Objet : audit agences</em></p>
+      <p>Une CMO de fintech avec qui on a bossé est passée de "il me faut une nouvelle agence perf" à 3 propositions qualifiées sur son bureau en 11 jours. Sans appel d'offres, sans pitchs à écouter. Si vous repensez votre stack d'agences, ça vaut peut-être un coup d'œil.</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touche 3 : DM LinkedIn (Jour 5)</div>
+      <p>Si le setup agence actuel marche, ignorez-moi. Sinon, je vous montre avec plaisir comment on raccourcit la recherche.</p>
+    </div>
+
+    <h3>Signal : a liké un post d'un concurrent de Sortlist sur la sélection d'agences (engagement concurrent)</h3>
+
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touche 1 : note de connexion LinkedIn (Jour 0)</div>
+      <p>Trouver la bonne agence, c'est toujours cassé. Vous demandez à votre réseau, vous obtenez 3 noms au hasard. Vous lancez un appel d'offres, vous croulez sous les réponses. Vous avez trouvé un moyen de contourner ça ?</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Touche 2 : email (Jour 2)</div>
+      <p><em>Objet : shortlist agences</em></p>
+      <p>Un pattern intéressant qu'on observe : les boîtes qui shortlistent les agences sur le fit projet réel (pas le nom de marque) sont 2x plus satisfaites 6 mois après. On l'a mesuré sur plus de 800 matchs l'an dernier. Je partage la data avec plaisir si utile.</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touche 3 : DM LinkedIn (Jour 5)</div>
+      <p>Dernier mot. Si la sélection d'agences n'est pas un casse-tête pour vous, tout va bien.</p>
+    </div>
+
+    <h3>Signal : a posté sur le besoin de scaler la production de contenu (conversation sur le sujet)</h3>
+
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touche 1 : note de connexion LinkedIn (Jour 0)</div>
+      <p>Scaler le contenu, ça ressemble à un problème de recrutement, mais c'est souvent un problème de partenaire. Les équipes qui vont vite font venir une agence spécialisée pour 3 à 6 mois. C'est quelque chose que vous avez envisagé ?</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon email" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> Touche 2 : email (Jour 2)</div>
+      <p><em>Objet : scaler le contenu</em></p>
+      <p>Un SaaS B2B à votre stade est passé de 2 articles par mois à 12 en 6 semaines en s'associant à une agence de contenu de niche qu'on lui a matchée. Sans nouveau recrutement, sans 6 mois de ramp-up. Si le contenu est le goulot en ce moment, ça peut être pertinent.</p>
+    </div>
+    <div class="message-example">
+      <div class="msg-label"><svg class="channel-icon linkedin" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> Touche 3 : DM LinkedIn (Jour 5)</div>
+      <p>Si vous avez déjà trouvé votre setup, ignorez ça. Sinon, je peux partager comment d'autres l'ont résolu.</p>
+    </div>
+
+    <!-- WE USE OVERLOOP -->
+    <h2>Comment on envoie ça sur tous les canaux</h2>
+
+    <p>Tu peux envoyer ces trois touches toi-même, direct depuis LinkedIn et ta boîte mail. Nous on utilise <a href="https://overloop.com" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Overloop</a> pour ne pas avoir à gérer le timing. Une séquence, plusieurs canaux : connexion LinkedIn Jour 0, email Jour 2, DM LinkedIn Jour 5. Le tout personnalisé par Claude.</p>
+
+    <div class="callout">
+      <strong>Pourquoi le cross-canal compte :</strong> les séquences email seul font 3 à 5% de réponses. Ajoute LinkedIn et tu montes à 10-12%. Les gens qui ignorent un email accepteront une connexion LinkedIn. Ceux qui ignorent une note LinkedIn ouvriront un email. Des gens différents, des habitudes différentes. Il te faut les deux.
+    </div>
+
+    <p>Le flow dans Overloop :</p>
+    <ol style="padding-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+      <li><strong>Connexion LinkedIn + note</strong> : premier point de contact, faible friction, lance la relation</li>
+      <li><strong>Email</strong> : 2 jours plus tard, apporte de la valeur avec une preuve ou une data</li>
+      <li><strong>DM LinkedIn</strong> : seulement s'il a accepté, soft close, une phrase</li>
+    </ol>
+
+    <p>Claude écrit les 3 touches. Overloop les envoie dans le bon ordre, sur le bon canal, au bon moment. Tu valides le batch du jour et tu lances.</p>
+
+    <div class="screenshot">
+      <img src="../img/add-to-overloop.png" alt="Ajout de leads à une séquence cross-canal Overloop">
+      <div class="screenshot-caption">Leads acceptés, prêts à être poussés dans une séquence cross-canal Overloop.</div>
+    </div>
+
+    <!-- THE 4-WEEK PLAN -->
+    <h2>Le plan sur 4 semaines : de 0 à 10+ appels qualifiés par semaine</h2>
+
+    <p>Voici exactement comment on a monté ça en puissance. Pas besoin de tout faire d'un coup.</p>
+
+    <div class="timeline">
+      <div class="timeline-week">
+        <div class="week-label">Semaine 1</div>
+        <div class="week-content">Setup ICP, configure 2 types de signaux (changements de poste + engagement concurrent), écris tes premiers messages avec Claude</div>
+        <div class="week-time">~4 heures</div>
+      </div>
+      <div class="timeline-week">
+        <div class="week-label">Semaine 2</div>
+        <div class="week-content">Lance les premières campagnes, passe les leads du jour, affine le message sur les premières réponses. Ajoute le signal #3 (conversations sur le sujet)</div>
+        <div class="week-time">~20 min/jour</div>
+      </div>
+      <div class="timeline-week">
+        <div class="week-label">Semaine 3</div>
+        <div class="week-content">Ajoute les signaux restants, A/B teste les angles, connecte le CRM. Tu devrais être à 3-5 rdv/semaine</div>
+        <div class="week-time">~20 min/jour</div>
+      </div>
+      <div class="timeline-week">
+        <div class="week-label">Semaine 4</div>
+        <div class="week-content">Pilote automatique complet. Claude gère détection + messages. Toi tu passes le feed du jour et tu prends les appels. Cible : 10+ appels qualifiés/semaine</div>
+        <div class="week-time">~15 min/jour</div>
+      </div>
+    </div>
+
+    <!-- THE NUMBERS -->
+    <h2>Les vrais chiffres, sans BS</h2>
+
+    <p>Voici ce qu'on a vraiment mesuré sur les 2 premières semaines du système.</p>
+
+    <div class="numbers-grid">
+      <div class="number-card">
+        <div class="value">12%</div>
+        <div class="label">Taux de réponse (vs 2-3% cold)</div>
+      </div>
+      <div class="number-card">
+        <div class="value">19</div>
+        <div class="label">Rendez-vous en 14 jours</div>
+      </div>
+      <div class="number-card">
+        <div class="value">142</div>
+        <div class="label">Leads qualifiés par signal contactés</div>
+      </div>
+      <div class="number-card">
+        <div class="value">&lt;20 min</div>
+        <div class="label">Temps humain par jour</div>
+      </div>
+    </div>
+
+    <div class="comparison">
+      <div class="comparison-col bad">
+        <h4>Avant (cold outbound)</h4>
+        <ul>
+          <li>Acheter des listes Apollo/ZoomInfo</li>
+          <li>Balancer des séquences génériques</li>
+          <li>2-3% de réponses</li>
+          <li>1-2 rdv par semaine</li>
+          <li>Des heures de recherche manuelle</li>
+        </ul>
+      </div>
+      <div class="comparison-col">
+        <h4>Après (basé signal)</h4>
+        <ul>
+          <li>Claude détecte les signaux d'intention</li>
+          <li>Chaque message référence un comportement réel</li>
+          <li>12% de réponses</li>
+          <li>9-10 rdv par semaine</li>
+          <li>Moins de 20 min/jour</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- THE STACK -->
+    <h2>Les outils qu'on a utilisés</h2>
+
+    <p>Transparence totale sur la stack. Rien de caché. Les seules choses vraiment nécessaires pour démarrer, c'est Claude et un compte LinkedIn. Le reste enlève juste le travail manuel.</p>
+
+    <ul style="padding-left: 20px; color: var(--text-secondary);">
+      <li><a href="https://yourmax.ai" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">Max</a> pour détecter et enrichir les signaux d'achat sur LinkedIn (essai gratuit 7 jours, puis à partir de 79&euro;/mois)</li>
+      <li><a href="https://overloop.com" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">Overloop</a> pour lancer les séquences (email + LinkedIn)</li>
+      <li><a href="https://claude.ai" target="_blank" style="color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid var(--accent)">Claude</a> pour la qualification ICP et la génération de messages</li>
+      <li>Ton CRM actuel (nous c'est HubSpot, mais n'importe lequel marche)</li>
+    </ul>
+
+    <div class="screenshot">
+      <img src="../img/integrations.png" alt="Intégrations de la stack">
+      <div class="screenshot-caption">La stack, connectée : Overloop gratuit avec Max, plus Slack, CRM et Zapier.</div>
+    </div>
+
+    <!-- TRY IT -->
+    <h2>Envie de tester toi-même ?</h2>
+
+    <p>Fais tourner ce playbook à la main d'abord. Tout ce qui est au-dessus marche avec juste Claude et LinkedIn, gratuit, dès aujourd'hui. Aucun compte requis chez nous.</p>
+
+    <p>Le hic, c'est le temps. Chasser les signaux à la main, coller chacun dans Claude, envoyer chaque touche, suivre les réponses. Ça s'accumule vite. C'est exactement ce grind qui nous a saoulés, donc on a construit <a href="https://yourmax.ai" target="_blank" style="color:var(--accent);font-weight:500;text-decoration:none;border-bottom:1px solid var(--accent)">Max</a> pour faire la détection et l'enrichissement à notre place. Si tu veux sauter la partie manuelle, l'<strong>essai gratuit 7 jours</strong> dépose environ 5 leads qualifiés par signal dans ta boîte chaque matin, à peu près 25 sur la semaine. Sans carte bancaire, sans appel.</p>
+
+    <p>Le setup prend environ 30 minutes :</p>
+    <ol style="padding-left: 20px; color: var(--text-secondary); margin-bottom: 16px;">
+      <li>Dépose ton site pour que Max construise ton ICP (5 min)</li>
+      <li>Choisis 2 types de signaux à surveiller (2 min)</li>
+      <li>Copie le prompt Claude ci-dessus et adapte-le à ton business (10 min)</li>
+      <li>Connecte Overloop pour l'envoi cross-canal (10 min)</li>
+      <li>Passe ton premier batch de leads qualifiés le lendemain matin</li>
+    </ol>
+
+    <p>Au jour 3 tu sauras si ça marche pour toi. La plupart le savent dès la première réponse.</p>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <h2>Prends le tout</h2>
+    <p>Le prompt, les signaux, la séquence : tout est à toi. Fais-le tourner à la main dès aujourd'hui. Et quand le grind manuel te lasse, laisse Max faire la partie chiante.</p>
+    <a href="https://yourmax.ai" class="cta-button" target="_blank">Tester Max gratuitement 7 jours</a>
+    <div class="cta-sub">Ou <a href="https://www.linkedin.com/in/nifinet" target="_blank" style="color:var(--text-secondary)">envoie-moi un DM sur LinkedIn</a> et je te fais le tour du setup. Sans appel commercial.</div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    Écrit par <a href="https://www.linkedin.com/in/nifinet" target="_blank">Nicolas Finet</a> &middot; CEO @ Sortlist &middot; <a href="../">English version</a>
+  </footer>
+
+</div>
+
+<script>
+function copyPrompt() {
+  const text = document.getElementById('promptContent').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copié !';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copier';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
